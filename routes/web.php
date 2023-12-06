@@ -27,14 +27,13 @@ Route::get('/pageEdit', function () {
     return view('pageEdit');
 });
 
-Route::get('/login', [userController::class,"login"]);
+Route::get('/login', [userController::class, "login"]);
 Route::post('/login', [userController::class, "doLogin"]);
 
-Route::get('/register', [userController::class,"register"]);
+Route::get('/register', [userController::class, "register"]);
 Route::post('/login', [userController::class, "doLogin"]);
 
 
-Route::prefix("master")->group(function(){
-    Route::get('/', [masterController::class,"master"]);
-    Route::get("pembeli",[masterController::class,"listPembeli"]);
+Route::prefix("master")->group(function () {
+    Route::get('/', [masterController::class, "master"]);
 });

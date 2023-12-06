@@ -29,7 +29,9 @@
                     <input type="text" disabled name="" id="" class="mb-4 w-64">
                     <input type="text" disabled name="" id="" class="mb-4 w-64">
                 </div>
-                    <a href={{ url('/pageEdit') }} class="mr-5 w-16 h-auto p-2 rounded-xl hover:cursor-pointer font-bold text-xl bg-[#e77438] ml-40"> Edit Profile </a>
+                <a href={{ url('/pageEdit') }}
+                    class="mr-5 w-16 h-auto p-2 rounded-xl hover:cursor-pointer font-bold text-xl bg-[#e77438] ml-40"> Edit
+                    Profile </a>
             </div>
         </div>
     </div>
