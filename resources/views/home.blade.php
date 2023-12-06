@@ -61,29 +61,31 @@
         </div>
 
         {{-- menu awal --}}
-        <div class="menu mt-20 ml-32 w-fit h-auto">
+        <div class="menu justify-between items-center mt-20 w-auto h-auto">
             <p class="text-center text-4xl">Products</p>
-            <hr class="border-black">
-            <div class="unitmobil text-black float-left ml-3 mr-5 mt-5 w-64 h-40"
-                style="background-image: url('{{ asset('/img/unitmobil.jpg') }}'); background-repeat: no-repeat; background-size: cover;">
-                <b class="bottom-0 right-0 text-white text-right text-2xl">Unit</b>
-            </div>
-            <div class="spareparts text-black float-left mr-5 mt-5 w-64 h-40"
-                style="background-image: url('{{ asset('/img/spareparts.jpg') }}'); background-repeat: no-repeat; background-size: cover;">
-                <b class="bottom-0 right-0 text-white text-right text-2xl">Spareparts</b>
-            </div>
-            <div class="aftermarket text-black float-left mr-5 mt-5 w-64 h-40"
-                style="background-image: url('{{ asset('/img/aftermarket.jpg') }}'); background-repeat: no-repeat; background-size: cover;">
-                <b class="bottom-0 right-0 text-white text-right text-2xl">Aftermarket</b>
-            </div>
-            <div class="interior text-black float-right mr-5 mt-5 w-64 h-40"
-                style="background-image: url('{{ asset('/img/interior.jpg') }}'); background-repeat: no-repeat; background-size: cover;">
-                <b class="bottom-0 right-0 text-white text-right text-2xl">Interior</b>
+            <hr class="border-black w-auto">
+            <div class="flex flex-wrap justify-center">
+                <div class="unitmobil text-black justify-evenly float-left ml-3 mr-5 mt-5 w-64 h-40"
+                    style="background-image: url('{{ asset('/img/GTR-R34.jpg') }}'); background-repeat: no-repeat; background-size: cover;">
+                    <b class="bottom-0 right-0 text-white text-right text-2xl">Unit</b>
+                </div>
+                <div class="spareparts text-black justify-evenly float-left mr-5 mt-5 w-64 h-40"
+                    style="background-image: url('{{ asset('/img/Rb26Engine.jpeg') }}'); background-repeat: no-repeat; background-size: cover;">
+                    <b class="bottom-0 right-0 text-white text-right text-2xl">Spareparts</b>
+                </div>
+                <div class="aftermarket text-black justify-evenly float-left mr-5 mt-5 w-64 h-40"
+                    style="background-image: url('{{ asset('/img/Aftermarkets.jpeg') }}'); background-repeat: no-repeat; background-size: cover;">
+                    <b class="bottom-0 right-0 text-white text-right text-2xl">Aftermarket</b>
+                </div>
+                <div class="interior text-black justify-evenly float-left mr-5 mt-5 w-64 h-40"
+                    style="background-image: url('{{ asset('/img/Cabin.jpeg') }}'); background-repeat: no-repeat; background-size: cover;">
+                    <b class="bottom-0 right-0 text-white text-right text-2xl">Interior</b>
+                </div>
             </div>
         </div>
 
         {{-- alasan pilih --}}
-        <div class="judul text-center mt-80 text-black w-auto h-auto">
+        <div class="judul text-center mt-[100px] text-black w-auto h-auto">
             <p class="text-4xl">Why Choose Us?</p>
         </div>
         <div class="alasan1 relative text-right w-full h-96 p-5 overflow-hidden mt-6">
