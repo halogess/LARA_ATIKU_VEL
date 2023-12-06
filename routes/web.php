@@ -22,4 +22,3 @@ Route::get('/profile', function () {
 Route::get('/pageEdit', function () {
     return view('pageEdit');
 });
-
