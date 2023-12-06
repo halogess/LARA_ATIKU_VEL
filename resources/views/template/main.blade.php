@@ -20,6 +20,7 @@
             <a href={{url("register")}} class="w-auto h-auto bg-[#433537] text-[#e7dfdc] p-3 rounded-xl hover:cursor-pointer font-bold text-xl drop-shadow-lg"> Sign Up</a>
         </div>
     </nav>
+    @yield('navbarMaster')
     @yield('content')
 
     <footer class="bg-[#546175] text-[#e7dfdc] mt-[60px]">
