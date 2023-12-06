@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pembeli extends Model
 {
     use HasFactory;
-    protected $connection ="koneksi";
+    protected $connection ="mysql";
     protected $table ="pembeli";
     protected $primaryKey = "id_pembeli";
     public $incrementing = false;

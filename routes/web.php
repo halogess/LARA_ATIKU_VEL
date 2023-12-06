@@ -36,4 +36,5 @@ Route::post('/login', [userController::class, "doLogin"]);
 
 Route::prefix("master")->group(function(){
     Route::get('/', [masterController::class,"master"]);
+    Route::get("pembeli",[masterController::class,"listPembeli"]);
 });

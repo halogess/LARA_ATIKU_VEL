@@ -33,4 +33,8 @@ class userController extends Controller
     public function register(){
         return view("register");
     }
+
+    public function doRegist(){
+
+    }
 }
