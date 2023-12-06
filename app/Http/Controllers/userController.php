@@ -16,25 +16,26 @@ class userController extends Controller
 
     public function doLogin(Request $req)
     {
-        if($req->input("email") == "master" && $req->input("password") == "master"){
+        if ($req->input("email") == "master" && $req->input("password") == "master") {
             return redirect("master");
         }
 
         $pembeli = Pembeli::all();
-        foreach($pembeli as $p){
-            if($req->input("email") == $p["username_pembeli"]){
-                if($req->input("password") == $p["username_password"]){
+        foreach ($pembeli as $p) {
+            if ($req->input("email") == $p["username_pembeli"]) {
+                if ($req->input("password") == $p["username_password"]) {
                     return back();
                 }
             }
         }
     }
 
-    public function register(){
+    public function register()
+    {
         return view("register");
     }
 
-    public function doRegist(){
-
+    public function doRegist()
+    {
     }
 }
