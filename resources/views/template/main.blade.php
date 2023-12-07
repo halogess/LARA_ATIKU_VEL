@@ -9,21 +9,20 @@
     <script src="/style/cdn.tailwindcss.com_3.3.3"></script>
 </head>
 
-<body>
-    <nav class="w-full h-20 bg-[#546175] text-[#e7dfdc]">
+<body class="w-fit h-fit bg-[#220030]">
+    <nav class="w-full h-[69px] bg-black text-[#e7dfdc]">
         <div class="judul h-auto w-auto ml-24 float-left">
-            <p class="font-bold text-4xl pt-4">JJHC Automotive</p>
+            <p class="font-bold text-4xl pt-4 text-yellow-400">JJHC Automotive</p>
         </div>
         <div class="buttons h-auto w-auto mr-24 mt-5 pb-4 float-right">
-            <a href={{url("/")}} class="mr-5 w-16 h-auto text-[#e7dfdc] p-2 rounded-xl hover:cursor-pointer font-bold text-xl"> Home </a>
-            <a href={{url("login")}} class="mr-5 w-16 h-auto text-[#e7dfdc] p-2 rounded-xl hover:cursor-pointer font-bold text-xl"> Log In </a>
-            <a href={{url("register")}} class="w-auto h-auto bg-[#433537] text-[#e7dfdc] p-3 rounded-xl hover:cursor-pointer font-bold text-xl drop-shadow-lg"> Sign Up</a>
+            <a href={{url("/")}} class="mr-5 w-16 h-auto text-[#e7dfdc] p-2 text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl"> Home </a>
+            <a href={{url("login")}} class="mr-5 w-16 h-auto text-[#e7dfdc] text-yellow-400 p-2 rounded-xl hover:cursor-pointer font-bold text-xl"> Log In </a>
+            <a href={{url("register")}} class="w-auto h-auto text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl drop-shadow-lg"> Sign Up</a>
         </div>
     </nav>
-    @yield('navbarMaster')
     @yield('content')
 
-    <footer class="bg-[#546175] text-[#e7dfdc] mt-[60px]">
+    <footer class="bg-black text-yellow-400">
         <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
             <div class="md:flex md:justify-between">
                 <div class="mb-6 md:mb-0">
@@ -35,8 +34,8 @@
                 </div>
                 <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                     <div>
-                        <h2 class="mb-4 text-sm font-semibold text-gray-900 uppercase dark:text-white">Explore</h2>
-                        <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                        <h2 class="mb-4 text-sm font-semibold text-yellow-400 uppercase">Explore</h2>
+                        <ul class="text-yellow-400 font-medium">
                             <li>
                                 <p>Unit</p>
                             </li>
@@ -52,9 +51,9 @@
                         </ul>
                     </div>
                     <div>
-                        <h2 class="mb-4 text-sm font-semibold text-gray-900 uppercase dark:text-white">Visit
+                        <h2 class="mb-4 text-sm font-semibold text-yellow-400 uppercase">Visit
                         </h2>
-                        <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                        <ul class="text-yellow-400 font-medium">
                             <li>
                                 <p>Jl. Ngagel Jaya Tengah 73-77</p>
                             </li>
@@ -73,9 +72,8 @@
                         </ul>
                     </div>
                     <div>
-                        <h2 class="mb-4 text-sm font-semibold text-gray-900 uppercase dark:text-white">Social Media</h2>
-                        <ul class="text-gray-500 dark:text-gray-400 font-medium">
-                            <li>
+                        <h2 class="mb-4 text-sm font-semibold text-yellow-400 uppercase">Social Media</h2>
+                        <ul class="text-yellow-400">
                                 <p class="hover:underline">Instagram</p>
                             </li>
                             <li>
@@ -91,9 +89,9 @@
                     </div>
                 </div>
             </div>
-            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+            <hr class="my-6 sm:mx-auto border-yellow-400 lg:my-8"/>
             <div class="sm:flex sm:items-center sm:justify-between">
-                <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023
+                <span class="text-sm text-yellow-400 sm:text-center">© 2023
                     <a>JJHC Automotive™</a>.
                 </span>
             </div>

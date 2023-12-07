@@ -1,69 +1,16 @@
 @extends('template.main')
 
 @section('content')
-    <div class="content h-auto">
-        <div id="animation-carousel" class="relative w-full" data-carousel="static">
-            <!-- Carousel wrapper -->
-            <div class="relative h-56 overflow-hidden md:h-96">
-                <!-- Item 1 -->
-                <div class="duration-200 ease-linear" data-carousel-item>
-                    <img src="{{ asset('/img/porschetaycan.jpg') }}"
-                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                </div>
-                <!-- Item 2 -->
-                <div class="duration-200 ease-linear" data-carousel-item>
-                    <img src="{{ asset('/img/fordranger.jpg') }}"
-                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                </div>
-                <!-- Item 3 -->
-                <div class="duration-200 ease-linear" data-carousel-item="active">
-                    <img src="{{ asset('/img/wulingairev.jpg') }}"
-                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                </div>
-                <!-- Item 4 -->
-                <div class="duration-200 ease-linear" data-carousel-item>
-                    <img src="{{ asset('/img/kiaev9.jpg') }}"
-                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                </div>
-                <!-- Item 5 -->
-                <div class="duration-200 ease-linear" data-carousel-item>
-                    <img src="{{ asset('/img/chevroletcamaro.jpg') }}"
-                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                </div>
-            </div>
-            <!-- Slider controls -->
-            <button type="button"
-                class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                data-carousel-prev>
-                <span
-                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M5 1 1 5l4 4" />
-                    </svg>
-                    <span class="sr-only">Previous</span>
-                </span>
-            </button>
-            <button type="button"
-                class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                data-carousel-next>
-                <span
-                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m1 9 4-4-4-4" />
-                    </svg>
-                    <span class="sr-only">Next</span>
-                </span>
-            </button>
+    <div class="">
+        <div class="flex w-full"">
+            <img src="{{ asset('/img/GTR-R34.jpg') }}" class="w-full">
+            </img>
         </div>
 
         {{-- menu awal --}}
         <div class="menu justify-between items-center mt-20 w-auto h-auto">
-            <p class="text-center text-4xl">Products</p>
-            <hr class="border-black w-auto">
+            <p class="text-center text-yellow-400 text-4xl">Products</p>
+            <hr class="my-6 sm:mx-auto border-yellow-400 lg:my-8">
             <div class="flex flex-wrap justify-center">
                 <div class="unitmobil text-black justify-evenly float-left ml-3 mr-5 mt-5 w-64 h-40"
                     style="background-image: url('{{ asset('/img/GTR-R34.jpg') }}'); background-repeat: no-repeat; background-size: cover;">
@@ -86,7 +33,7 @@
 
         {{-- alasan pilih --}}
         <div class="judul text-center mt-[100px] text-black w-auto h-auto">
-            <p class="text-4xl">Why Choose Us?</p>
+            <p class="text-4xl text-yellow-400">Why Choose Us?</p>
         </div>
         <div class="alasan1 relative text-right w-full h-96 p-5 overflow-hidden mt-6">
             <div class="blur-background absolute inset-0 w-full h-full"
