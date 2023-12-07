@@ -26,12 +26,16 @@ Route::get('/profile', function () {
 Route::get('/pageEdit', function () {
     return view('pageEdit');
 });
+Route::get('/user/home', function () {
+    return view('user');
+});
 
 Route::get('/login', [userController::class, "login"]);
 Route::post('/login', [userController::class, "doLogin"]);
 
 Route::get('/register', [userController::class, "register"]);
-Route::post('/login', [userController::class, "doLogin"]);
+Route::post('/register', [userController::class, "doRegist"]);
+
 
 
 Route::prefix("master")->group(function () {

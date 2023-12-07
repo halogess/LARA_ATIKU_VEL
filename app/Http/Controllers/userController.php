@@ -16,15 +16,28 @@ class userController extends Controller
 
     public function doLogin(Request $req)
     {
-        if ($req->input("email") == "master" && $req->input("password") == "master") {
+        $req -> validate(
+            [
+                //ini pengecekannya
+                "username"=>"required",
+                'password'=>"required"
+            ],
+            [
+                //ini perubahan error messagenya
+                "username.required" => "Username harus terisi!",
+                "password.required" => "Password harus terisi!"
+
+            ]
+        );
+        if ($req->input("username") == "master" && $req->input("password") == "master") {
             return redirect("master");
         }
 
         $pembeli = Pembeli::all();
         foreach ($pembeli as $p) {
-            if ($req->input("email") == $p["username_pembeli"]) {
-                if ($req->input("password") == $p["username_password"]) {
-                    return back();
+            if ($req->username == $p["username_pembeli"]) {
+                if ($req->password == $p["password_pembeli"]) {
+                    return redirect("user/home");
                 }
             }
         }
@@ -35,7 +48,25 @@ class userController extends Controller
         return view("register");
     }
 
-    public function doRegist()
+    public function doRegist(Request $req)
     {
+        $req-> validate(
+            [
+                //ini pengecekannya
+                "username"=>"required",
+                "name"=>"required",
+                "telp"=>"required",
+                'password'=>"required|confirmed"
+            ],
+            [
+                //ini perubahan error messagenya
+                "username.required" => "Username harus terisi!",
+                "name.required" => "Name harus terisi!",
+                "telp.required" => "Phone Number harus terisi!",
+                "password.confirmed" => "Password dan Confirm Password harus sama!",
+                "password.required" => "Password harus terisi!"
+
+            ]
+        );
     }
 }
