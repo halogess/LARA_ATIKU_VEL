@@ -26,14 +26,25 @@ Route::get('/profile', function () {
 Route::get('/pageEdit', function () {
     return view('pageEdit');
 });
+Route::get('/user/home', function () {
+    return view('user');
+});
 
 Route::get('/login', [userController::class, "login"]);
 Route::post('/login', [userController::class, "doLogin"]);
 
 Route::get('/register', [userController::class, "register"]);
-Route::post('/login', [userController::class, "doLogin"]);
+Route::post('/register', [userController::class, "doRegist"]);
+
 
 
 Route::prefix("master")->group(function () {
     Route::get('/', [masterController::class, "master"]);
+
+    Route::get('/pembeli', [masterController::class, "listPembeli"]);
+    Route::post('/pembeli', [masterController::class, "getPembeli"])->name("loadPembeli");
+
+    Route::get('/admin', [masterController::class, "listAdmin"]);
+    Route::post('/admin', [masterController::class, "getAdmin"])->name("loadAdmin");
+
 });

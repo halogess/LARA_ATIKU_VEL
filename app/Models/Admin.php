@@ -9,7 +9,7 @@ class Admin extends Model
 {
     use HasFactory;
 
-    protected $connection ="koneksi";
+    protected $connection ="mysql";
     protected $table ="admin";
     protected $primaryKey = "id_admin";
     public $incrementing = false;
