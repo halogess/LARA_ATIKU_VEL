@@ -10,7 +10,7 @@
     <script src="/style/jquery.js"></script>
 </head>
 
-<body class="w-fit h-fit bg-[#220030]">
+<body class="w-full h-fit">
     <nav class="w-full h-[69px] bg-black text-[#e7dfdc]">
         <div class="judul h-auto w-auto ml-24 float-left">
             <p class="font-bold text-4xl pt-4 text-yellow-400">JJHC Automotive</p>
@@ -29,7 +29,7 @@
     </nav>
     @yield('content')
 
-    <footer class="bg-black text-yellow-400">
+    <footer class="bg-black text-yellow-400 mt-5">
         <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
             <div class="md:flex md:justify-between">
                 <div class="mb-6 md:mb-0">

@@ -6,6 +6,8 @@ use App\Models\Admin;
 use App\Models\Pembeli;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Session;
+
 
 class userController extends Controller
 {
@@ -16,11 +18,11 @@ class userController extends Controller
 
     public function doLogin(Request $req)
     {
-        $req -> validate(
+        $req->validate(
             [
                 //ini pengecekannya
-                "username"=>"required",
-                'password'=>"required"
+                "username" => "required",
+                'password' => "required"
             ],
             [
                 //ini perubahan error messagenya
@@ -37,11 +39,22 @@ class userController extends Controller
         foreach ($pembeli as $p) {
             if ($req->username == $p["username_pembeli"]) {
                 if ($req->password == $p["password_pembeli"]) {
+
+                    Session::put("user",$p);
                     return redirect("user/home");
+                    //return view("user", compact('nama'));
                 }
             }
         }
     }
+
+    public function home(){
+
+        $user = Session::get("user");
+        return view("user",compact("user"));
+    }
+
+
 
     public function register()
     {
@@ -50,13 +63,13 @@ class userController extends Controller
 
     public function doRegist(Request $req)
     {
-        $req-> validate(
+        $req->validate(
             [
                 //ini pengecekannya
-                "username"=>"required",
-                "name"=>"required",
-                "telp"=>"required",
-                'password'=>"required|confirmed"
+                "username" => "required",
+                "name" => "required",
+                "telp" => "required",
+                'password' => "required|confirmed"
             ],
             [
                 //ini perubahan error messagenya

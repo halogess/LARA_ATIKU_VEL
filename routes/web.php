@@ -35,6 +35,8 @@ Route::get('/mainUser', function () {
     return view('user');
 });
 
+// Route::get('/detail?id={id}', [SearchController::class, 'detail'])->name('detail');
+
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 Route::get('/login', [userController::class, "login"]);
@@ -51,4 +53,9 @@ Route::prefix("master")->group(function () {
 
     Route::get('/admin', [masterController::class, "listAdmin"]);
     Route::post('/admin', [masterController::class, "getAdmin"])->name("loadAdmin");
+});
+
+Route::prefix("user")->group(function(){
+    Route::get('/home',[userController::class,"home"]);
+    Route::get("/detail",[SearchController::class,"detail"] );
 });

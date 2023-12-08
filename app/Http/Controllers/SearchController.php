@@ -15,10 +15,23 @@ class SearchController extends Controller
 
         $hasil = "";
         foreach ($results as $result) {
-            $hasil .= '<p>' . $result['nama_barang'] . '</p><img src="' . $result['gambar_barang'] . '" style="width: 200px; height: 100px;"></img>';
+
+            $url = "detail?id=" . $result["kode_barang"];
+
+            // $url = route('detail', ['id' => $result['kode_barang'], 'nama' => $result['nama_barang'], 'gambar' => $result['gambar_barang']]);
+
+            $hasil .= '<a href="' . $url . '">' . $result['nama_barang'] . '</a><img src="' . $result['gambar_barang'] . '" style="width: 200px; height: 100px;"></img>';
         }
 
         return $hasil;
+    }
+
+    public function detail(Request $request)
+    {
+        $id = $request->input('id');
+        $barang = Barang::where("kode_barang", "$id")->get();
+
+        return view('detail', compact('barang'));
     }
 
     public function performSearch($keyword)
