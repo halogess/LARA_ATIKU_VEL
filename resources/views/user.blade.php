@@ -53,7 +53,7 @@
             </div>
             <div class="mobil3 px-4 py-4 border-black border-x-2 border-y-2 w-1/6 text-center ml-10 rounded float-left"
                 style="transition: transform .2s;">
-                <img src="{{ asset('img/honda.png') }}" alt="" style="width: 200px; height: 100px;">
+                <img src="{{ asset('img/honda1.png') }}" alt="" style="width: 200px; height: 100px;">
                 <p>Honda</p>
             </div>
             <div class="mobil4 px-4 py-4 border-black border-x-2 border-y-2 w-1/6 text-center ml-10 rounded float-left"
