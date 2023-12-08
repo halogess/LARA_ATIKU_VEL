@@ -79,7 +79,6 @@
                 url: "{{ route('loadAdmin') }}",
                 method: "post",
                 data: {
-                    _token: '{{ csrf_token() }}',
                     action: "delete",
                     id_admin: id
                 },
@@ -141,18 +140,6 @@
             sort(sortBy);
         }
 
-        function sortSaldo() {
-            sortBy["field"] = "saldo";
-            if (sortActive=="saldo_asc") {
-                sortBy["urutan"] = "desc";
-                sortActive = "saldo_dsc"
-            } else {
-                sortBy["urutan"] = "asc";
-                sortActive = "saldo_asc";
-            }
-            sort(sortBy);
-        }
-
         function hideAll(){
             $("#id_asc").hide();
             $("#id_dsc").hide();
@@ -162,8 +149,6 @@
             $("#usr_dsc").hide();
             $("#telp_asc").hide();
             $("#telp_dsc").hide();
-            $("#saldo_asc").hide();
-            $("#saldo_dsc").hide();
         }
 
         function load() {

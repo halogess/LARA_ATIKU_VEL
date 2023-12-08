@@ -76,21 +76,6 @@
             else if(sortActive == "saldo_dsc") $("#saldo_dsc").show();
         }
 
-        function ban(id) {
-            $.ajax({
-                url: "{{ route('loadPembeli') }}",
-                method: "post",
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    action: "delete",
-                    id_pembeli: id
-                },
-                success: function(response) {
-                    load();
-                }
-            });
-        }
-
         function sort(param) {
             load();
         }
@@ -187,6 +172,20 @@
                 success: function(response) {
                     $("#table").html(response);
                     setSort();
+                }
+            });
+        }
+
+        function ban(id) {
+            $.ajax({
+                url: "{{ route('loadPembeli') }}",
+                method: "post",
+                data: {
+                    action: "delete",
+                    id_pembeli: id
+                },
+                success: function(response) {
+                    load();
                 }
             });
         }

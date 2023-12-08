@@ -40,4 +40,11 @@ Route::post('/register', [userController::class, "doRegist"]);
 
 Route::prefix("master")->group(function () {
     Route::get('/', [masterController::class, "master"]);
+
+    Route::get('/pembeli', [masterController::class, "listPembeli"]);
+    Route::post('/pembeli', [masterController::class, "getPembeli"])->name("loadPembeli");
+
+    Route::get('/admin', [masterController::class, "listAdmin"]);
+    Route::post('/admin', [masterController::class, "getAdmin"])->name("loadAdmin");
+
 });
