@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>JJHC</title>
-    <script src="/style/cdn.tailwindcss.com_3.3.3"></script>
+    <script src="/style/tailwind.js"></script>
+    <script src="/style/jquery.js"></script>
     <style>
         table,
         td {

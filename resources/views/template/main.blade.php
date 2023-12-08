@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script src="/style/cdn.tailwindcss.com_3.3.3"></script>
+    <script src="/style/tailwind.js"></script>
+    <script src="/style/jquery.js"></script>
 </head>
 
 <body class="w-fit h-fit bg-[#220030]">
@@ -15,8 +16,8 @@
             <p class="font-bold text-4xl pt-4 text-yellow-400">JJHC Automotive</p>
         </div>
         <div class="buttons h-auto w-auto mr-24 mt-5 pb-4 float-right">
-            <a href={{url("/")}} class="mr-5 w-16 h-auto text-[#e7dfdc] p-2 text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl"> Home </a>
-            <a href={{url("login")}} class="mr-5 w-16 h-auto text-[#e7dfdc] text-yellow-400 p-2 rounded-xl hover:cursor-pointer font-bold text-xl"> Log In </a>
+            <a href={{url("/")}} class="mr-5 w-16 h-auto  p-2 text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl"> Home </a>
+            <a href={{url("login")}} class="mr-5 w-16 h-auto text-yellow-400 p-2 rounded-xl hover:cursor-pointer font-bold text-xl"> Log In </a>
             <a href={{url("register")}} class="w-auto h-auto text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl drop-shadow-lg"> Sign Up</a>
         </div>
     </nav>
