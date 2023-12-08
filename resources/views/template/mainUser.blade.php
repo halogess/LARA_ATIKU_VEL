@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="/style/cdn.tailwindcss.com_3.3.3"></script>
+    <script src="/style/tailwind.js"></script>
+    <script src="/style/jquery.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
     <style>
@@ -43,15 +45,19 @@
         .mobil1:hover {
             transform: scale(1.5);
         }
+
         .mobil2:hover {
             transform: scale(1.5);
         }
+
         .mobil3:hover {
             transform: scale(1.5);
         }
+
         .mobil4:hover {
             transform: scale(1.5);
         }
+
         .mobil5:hover {
             transform: scale(1.5);
         }

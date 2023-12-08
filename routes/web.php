@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\masterController;
+use App\Http\Controllers\SearchController;
 
 
 
