@@ -17,10 +17,10 @@
         </div>
         <div class="buttons h-auto w-auto mr-24 mt-5 pb-4 float-right">
             <a href={{ url('/') }}
-                class="mr-5 w-16 h-auto text-[#e7dfdc] p-2 text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl">
+                class="mr-5 w-16 h-auto p-2 text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl">
                 Home </a>
             <a href={{ url('login') }}
-                class="mr-5 w-16 h-auto text-[#e7dfdc] text-yellow-400 p-2 rounded-xl hover:cursor-pointer font-bold text-xl">
+                class="mr-5 w-16 h-auto text-yellow-400 p-2 rounded-xl hover:cursor-pointer font-bold text-xl">
                 Log In </a>
             <a href={{ url('register') }}
                 class="w-auto h-auto text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl drop-shadow-lg">
