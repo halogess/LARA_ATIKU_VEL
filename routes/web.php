@@ -30,13 +30,17 @@ Route::get('/user/home', function () {
     return view('user');
 });
 
+Route::get('/mainUser', function () {
+    return view('user');
+});
+
+Route::get('/search', [SearchController::class, 'search'])->name('search');
+
 Route::get('/login', [userController::class, "login"]);
 Route::post('/login', [userController::class, "doLogin"]);
 
 Route::get('/register', [userController::class, "register"]);
 Route::post('/register', [userController::class, "doRegist"]);
-
-
 
 Route::prefix("master")->group(function () {
     Route::get('/', [masterController::class, "master"]);
@@ -46,5 +50,4 @@ Route::prefix("master")->group(function () {
 
     Route::get('/admin', [masterController::class, "listAdmin"]);
     Route::post('/admin', [masterController::class, "getAdmin"])->name("loadAdmin");
-
 });
