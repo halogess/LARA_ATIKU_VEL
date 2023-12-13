@@ -29,12 +29,12 @@
     </nav>
     @yield('content')
 
-    <footer class="bg-black text-yellow-400 mt-5">
+    <footer class="bg-black text-yellow-400">
         <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
             <div class="md:flex md:justify-between">
                 <div class="mb-6 md:mb-0">
                     <a href="https://flowbite.com/" class="flex items-center">
-                        <img src="/img/image.png" class="h-36 me-3" alt="FlowBite Logo" />
+                        <img src="/img/logo.png" class="h-36 me-3" alt="FlowBite Logo" />
                         <span class="self-center text-2xl font-semibold whitespace-nowrap">JJHC Automotive</span>
                     </a>
                 </div>

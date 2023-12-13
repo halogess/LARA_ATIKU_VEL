@@ -37,7 +37,7 @@
         </div>
         <div class="alasan1 relative text-right w-full h-96 p-5 overflow-hidden mt-6">
             <div class="blur-background absolute inset-0 w-full h-full"
-                style="background-image: url('{{ asset('/img/trusted.jpg') }}'); background-repeat: no-repeat; background-size: cover; filter: blur(8px); -webkit-filter: blur(8px);">
+                style="background-image: url('{{ asset('/img/hyperion.jpg') }}'); background-repeat: no-repeat; background-size: cover; filter: blur(8px); -webkit-filter: blur(8px);">
             </div>
             <div class="text-content relative text-black z-10">
                 <p class="text-7xl mr-32 mt-20">Trusted</p>
@@ -47,7 +47,7 @@
         </div>
         <div class="alasan2 relative text-left w-full h-96 p-5 overflow-hidden">
             <div class="blur-background absolute inset-0 w-full h-full"
-                style="background-image: url('{{ asset('/img/secure.jpg') }}'); background-repeat: no-repeat; background-size: cover; filter: blur(8px); -webkit-filter: blur(8px);">
+                style="background-image: url('{{ asset('/img/ironcraft.jpeg') }}'); background-repeat: no-repeat; background-size: cover; filter: blur(8px); -webkit-filter: blur(8px);">
             </div>
             <div class="text-content relative text-black z-10">
                 <p class="text-7xl ml-32 mt-20">Secure</p>
@@ -58,7 +58,7 @@
     </div>
     <div class="alasan3 relative text-right w-full h-96 p-5 overflow-hidden">
         <div class="blur-background absolute inset-0 w-full h-full"
-            style="background-image: url('{{ asset('/img/express.jpeg') }}'); background-repeat: no-repeat; background-size: cover; filter: blur(8px); -webkit-filter: blur(8px);">
+            style="background-image: url('{{ asset('/img/regera.jpeg') }}'); background-repeat: no-repeat; background-size: cover; filter: blur(8px); -webkit-filter: blur(8px);">
         </div>
         <div class="text-content relative text-black z-10">
             <p class="text-7xl mr-32 mt-20">Express</p>
