@@ -209,15 +209,5 @@
                     return "Silahkan pilih filter yang cocok...";
             }
         }
-
-
-        // document.getElementById('myForm').addEventListener('submit', function(event) {
-        //     event.preventDefault();
-
-        //     var clickedButton = event.submitter;
-
-        //     document.getElementById('contohMobil').innerHTML = "Ini adalah mobil-mobil dengan harga " +
-        //         clickedButton.value + ": ";
-        // });
     </script>
 @endsection

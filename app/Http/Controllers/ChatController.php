@@ -22,7 +22,8 @@ class ChatController extends Controller
     public function kirimChat(Request $request)
     {
         $input = [
-            'chat_content' => $request->input('inputChat')
+            'chat_content' => $request->input('inputChat'),
+            'id_admin' => 'A0001'
         ];
 
         DB::table('serverchat')->insert($input);
