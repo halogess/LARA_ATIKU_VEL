@@ -1,29 +1,28 @@
 @extends('template.mainUser')
 
 @section('navbarUser')
-    <nav class="bg-white border-gray-200 dark:bg-gray-900">
+    <nav class="bg-black">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <p class="text-white">JJHC Automotive</p>
+            <p class="text-yellow-400">JJHC Automotive</p>
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                 <ul
-                    class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    class="font-medium flex flex-col p-4 md:p-0 mt-4 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
                     <li>
-                        <a href="#"
-                            class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+                        <a href="#" class="block py-2 px-3 text-yellow-400 rounded md:bg-transparent md:p-0"
                             aria-current="page">Home</a>
                     </li>
                     <li>
                         <a href="#"
-                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Cart</a>
+                            class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-yellow-400 md:p-0">Cart</a>
                     </li>
                     <li>
                         <a href="{{ url('/') }}"
-                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Log
+                            class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-yellow-400 md:p-0">Log
                             Out</a>
                     </li>
                     <li>
                         <p
-                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                            class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-yellow-400 md:p-0">
                             Welcome, {{ $user['nama_pembeli'] }}</p>
                     </li>
                 </ul>
@@ -115,8 +114,7 @@
                 id="harga6" onclick="showContent('harga6')">
         </form>
 
-        <div id="contohMobil" class="w-full h-auto pt-3"></div>
-        <p>Credit by Viery Pangeran</p>
+        <div id="contohMobil" class="w-full h-auto pt-3 "></div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -158,9 +156,9 @@
         function getContentForButton(buttonId) {
             switch (buttonId) {
                 case 'harga1':
-                    var ayla = "{{ asset('img/ayla.jpg') }}";
+                    var ayla = "{{ asset('img/ayla.png') }}";
                     var brio = "{{ asset('img/brio.jpg') }}";
-                    var agya = "{{ asset('img/agya.jpg') }}";
+                    var agya = "{{ asset('img/agya.png') }}";
                     return "<div class='float-left'><img src='" + ayla +
                         "' style='width: 300px; height: 200px;'></img><p>Daihatsu Ayla</p></div><div class='float-left'><img src='" +
                         brio +
@@ -178,33 +176,43 @@
                         spresso +
                         "' style='width: 300px; height: 200px;'></img><p>Suzuki S Presso</p></div>";
                 case 'harga3':
-                    var ayla = "{{ asset('img/ayla.jpg') }}";
-                    var brio = "{{ asset('img/ayla.jpg') }}";
+                    var ayla = "{{ asset('img/innovaD.png') }}";
+                    var brio = "{{ asset('img/HRV.png') }}";
                     var agya = "{{ asset('img/ayla.jpg') }}";
                     return "<div class='float-left'><img src='" + ayla +
-                        "'></img><p>Daihatsu Ayla</p></div><div class='float-left'><img src='" + ayla +
-                        "'></img><p>Daihatsu Ayla</p></div>";
+                        "' style='width: 300px; height: 200px;'></img><p>Toyota Innova Reborn Diesel</p></div><div class='float-left'><img src='" +
+                        "'></img><p></p></div><div class='float-left'><img src='" + brio +
+                        "' style='width: 300px; height: 200px;'></img><p>HRV RS</p></div><div class='float-left'><img src='" +
+                        "'></img><p></p></div>";
                 case 'harga4':
-                    var ayla = "{{ asset('img/ayla.jpg') }}";
-                    var brio = "{{ asset('img/ayla.jpg') }}";
+                    var ayla = "{{ asset('img/civicT.png') }}";
+                    var brio = "{{ asset('img/audiA3.png') }}";
                     var agya = "{{ asset('img/ayla.jpg') }}";
                     return "<div class='float-left'><img src='" + ayla +
-                        "'></img><p>Daihatsu Ayla</p></div><div class='float-left'><img src='" + ayla +
-                        "'></img><p>Daihatsu Ayla</p></div>";
+                        "' style='width: 300px; height: 200px;'></img><p>Civic Turbo Type R</p></div><div class='float-left'><img src='" +
+                        "'></img><p></p></div><div class='float-left'><img src='" + brio +
+                        "' style='width: 300px; height: 200px;'></img><p>Audi A3</p></div><div class='float-left'><img src='" +
+                        "'></img><p></p></div>";
                 case 'harga5':
-                    var ayla = "{{ asset('img/ayla.jpg') }}";
-                    var brio = "{{ asset('img/ayla.jpg') }}";
+                    var ayla = "{{ asset('img/Palisade.png') }}";
+                    var brio = "{{ asset('img/Ioniq.png') }}";
                     var agya = "{{ asset('img/ayla.jpg') }}";
                     return "<div class='float-left'><img src='" + ayla +
-                        "'></img><p>Daihatsu Ayla</p></div><div class='float-left'><img src='" + ayla +
-                        "'></img><p>Daihatsu Ayla</p></div>";
+                        "' style='width: 380px; height: 200px;'></img><p>Hyundai Palisade</p></div><div class='float-left'><img src='" +
+                        "'></img><p></p></div><div class='float-left'><img src='" + brio +
+                        "' style='width: 350px; height: 200px;'></img><p>Ioniq 6</p></div><div class='float-left'><img src='" +
+                        "'></img><p></p></div>";
                 case 'harga6':
-                    var ayla = "{{ asset('img/ayla.jpg') }}";
-                    var brio = "{{ asset('img/ayla.jpg') }}";
-                    var agya = "{{ asset('img/ayla.jpg') }}";
+                    var ayla = "{{ asset('img/Pagani.png') }}";
+                    var brio = "{{ asset('img/AgeraR.png') }}";
+                    var agya = "{{ asset('img/VenomF5.png') }}";
                     return "<div class='float-left'><img src='" + ayla +
-                        "'></img><p>Daihatsu Ayla</p></div><div class='float-left'><img src='" + ayla +
-                        "'></img><p>Daihatsu Ayla</p></div>";
+                        "' style='width: 320px; height: 200px;'></img><p>Pagani Zonda Kiryu</p></div><div class='float-left'><img src='" +
+                        "'></img><p></p></div><div class='float-left'><img src='" + brio +
+                        "' style='width: 350px; height: 200px;'></img><p>Koenisegg Agera R</p></div><div class='float-left'><img src='" +
+                        "'></img><p></p></div>" +
+                        "<div class='float-left'><img src='" + agya +
+                        "' style='width: 320px; height: 200px;'></img><p>Hennessey Venom F5</p></div><div class='float-left'><img src='";
                 default:
                     return "Silahkan pilih filter yang cocok...";
             }

@@ -51,7 +51,7 @@
             </div>
             <div class="text-content relative text-black z-10">
                 <p class="text-7xl ml-32 mt-20">Secure</p>
-                <p class="text-4xl ml-32">All transactions carried out are protected by insurance that our company has and
+                <p class="text-4xl ml-32">All transactions carried out are protected by insurance that our company had and
                     has verified!</p>
             </div>
         </div>
