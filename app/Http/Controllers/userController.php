@@ -40,7 +40,7 @@ class userController extends Controller
             if ($req->username == $p["username_pembeli"]) {
                 if ($req->password == $p["password_pembeli"]) {
 
-                    Session::put("user",$p);
+                    Session::put("user", $p);
                     return redirect("user/home");
                     //return view("user", compact('nama'));
                 }
@@ -48,13 +48,18 @@ class userController extends Controller
         }
     }
 
-    public function home(){
+    public function home()
+    {
 
         $user = Session::get("user");
-        return view("user",compact("user"));
+        return view("user", compact("user"));
     }
 
-
+    public function terbeli(Request $req)
+    {
+        $jumlah = $req->input('jumlah');
+        return view('terbeli', compact('jumlah'));
+    }
 
     public function register()
     {

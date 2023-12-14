@@ -20,7 +20,8 @@
         </div>
         <div class="formBeli text-center border border-black p-20 justify-items-center">
             <p class="text-4xl"><b>Atur Jumlah</b></p>
-            <form action="" class="mt-5">
+            <form action="{{ route('terbeli') }}" class="mt-5" method="POST">
+                @csrf
                 <input type="number" name="jumlah" id="jumlah" class="w-full" oninput="updateSubtotal()"
                     min="0"><br>
                 <table class="mt-2">
@@ -35,7 +36,7 @@
                     class="btn btn-light text-black bg-white w-full rounded p-1 mt-1">
                 <table class="w-full mt-2">
                     <tr>
-                        <td>Chat</td>
+                        <td><a href="{{ route('chat') }}">Chat</a></td>
                         <td>Wishlist</td>
                         <td>Share</td>
                     </tr>

@@ -8,6 +8,12 @@
     <title>Document</title>
     <script src="/style/tailwind.js"></script>
     <script src="/style/jquery.js"></script>
+    <style>
+        #btnBeli:hover {
+            background-color: black;
+            color: white;
+        }
+    </style>
 </head>
 
 <body class="w-full h-fit">
@@ -33,7 +39,7 @@
         <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
             <div class="md:flex md:justify-between">
                 <div class="mb-6 md:mb-0">
-                    <a href="https://flowbite.com/" class="flex items-center">
+                    <a href="{{ url('/') }}" class="flex items-center">
                         <img src="/img/logo.png" class="h-36 me-3" alt="FlowBite Logo" />
                         <span class="self-center text-2xl font-semibold whitespace-nowrap">JJHC Automotive</span>
                     </a>
@@ -81,7 +87,7 @@
                     <div>
                         <h2 class="mb-4 text-sm font-semibold text-yellow-400 uppercase">Social Media</h2>
                         <ul class="text-yellow-400">
-                            <p class="hover:underline">Instagram</p>
+                            <p class="hover:underline">Instagram</a></p>
                             </li>
                             <li>
                                 <p class="hover:underline">Facebook</p>

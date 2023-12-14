@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Admin extends Model
+class Chat extends Model
 {
     use HasFactory;
 
     protected $connection = "mysql";
-    protected $table = "admin";
+    protected $table = "serverchat";
     protected $primaryKey = "id_admin";
     public $incrementing = false;
     public $timestamps = false;

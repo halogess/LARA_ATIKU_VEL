@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\masterController;
@@ -35,6 +36,9 @@ Route::get('/mainUser', function () {
     return view('user');
 });
 
+Route::get('/chat', [ChatController::class, "doChat"])->name('chat');
+Route::post('/chat', [ChatController::class, "kirimChat"])->name('masukChat');
+
 // Route::get('/detail?id={id}', [SearchController::class, 'detail'])->name('detail');
 
 Route::get('/search', [SearchController::class, 'search'])->name('search');
@@ -44,6 +48,9 @@ Route::post('/login', [userController::class, "doLogin"]);
 
 Route::get('/register', [userController::class, "register"]);
 Route::post('/register', [userController::class, "doRegist"]);
+
+Route::get('/terbeli', [userController::class, "terbeli"])->name('terbeli');
+Route::post('/terbeli', [userController::class, "terbeli"])->name('membeli');
 
 Route::prefix("master")->group(function () {
     Route::get('/', [masterController::class, "master"]);
@@ -55,7 +62,7 @@ Route::prefix("master")->group(function () {
     Route::post('/admin', [masterController::class, "getAdmin"])->name("loadAdmin");
 });
 
-Route::prefix("user")->group(function(){
-    Route::get('/home',[userController::class,"home"]);
-    Route::get("/detail",[SearchController::class,"detail"] );
+Route::prefix("user")->group(function () {
+    Route::get('/home', [userController::class, "home"]);
+    Route::get("/detail", [SearchController::class, "detail"]);
 });
