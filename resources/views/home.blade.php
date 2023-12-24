@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="">
-        <div class="flex w-full"">
+        <div class="flex w-full">
             <img src="{{ asset('/img/GTR-R34.jpg') }}" class="w-full">
-            </img>
+            
         </div>
 
         {{-- menu awal --}}

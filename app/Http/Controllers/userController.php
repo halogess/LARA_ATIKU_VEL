@@ -86,5 +86,33 @@ class userController extends Controller
 
             ]
         );
+
+        // $jumlah = Pembeli::count();
+        // if ($jumlah<10) {
+        //     $id = '1000' . $jumlah;
+        // } else if ($jumlah<100) {
+        //     $id = '100' . $jumlah;
+        // } else if ($jumlah<1000) {
+        //     $id = '10' . $jumlah;
+        // } else {
+        //     $id = '1' . $jumlah;
+        // }
+
+
+        // $data = new Pembeli();
+        // $data->id_pembeli = $id;
+        // $data->username_pembeli = $req->input('username');
+        // $data->nama_pembeli = $req->input('name');
+        // $data->password_pembeli = $req->input('password');
+        // $data->telp_pembeli = $req->input('telp');
+        // // sesuaikan dengan nama kolom dan data yang akan disimpan
+
+        // $data->save();
+
+        // // Tambahkan pesan sukses atau redirect ke halaman lain
+        // // return redirect('register');
+        // return redirect()->route('register')->with('success', 'Anda telah berhasil register');
+
+
     }
 }

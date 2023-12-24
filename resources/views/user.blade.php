@@ -43,7 +43,7 @@
 
     {{-- merk mobil --}}
     <div class="merkMobil w-full h-auto px-16 py-8">
-        <p class="text-6xl text-black">Merk Mobil</p>
+        <p class="text-5xl text-black font-semibold font-serif">Merk Mobil</p>
         <div class="line1 w-full mt-5">
             <div class="mobil1 px-4 py-4 border-black border-x-2 border-y-2 w-1/6 text-center rounded float-left"
                 style="transition: transform .2s;">
@@ -98,7 +98,7 @@
 
     {{-- mobil sesuai anggaran --}}
     <div class="anggaran w-full h-auto px-16 py-8 mt-48">
-        <p class="text-6xl text-black">Mobil Sesuai Anggaran</p>
+        <p class="text-5xl text-black font-semibold font-serif">Mobil Sesuai Anggaran</p>
         <form action="" class="mt-5" id="myForm">
             <input type="button" value="Dibawah Rp 150 Juta" class="mr-10 bg-black text-white p-2 rounded" id="harga1"
                 onclick="showContent('harga1')">

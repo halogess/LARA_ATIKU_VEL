@@ -10,7 +10,9 @@
     <script src="/style/tailwind.js"></script>
     <script src="/style/jquery.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script> --}}
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     <style>
         #btnKirim:hover {
             background-color: grey;
@@ -47,7 +49,7 @@
     </nav>
 
     {{-- chatnya --}}
-    <div class="kotak flex flex-col items-center w-full">
+    {{-- <div class="kotak flex flex-col items-center w-full">
         @foreach ($chat as $c)
             <div class="chat1Orang w-3/4 bg-black h-auto m-2 p-2 rounded">
                 <p class="text-white">{{ $c->chat_content }}</p>
@@ -59,7 +61,53 @@
                 style="border: 2px solid black;">
             <input type="submit" value="Kirim" class="bg-black text-white p-1 rounded" id="btnKirim">
         </form>
+    </div> --}}
+
+    <div class="kotak flex flex-col items-center w-full">
+        <div id="chatContainer">
+            @foreach ($chat as $c)
+                <div class="chat1Orang w-3/4 bg-black h-auto m-2 p-2 rounded">
+                    <p class="text-white">{{ $c->chat_content }}</p>
+                </div>
+            @endforeach
+        </div>
+
+        <form id="chatForm">
+            @csrf
+            <input type="text" name="inputChat" id="inputChat" class="w-full p-1 bg-slate-200 rounded"
+                style="border: 2px solid black;">
+            <input type="button" value="Kirim" class="bg-black text-white p-1 rounded" id="btnKirim">
+        </form>
     </div>
+
+    <script>
+
+        $(document).ready(function() {
+            // Submit form using AJAX
+            $('#btnKirim').on('click', function(e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('masukChat') }}',
+                    data: $('#chatForm').serialize(),
+                    success: function(response) {
+                        // Assuming the response is a JSON object containing the new chat message
+                        // Modify the structure according to your actual response
+                        $('#chatContainer').append(
+                            '<div class="chat1Orang w-3/4 bg-black h-auto m-2 p-2 rounded"><p class="text-white">' +
+                            response.chat_content + '</p></div>');
+
+                        // Clear input field
+                        $('#inputChat').val('');
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
 
     {{-- footer --}}
     <footer class="bg-[#546175] text-[#e7dfdc] mt-[150px]">

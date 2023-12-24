@@ -28,9 +28,9 @@ Route::get('/profile', function () {
 Route::get('/pageEdit', function () {
     return view('pageEdit');
 });
-Route::get('/user/home', function () {
-    return view('user');
-});
+    // Route::get('/user/home', function () {
+    //     return view('user');
+    // });
 
 Route::get('/mainUser', function () {
     return view('user');
