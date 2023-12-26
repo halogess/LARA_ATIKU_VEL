@@ -49,19 +49,6 @@
     </nav>
 
     {{-- chatnya --}}
-    {{-- <div class="kotak flex flex-col items-center w-full">
-        @foreach ($chat as $c)
-            <div class="chat1Orang w-3/4 bg-black h-auto m-2 p-2 rounded">
-                <p class="text-white">{{ $c->chat_content }}</p>
-            </div>
-        @endforeach
-        <form action="{{ route('masukChat') }}" method="POST">
-            @csrf
-            <input type="text" name="inputChat" id="inputChat" class="w-full p-1 bg-slate-200 rounded"
-                style="border: 2px solid black;">
-            <input type="submit" value="Kirim" class="bg-black text-white p-1 rounded" id="btnKirim">
-        </form>
-    </div> --}}
 
     <div class="kotak flex flex-col items-center w-full">
         <div id="chatContainer">
@@ -81,9 +68,7 @@
     </div>
 
     <script>
-
         $(document).ready(function() {
-            // Submit form using AJAX
             $('#btnKirim').on('click', function(e) {
                 e.preventDefault();
 
@@ -91,23 +76,25 @@
                     type: 'POST',
                     url: '{{ route('masukChat') }}',
                     data: $('#chatForm').serialize(),
+                    dataType: 'json',
                     success: function(response) {
-                        // Assuming the response is a JSON object containing the new chat message
-                        // Modify the structure according to your actual response
                         $('#chatContainer').append(
                             '<div class="chat1Orang w-3/4 bg-black h-auto m-2 p-2 rounded"><p class="text-white">' +
                             response.chat_content + '</p></div>');
 
-                        // Clear input field
                         $('#inputChat').val('');
                     },
-                    error: function(error) {
-                        console.log(error);
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                        console.error(status);
+                        console.error(error);
                     }
                 });
             });
         });
     </script>
+
+
 
     {{-- footer --}}
     <footer class="bg-[#546175] text-[#e7dfdc] mt-[150px]">

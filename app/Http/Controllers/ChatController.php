@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Chat;
 use App\Models\Pembeli;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Session;
@@ -26,9 +27,10 @@ class ChatController extends Controller
             'id_admin' => 'A0001'
         ];
 
-        DB::table('serverchat')->insert($input);
+        $newChat = DB::table('serverchat')->insertGetId($input);
 
-        return redirect('chat');
+        $chat = DB::table('serverchat')->where('id', $newChat)->first();
+        return Response::json(['chat_content' => $chat->chat_content]);
     }
 
 
