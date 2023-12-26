@@ -31,12 +31,12 @@
     @endphp
 
     <tr class="{{ $bg }}">
-        <td>{{ $p->id_admin }}</td>
-        <td>{{ $p->nama_admin }}</td>
-        <td>{{ $p->username_admin }}</td>
-        <td>{{ $p->telp_admin }}</td>
+        <td>{{ $p->id_user }}</td>
+        <td>{{ $p->nama_user }}</td>
+        <td>{{ $p->username }}</td>
+        <td>{{ $p->telp }}</td>
         <td>
-            <button onclick="ban('{{ $p->id_admin }}')" class="w-full h-full border rounded p-2">{{ $btn }}
+            <button onclick="ban('{{ $p->id_user }}')" class="w-full h-full border rounded p-2">{{ $btn }}
             </button>
         </td>
     </tr>

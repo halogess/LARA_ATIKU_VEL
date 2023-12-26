@@ -16,8 +16,10 @@
 
     <nav class="w-full h-20 p-3 bg-gray-400 text">
         <p>Welcome, Master!</p>
-        <a href="{{url('master/pembeli')}}">List Pembeli</a>
-        <a href="{{url('master/admin')}}">List Admin</a>
+        <a href="{{url('master/pembeli')}}" class="border-2 border-black p-1">Pembeli</a>
+        <a href="{{url('master/admin')}}" class="border-2 border-black p-1">Admin</a>
+        <a href="{{url('master/barang')}}" class="border-2 border-black p-1">Barang</a>
+        <a href="{{url('logout')}}" class="border-2 border-black p-1">Logout</a>
 
     </nav>
     @yield('content')

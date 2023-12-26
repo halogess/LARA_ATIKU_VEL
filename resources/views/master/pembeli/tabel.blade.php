@@ -16,10 +16,7 @@
         <button id="telp_asc">🡹</button>
         <button id="telp_dsc">🡻</button>
     </td>
-    <td onclick="sortSaldo()">Saldo
-        <button id="saldo_asc">🡹</button>
-        <button id="saldo_dsc">🡻</button>
-    </td>
+    <td>Saldo</td>
     <td>Action</td>
 </tr>
 
@@ -35,13 +32,14 @@
     @endphp
 
     <tr class="{{ $bg }}">
-        <td>{{ $p->id_pembeli }}</td>
-        <td>{{ $p->nama_pembeli }}</td>
-        <td>{{ $p->username_pembeli }}</td>
-        <td>{{ $p->telp_pembeli }}</td>
-        <td>{{ $p->saldo }}</td>
+        <td>{{ $p->id_user }}</td>
+        <td>{{ $p->nama_user }}</td>
+        <td>{{ $p->username }}</td>
+        <td>{{ $p->telp }}</td>
+        {{-- <td>{{ $p->Saldo->saldo }}</td> --}}
+
         <td>
-            <button onclick="ban('{{ $p->id_pembeli }}')" class="w-full h-full border rounded p-2">{{ $btn }}
+            <button onclick="ban('{{ $p->id_user }}')" class="w-full h-full border rounded p-2">{{ $btn }}
             </button>
         </td>
     </tr>
