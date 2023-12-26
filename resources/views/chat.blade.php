@@ -15,7 +15,7 @@
 
     <style>
         #btnKirim:hover {
-            background-color: grey;
+            background-color: yellow;
             color: black;
         }
     </style>
@@ -50,7 +50,7 @@
 
     {{-- chatnya --}}
 
-    <div class="kotak flex flex-col items-center w-full">
+    <div class="kotak ml-44 w-full mt-10">
         <div id="chatContainer">
             @foreach ($chat as $c)
                 <div class="chat1Orang w-3/4 bg-black h-auto m-2 p-2 rounded">
@@ -59,11 +59,12 @@
             @endforeach
         </div>
 
-        <form id="chatForm">
+        <form id="chatForm" class="w-3/4">
             @csrf
             <input type="text" name="inputChat" id="inputChat" class="w-full p-1 bg-slate-200 rounded"
                 style="border: 2px solid black;">
-            <input type="button" value="Kirim" class="bg-black text-white p-1 rounded" id="btnKirim">
+            <input type="button" value="Kirim" class="bg-black text-white p-1 rounded mt-2 w-full text-lg"
+                id="btnKirim">
         </form>
     </div>
 
@@ -97,7 +98,7 @@
 
 
     {{-- footer --}}
-    <footer class="bg-[#546175] text-[#e7dfdc] mt-[150px]">
+    <footer class="bg-[#546175] text-[#e7dfdc] mt-[200px]">
         <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
             <div class="md:flex md:justify-between">
                 <div class="mb-6 md:mb-0">
