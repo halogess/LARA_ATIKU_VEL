@@ -27,7 +27,6 @@ class LoginController extends Controller
                 //ini perubahan error messagenya
                 "username.required" => "Username harus terisi!",
                 "password.required" => "Password harus terisi!"
-
             ]
         );
 
@@ -36,16 +35,29 @@ class LoginController extends Controller
             "password" => $req->password,
         ];
 
-        if(Auth::attempt($cek)){
-            if(Auth::user()->role == 0){
+        //punya jewe
+        // if(Auth::attempt($cek)){
+        //     if(Auth::user()->role == 0){
+        //         return redirect("user/home");
+        //     } else if(Auth::user()->role==1){
+        //         return redirect("admin");
+        //     } else{
+        //         return redirect("master");
+        //     }
+        // }
+
+        if (Auth::attempt($cek)) {
+            $userID = Auth::id(); // Mendapatkan ID pengguna
+            session(['user_id' => $userID]); // Menyimpan ID pengguna dalam sesi
+
+            if (Auth::user()->role == 0) {
                 return redirect("user/home");
-            } else if(Auth::user()->role==1){
+            } else if (Auth::user()->role == 1) {
                 return redirect("admin");
-            } else{
+            } else {
                 return redirect("master");
             }
         }
-
     }
 
     public function register()
