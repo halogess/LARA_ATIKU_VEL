@@ -8,6 +8,7 @@ use App\Http\Controllers\userController;
 use App\Http\Controllers\Master\MasterController;
 use App\Http\Controllers\Master\MasterAdminController;
 use App\Http\Controllers\Master\MasterPembeliController;
+use App\Http\Controllers\Master\MasterBarangController;
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminTransaksiController;
@@ -72,6 +73,15 @@ Route::middleware("master")->group(function () {
 
         Route::get('/admin/add', [MasterAdminController::class, "pageAddAdmin"]);
         Route::post('/admin/add', [MasterAdminController::class, "addAdmin"]);
+
+        Route::get('/barang', [MasterBarangController::class, "pageBarang"]);
+        Route::post('/barang', [MasterBarangController::class, "getBarang"])->name("loadBarang");
+
+        Route::get('/barang/add', [MasterBarangController::class, "pageAddBarang"]);
+        Route::post('/barang/add', [MasterBarangController::class, "addBarang"]);
+
+        Route::get('/barang/edit/{kode}', [MasterBarangController::class, "pageEditBarang"]);
+        Route::post('/barang/edit/{kode}', [MasterBarangController::class, "editBarang"]);
     });
 });
 
@@ -88,6 +98,7 @@ Route::middleware("admin")->group(function(){
 
         Route::prefix("transaksi")->group(function(){
             Route::get("new",[AdminTransaksiController::class, "page_new"]);
+            Route::post("new",[AdminTransaksiController::class, "getNewTrans"])->name("loadNewTrans");
         });
     });
 });

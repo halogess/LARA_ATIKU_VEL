@@ -15,8 +15,11 @@ class Htrans extends Model
     public $timestamps = false;
 
     public function Status(){
-        return $this->belongsToMany(Status::class);
+        return $this->hasMany(Status::class, 'nomor_nota', 'nomor_nota');
     }
 
+    public function Pembeli(){
+        return $this->belongsTo(User::class, 'id_pembeli', 'id_user');
+    }
 
 }
