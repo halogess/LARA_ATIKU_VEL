@@ -95,6 +95,8 @@ Route::middleware("pembeli")->group(function () {
 Route::middleware("admin")->group(function(){
     Route::prefix("admin")->group(function(){
         Route::get("home",[AdminController::class,"home"]);
+        Route::get('/chat', [ChatController::class, "doChatAdmin"])->name('chatAdmin');
+        Route::post('/chat', [ChatController::class, "kirimChatAdmin"])->name('adminChat'); 
 
         Route::prefix("transaksi")->group(function(){
             Route::get("new",[AdminTransaksiController::class, "page_new"]);

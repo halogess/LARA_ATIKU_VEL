@@ -16,7 +16,7 @@
         <button id="telp_asc">🡹</button>
         <button id="telp_dsc">🡻</button>
     </td>
-    <td>Action</td>
+    <td class="text-center">Action</td>
 </tr>
 
 @foreach ($admin as $p)
@@ -36,7 +36,7 @@
         <td>{{ $p->username }}</td>
         <td>{{ $p->telp }}</td>
         <td>
-            <button onclick="ban('{{ $p->id_user }}')" class="w-full h-full border border-yellow-400 bg-black text-yellow-400 rounded p-2">{{ $btn }}
+            <button onclick="ban('{{ $p->id_user }}')" class="w-full h-full border border-yellow-400 bg-black text-yellow-400 rounded p-2 hover:bg-yellow-400 hover:text-black">{{ $btn }}
             </button>
         </td>
     </tr>

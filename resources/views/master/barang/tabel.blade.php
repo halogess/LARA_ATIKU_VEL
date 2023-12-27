@@ -21,7 +21,7 @@
         <button id="stok_dsc">🡻</button>
     </td>
 
-    <td>Action</td>
+    <td class="text-center">Action</td>
 </tr>
 
 @foreach ($barang as $p)

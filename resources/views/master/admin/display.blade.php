@@ -17,18 +17,18 @@
         </select>
 
         <input type="search" id="search" placeholder="Search"
-            class="border-2 border-yellow-400 bg-black text-yellow-400 p-2 rounded-lg inline-flex">
+        class="border-2 border-yellow-400 bg-black text-yellow-400 p-2 rounded-lg inline-flex">
 
-        <div>
-            <input type="radio" name="rb" id="active" value="active" checked>
-            <label for="active">Active</label>
+        <input type="radio" name="rb" id="active" value="active" checked>
+        <label for="active">Active</label>
 
-            <input type="radio" name="rb" id="banned" value="banned">
-            <label for="banned">Banned</label>
+        <input type="radio" name="rb" id="banned" value="banned">
+        <label for="banned">Banned</label>
 
-            <input type="radio" name="rb" id="all" value="all">
-            <label for="banned">All</label>
-        </div>
+        <input type="radio" name="rb" id="all" value="all">
+        <label for="banned">All</label>
+        <br>
+        <br>
 
         <div class="w-full overflow-x-auto">
             <table id="table" class="min w-full"></table>

@@ -25,7 +25,6 @@
             @endforeach
         </select>
 
-        <div>
             <input type="radio" name="rb" id="active" value="active" checked>
             <label for="active">Active</label>
 
@@ -34,7 +33,8 @@
 
             <input type="radio" name="rb" id="all" value="all">
             <label for="banned">All</label>
-        </div>
+
+            <br><br>
 
         <div class="w-full overflow-x-auto">
             <table id="table" class="min w-full"></table>

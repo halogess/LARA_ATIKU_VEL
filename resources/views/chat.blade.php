@@ -55,19 +55,19 @@
             <div class="text-center text-black font-semibold text-lg pb-4 pt-2 ">
                 CHAT
             </div>
-            <div id="chatContainer" class="w-full">
+            <div id="chatContainer" class="w-full overflow-auto h-96">
                 @foreach ($chat as $c)
                     @if ($c->pengirim === 'admin')
                         <div class="admin-chat w-fit m-2 p-2 rounded" style="background-color: #FFFF00;">
                             <p class="text-black">
-                                {{ $c->chat_content }}
+                                {{$c->chat_content}}
                             </p>
                         </div>
                     @else
                         <div class="user-chat w-fit m-2 p-2 rounded ml-auto mr-7"
                             style="background-color: #000000;">
                             <p class="text-white">
-                                {{ $c->chat_content }}
+                                {{$c->chat_content}}
                             </p>
                         </div>
                     @endif
@@ -87,7 +87,7 @@
 
     <script>
         $(document).ready(function() {
-    $('#btnKirim').on('click', function(e) {
+        $('#btnKirim').on('click', function(e) {
         e.preventDefault();
 
         $.ajax({
@@ -119,8 +119,6 @@
     });
 });
     </script>
-
-
 
     {{-- footer --}}
     <footer class="bg-[#546175] text-[#e7dfdc] mt-[200px]">

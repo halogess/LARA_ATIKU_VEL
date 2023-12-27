@@ -17,7 +17,7 @@
         <button id="telp_dsc">🡻</button>
     </td>
     <td>Saldo</td>
-    <td>Action</td>
+    <td class="text-center">Action</td>
 </tr>
 
 @foreach ($pembeli as $p)

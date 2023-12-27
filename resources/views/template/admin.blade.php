@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="/style/tailwind.js"></script>
-    <script src="/style/jquery.js"></script>
+    <script src="/style/jquery.js"></script>  
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
