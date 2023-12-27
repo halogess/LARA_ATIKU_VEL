@@ -26,5 +26,4 @@ class userController extends Controller
         return view('terbeli', compact('jumlah'));
     }
 
-
 }

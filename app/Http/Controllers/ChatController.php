@@ -16,7 +16,8 @@ class ChatController extends Controller
 {
     public function doChat()
     {
-        $chat = Chat::all();
+        $userID = session('user_id');
+        $chat = Chat::where('id_pembeli', $userID)->get();
 
         return view('chat', compact('chat'));
     }
