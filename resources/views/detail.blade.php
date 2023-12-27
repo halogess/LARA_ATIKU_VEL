@@ -30,7 +30,8 @@
                     </tr>
                 </table>
                 <input type="submit" id="btnAddKeranjang"
-                    class="btn btn-success text-yellow-300 bg-black w-full rounded p-1 mt-3" value="+ Keranjang"><br>
+                    class="btn btn-success text-yellow-300 bg-black w-full rounded p-1 mt-3" value="+ Keranjang"
+                    onclick="submitForm()"><br>
             </form><br>
 
             <form action="{{ route('membeli', ['kode_barang' => $barang->kode_barang]) }}" method="post">
@@ -87,25 +88,6 @@
 
         function submitForm() {
             alert("Berhasil memasukkan barang ke keranjang");
-            var jumlah = document.getElementById('jumlah').value;
-
-            var kode_barang = '{{ $barang->kode_barang }}';
-
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('add-to-cart', ['kode_barang' => $barang->kode_barang]) }}',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    kode_barang: kode_barang
-                    jumlah: jumlah
-                },
-                success: function(response) {
-                    alert("Berhasil memasukkan barang ke keranjang");
-                },
-                error: function(error) {
-                    console.error('Error adding item to cart:', error);
-                }
-            });
         }
     </script>
 @endsection

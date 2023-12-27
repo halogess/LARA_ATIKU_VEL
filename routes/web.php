@@ -8,7 +8,6 @@ use App\Http\Controllers\userController;
 use App\Http\Controllers\Master\MasterController;
 use App\Http\Controllers\Master\MasterAdminController;
 use App\Http\Controllers\Master\MasterPembeliController;
-use App\Http\Controllers\Master\MasterBarangController;
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminTransaksiController;
@@ -73,15 +72,6 @@ Route::middleware("master")->group(function () {
 
         Route::get('/admin/add', [MasterAdminController::class, "pageAddAdmin"]);
         Route::post('/admin/add', [MasterAdminController::class, "addAdmin"]);
-
-        Route::get('/barang', [MasterBarangController::class, "pageBarang"]);
-        Route::post('/barang', [MasterBarangController::class, "getBarang"])->name("loadBarang");
-
-        Route::get('/barang/add', [MasterBarangController::class, "pageAddBarang"]);
-        Route::post('/barang/add', [MasterBarangController::class, "addBarang"]);
-
-        Route::get('/barang/edit/{kode}', [MasterBarangController::class, "pageEditBarang"]);
-        Route::post('/barang/edit/{kode}', [MasterBarangController::class, "editBarang"]);
     });
 });
 
@@ -89,21 +79,18 @@ Route::middleware("pembeli")->group(function () {
     Route::prefix("user")->group(function () {
         Route::get('/home', [userController::class, "home"]);
         Route::get("/detail", [SearchController::class, "detail"]);
+        Route::post('/detail?id={kode_barang}', [CartController::class, 'addToCart'])->name('add-to-cart');
     });
 });
 
-Route::middleware("admin")->group(function(){
-    Route::prefix("admin")->group(function(){
-        Route::get("home",[AdminController::class,"home"]);
-        Route::get('/chat', [ChatController::class, "doChatAdmin"])->name('chatAdmin');
-        Route::post('/chat', [ChatController::class, "kirimChatAdmin"])->name('adminChat'); 
+Route::middleware("admin")->group(function () {
+    Route::prefix("admin")->group(function () {
+        Route::get("home", [AdminController::class, "home"]);
 
-        Route::prefix("transaksi")->group(function(){
-            Route::get("new",[AdminTransaksiController::class, "page_new"]);
-            Route::post("new",[AdminTransaksiController::class, "getNewTrans"])->name("loadNewTrans");
+        Route::prefix("transaksi")->group(function () {
+            Route::get("new", [AdminTransaksiController::class, "page_new"]);
         });
     });
 });
 
 Route::get('/cart', [CartController::class, 'showCart'])->name('show-cart');
-Route::post('/add-to-cart/{kode_barang}', [CartController::class, 'addToCart'])->name('add-to-cart');
