@@ -50,49 +50,74 @@
 
     {{-- chatnya --}}
 
-    <div class="kotak ml-44 w-full mt-10">
-        <div id="chatContainer">
-            @foreach ($chat as $c)
-                <div class="chat1Orang w-3/4 bg-black h-auto m-2 p-2 rounded">
-                    <p class="text-white">{{ $c->chat_content }}</p>
-                </div>
-            @endforeach
-        </div>
+    <div class="kotak w-full mt-10 flex flex-col items-center">
+        <div class="isi w-1/2 mt-4 bg-slate-200 rounded p-4">
+            <div class="text-center text-black font-semibold text-lg pb-4 pt-2 ">
+                CHAT
+            </div>
+            <div id="chatContainer" class="w-full">
+                @foreach ($chat as $c)
+                    @if ($c->pengirim === 'admin')
+                        <div class="admin-chat w-fit m-2 p-2 rounded" style="background-color: #FFFF00;">
+                            <p class="text-black">
+                                {{ $c->chat_content }}
+                            </p>
+                        </div>
+                    @else
+                        <div class="user-chat w-fit m-2 p-2 rounded ml-auto mr-7"
+                            style="background-color: #000000;">
+                            <p class="text-white">
+                                {{ $c->chat_content }}
+                            </p>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
 
-        <form id="chatForm" class="w-3/4">
-            @csrf
-            <input type="text" name="inputChat" id="inputChat" class="w-full p-1 bg-slate-200 rounded"
-                style="border: 2px solid black;">
-            <input type="button" value="Kirim" class="bg-black text-white p-1 rounded mt-2 w-full text-lg"
-                id="btnKirim">
-        </form>
+            <form id="chatForm" class="w-full mt-4">
+                @csrf
+                <input type="text" name="inputChat" id="inputChat" class="w-5/6 p-1 bg-slate-200 rounded float-left mt-2 ml-2"
+                    style="border: 2px solid black;">
+                    <button type="button" class="py-1 px-4 rounded mt-2 w-fit text-lg float-left mx-4" id="btnKirim">
+                        <img src="img/send_icon.png" alt="Send Icon" class="w-6 h-7">
+                    </button>
+            </form>
+        </div>
     </div>
 
     <script>
         $(document).ready(function() {
-            $('#btnKirim').on('click', function(e) {
-                e.preventDefault();
+    $('#btnKirim').on('click', function(e) {
+        e.preventDefault();
 
-                $.ajax({
-                    type: 'POST',
-                    url: '{{ route('masukChat') }}',
-                    data: $('#chatForm').serialize(),
-                    dataType: 'json',
-                    success: function(response) {
-                        $('#chatContainer').append(
-                            '<div class="chat1Orang w-3/4 bg-black h-auto m-2 p-2 rounded"><p class="text-white">' +
-                            response.chat_content + '</p></div>');
+        $.ajax({
+            type: 'POST',
+            url: '{{ route('masukChat') }}',
+            data: $('#chatForm').serialize(),
+            dataType: 'json',
+            success: function(response) {
+                var chatContainer = $('#chatContainer');
+                var newChatDiv = $('<div></div>');
+                newChatDiv.addClass(response.pengirim === 'admin' ? 'admin-chat w-fit m-2 p-2 rounded' : 'user-chat w-fit m-2 p-2 rounded ml-auto mr-7');
+                newChatDiv.css('background-color', response.pengirim === 'admin' ? '#FFFF00' : '#000000');
 
-                        $('#inputChat').val('');
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                        console.error(status);
-                        console.error(error);
-                    }
-                });
-            });
+                var newChatP = $('<p></p>');
+                newChatP.addClass(response.pengirim === 'admin' ? 'text-black' : 'text-white');
+                newChatP.text(response.chat_content);
+
+                newChatDiv.append(newChatP);
+                chatContainer.append(newChatDiv);
+
+                $('#inputChat').val('');
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+                console.error(status);
+                console.error(error);
+            }
         });
+    });
+});
     </script>
 
 

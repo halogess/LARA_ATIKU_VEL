@@ -29,7 +29,8 @@ class ChatController extends Controller
         $input = [
             'chat_content' => $request->input('inputChat'),
             'id_admin' => 'A0001',
-            'id_pembeli' =>  $userID
+            'id_pembeli' =>  $userID,
+            'pengirim' =>'user'
         ];
 
         $newChat = DB::table('serverchat')->insertGetId($input);
