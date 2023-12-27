@@ -12,9 +12,9 @@
 
 </head>
 
-<body>
+<body class="bg-gray-200">
 
-    <nav class="w-full h-20 p-3 bg-gray-400 text">
+    <nav class="w-full h-20 p-3 bg-black text-yellow-400">
         <p>Welcome, Master!</p>
         <a href="{{url('master/pembeli')}}" class="border-2 border-black p-1">Pembeli</a>
         <a href="{{url('master/admin')}}" class="border-2 border-black p-1">Admin</a>

@@ -1,33 +1,39 @@
 @extends('template.master')
 
 @section('content')
-    @if (Session::has('message'))
-        {{ Session::get("message") }}
-    @endif
+    <div class="mt-4 ml-4 mr-4">
+        @if (Session::has('message'))
+            {{ Session::get('message') }}
+        @endif
 
-    <a href="{{ url('master/admin/add') }}" class="bg-yellow-200 border-black border-2 p-2 rounded-lg">Add Admin</a> <br>
-    Search By
-    <select id="combo_box" class="border-2 border-gray-950 p-2 rounded-lg inline-flex">
-        <option value="id_user">ID</option>
-        <option value="nama_user">Name</option>
-        <option value="username">Username</option>
-        <option value="telp">Phone Number</option>
-    </select>
+        <a href="{{ url('master/admin/add') }}"
+            class="bg-black border-yellow-400 text-yellow-400 border-2 p-2 rounded-lg ml-2">Add Admin</a> <br> <br>
+        Search By
+        <select id="combo_box" class="border-2 border-yellow-400 bg-black text-yellow-400 p-2 rounded-lg inline-flex">
+            <option value="id_user">ID</option>
+            <option value="nama_user">Name</option>
+            <option value="username">Username</option>
+            <option value="telp">Phone Number</option>
+        </select>
 
-    <input type="search" id="search" placeholder="Search" class="border-2 border-gray-950 p-2 rounded-lg inline-flex">
+        <input type="search" id="search" placeholder="Search"
+            class="border-2 border-yellow-400 bg-black text-yellow-400 p-2 rounded-lg inline-flex">
 
-    <div>
-        <input type="radio" name="rb" id="active" value="active" checked>
-        <label for="active">Active</label>
+        <div>
+            <input type="radio" name="rb" id="active" value="active" checked>
+            <label for="active">Active</label>
 
-        <input type="radio" name="rb" id="banned" value="banned">
-        <label for="banned">Banned</label>
+            <input type="radio" name="rb" id="banned" value="banned">
+            <label for="banned">Banned</label>
 
-        <input type="radio" name="rb" id="all" value="all">
-        <label for="banned">All</label>
+            <input type="radio" name="rb" id="all" value="all">
+            <label for="banned">All</label>
+        </div>
+
+        <div class="w-full overflow-x-auto">
+            <table id="table" class="min w-full"></table>
+        </div>
     </div>
-
-    <table id="table"></table>
 
     <script>
         var sortBy;

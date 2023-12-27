@@ -4,7 +4,7 @@
     <div class="">
         <div class="flex w-full">
             <img src="{{ asset('/img/GTR-R34.jpg') }}" class="w-full">
-            
+
         </div>
 
         {{-- menu awal --}}

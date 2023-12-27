@@ -1,4 +1,4 @@
-<tr>
+<tr class="border-2 border-yellow-400 bg-black text-yellow-400">
     <td onclick="sortID()">ID
         <button id="id_asc">🡹</button>
         <button id="id_dsc">🡻</button>
@@ -30,13 +30,13 @@
         }
     @endphp
 
-    <tr class="{{ $bg }}">
+    <tr class="{{ $bg }}  border-2 border-yellow-400 bg-black text-yellow-400">
         <td>{{ $p->id_user }}</td>
         <td>{{ $p->nama_user }}</td>
         <td>{{ $p->username }}</td>
         <td>{{ $p->telp }}</td>
         <td>
-            <button onclick="ban('{{ $p->id_user }}')" class="w-full h-full border rounded p-2">{{ $btn }}
+            <button onclick="ban('{{ $p->id_user }}')" class="w-full h-full border border-yellow-400 bg-black text-yellow-400 rounded p-2">{{ $btn }}
             </button>
         </td>
     </tr>

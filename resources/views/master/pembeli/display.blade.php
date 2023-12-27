@@ -1,28 +1,32 @@
 @extends('template.master')
 
 @section('content')
-    Search By
-    <select id="combo_box" class="border-2 border-gray-950 p-2 rounded-lg inline-flex">
-        <option value="id_user">ID</option>
-        <option value="nama_user">Name</option>
-        <option value="username">Username</option>
-        <option value="telp">Phone Number</option>
-    </select>
+    <div class="mt-4 ml-4 mr-4">
+        Search By
+        <select id="combo_box" class="border-2 border-yellow-400 bg-black text-yellow-400 p-2 rounded-lg inline-flex">
+            <option value="id_user">ID</option>
+            <option value="nama_user">Name</option>
+            <option value="username">Username</option>
+            <option value="telp">Phone Number</option>
+        </select>
 
-    <input type="search" id="search" placeholder="Search" class="border-2 border-gray-950 p-2 rounded-lg inline-flex">
+        <input type="search" id="search" placeholder="Search" class="border-2 border-yellow-400 text-yellow-400 bg-black p-2 rounded-lg inline-flex">
 
-    <div>
-        <input type="radio" name="rb" id="active" value="active" checked>
-        <label for="active">Active</label>
+        <div>
+            <input type="radio" name="rb" id="active" value="active" checked>
+            <label for="active">Active</label>
 
-        <input type="radio" name="rb" id="banned" value="banned">
-        <label for="banned">Banned</label>
+            <input type="radio" name="rb" id="banned" value="banned">
+            <label for="banned">Banned</label>
 
-        <input type="radio" name="rb" id="all" value="all">
-        <label for="banned">All</label>
+            <input type="radio" name="rb" id="all" value="all">
+            <label for="banned">All</label>
+        </div>
+
+        <div class="w-full overflow-x-auto">
+            <table id="table" class="min w-full"></table>
+        </div>
     </div>
-
-    <table id="table"></table>
 
     <script>
         var sortBy;
@@ -62,16 +66,16 @@
             load();
         }
 
-        function setSort(){
+        function setSort() {
             hideAll();
-            if(sortActive == "id_asc") $("#id_asc").show();
-            else if(sortActive == "id_dsc") $("#id_dsc").show();
-            else if(sortActive == "nama_asc") $("#nama_asc").show();
-            else if(sortActive == "nama_dsc") $("#nama_dsc").show();
-            else if(sortActive == "usr_asc") $("#usr_asc").show();
-            else if(sortActive == "usr_dsc") $("#usr_dsc").show();
-            else if(sortActive == "telp_asc") $("#telp_asc").show();
-            else if(sortActive == "telp_dsc") $("#telp_dsc").show();
+            if (sortActive == "id_asc") $("#id_asc").show();
+            else if (sortActive == "id_dsc") $("#id_dsc").show();
+            else if (sortActive == "nama_asc") $("#nama_asc").show();
+            else if (sortActive == "nama_dsc") $("#nama_dsc").show();
+            else if (sortActive == "usr_asc") $("#usr_asc").show();
+            else if (sortActive == "usr_dsc") $("#usr_dsc").show();
+            else if (sortActive == "telp_asc") $("#telp_asc").show();
+            else if (sortActive == "telp_dsc") $("#telp_dsc").show();
         }
 
         function ban(id) {
@@ -94,7 +98,7 @@
 
         function sortID() {
             sortBy["field"] = "id_user";
-            if (sortActive=="id_asc") {
+            if (sortActive == "id_asc") {
                 sortBy["urutan"] = "desc";
                 sortActive = "id_dsc"
             } else {
@@ -106,7 +110,7 @@
 
         function sortName() {
             sortBy["field"] = "nama_user";
-            if (sortActive=="nama_asc") {
+            if (sortActive == "nama_asc") {
                 sortBy["urutan"] = "desc";
                 sortActive = "nama_dsc"
             } else {
@@ -118,7 +122,7 @@
 
         function sortUsername() {
             sortBy["field"] = "username";
-            if (sortActive=="usr_asc") {
+            if (sortActive == "usr_asc") {
                 sortBy["urutan"] = "desc";
                 sortActive = "usr_dsc"
             } else {
@@ -130,7 +134,7 @@
 
         function sortTelp() {
             sortBy["field"] = "telp";
-            if (sortActive=="telp_asc") {
+            if (sortActive == "telp_asc") {
                 sortBy["urutan"] = "desc";
                 sortActive = "telp_dsc"
             } else {
@@ -140,7 +144,7 @@
             sort(sortBy);
         }
 
-        function hideAll(){
+        function hideAll() {
             $("#id_asc").hide();
             $("#id_dsc").hide();
             $("#nama_asc").hide();

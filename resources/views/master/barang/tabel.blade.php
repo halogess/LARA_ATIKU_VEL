@@ -1,4 +1,4 @@
-<tr>
+<tr class="border-2 border-yellow-400 bg-black text-yellow-400">
     <td onclick="sortKode()">ID
         <button id="kode_asc">🡹</button>
         <button id="kode_dsc">🡻</button>
@@ -35,17 +35,17 @@
         }
     @endphp
 
-    <tr class="{{ $bg }}">
+    <tr class="{{ $bg }} border-2 border-yellow-400 bg-black text-yellow-400">
         <td>{{ $p->kode_barang }}</td>
         <td>{{ $p->nama_barang }}</td>
         <td><img src="{{asset("$p->gambar_barang")}}" alt="Picture" width="200px"></td>
         <td>{{ $p->deskripsi_barang }}</td>
-        <td class="text-end">Rp {{ number_format($p->harga_barang,2,',','.') }}</td>
-        <td class="text-end">{{ number_format($p->stok_barang, 0, ',', '.') }}</td>
+        <td class="">Rp {{ number_format($p->harga_barang,2,',','.') }}</td>
+        <td class="">{{ number_format($p->stok_barang, 0, ',', '.') }}</td>
         <td>
-            <button onclick="ban('{{ $p->kode_barang }}')" class="w-50 h-full border rounded p-2">{{ $btn }}
+            <button onclick="ban('{{ $p->kode_barang }}')" class="w-50 h-full border rounded p-2 border-yellow-400">{{ $btn }}
             </button>
-            <a href="{{url('master/barang/edit/'. $p->kode_barang)}}" class="w-50 h-full border rounded p-2">Edit
+            <a href="{{url('master/barang/edit/'. $p->kode_barang)}}" class="w-50 h-full border rounded p-2 border-yellow-400 ml-4">Edit
             </a>
         </td>
     </tr>

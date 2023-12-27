@@ -21,7 +21,7 @@ class User extends Authenticatable
     public $timestamps = false;
 
     public function Saldo(){
-        return $this->hasOne(Saldo::class);
+        return $this->hasOne(Saldo::class, "id_user", "id_user");
     }
 
 }
