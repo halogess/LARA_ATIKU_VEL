@@ -35,6 +35,8 @@ class userController extends Controller
             'subtotalBeli' => $product->harga_barang * $req->jumlahBeli,
         ];
 
+
+
         return view('terbeli', compact('cart'));
     }
 }

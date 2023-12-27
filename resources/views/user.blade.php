@@ -13,7 +13,7 @@
 
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="{{ url('/cart') }}"
                             class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-yellow-400 md:p-0">Cart</a>
                     </li>
                     <li>
@@ -24,7 +24,7 @@
                     <li>
                         <p
                             class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-yellow-400 md:p-0">
-                            Welcome, {{ Auth::user()->nama_user}}</p>
+                            Welcome, {{ Auth::user()->nama_user }}</p>
                     </li>
                 </ul>
             </div>

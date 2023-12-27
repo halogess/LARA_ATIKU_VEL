@@ -29,7 +29,7 @@ class SearchController extends Controller
     public function detail(Request $request)
     {
         $id = $request->input('id');
-        $barang = Barang::where("kode_barang", "$id")->get();
+        $barang = Barang::where("kode_barang", "$id")->first();
 
         return view('detail', compact('barang'));
     }

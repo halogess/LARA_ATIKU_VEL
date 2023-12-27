@@ -9,28 +9,34 @@
 </head>
 
 <body>
-    <!-- resources/views/cart.blade.php -->
-
     <h1>Shopping Cart</h1>
 
-    <table border="1">
-        <tr>
-            <th>Kode Barang</th>
-            <th>Nama Barang</th>
-            <th>Harga Barang</th>
-            <th>Jumlah</th>
-            <th>Subtotal</th>
-        </tr>
-        @foreach ($cart as $c)
+    <div class="data w-full">
+        <table border="1" class="mx-auto">
             <tr>
-                <td>{{ $c['kode_barang'] }}</td>
-                <td>{{ $c['nama_barang'] }}</td>
-                <td>{{ $c['harga_barang'] }}</td>
-                <td>{{ $c['jumlah'] }}</td>
-                <td>{{ $c['subtotal'] }}</td>
+                <th>ID Cart</th>
+                <th>ID Pembeli</th>
+                <th>Kode Barang</th>
+                <th>Jumlah</th>
+                <th>Subtotal</th>
+                <th>Action</th>
             </tr>
-        @endforeach
-    </table>
+            @foreach ($cartItems as $item)
+                <tr>
+                    <td>{{ $item->id_cart }}</td>
+                    <td>{{ $item->id_pembeli }}</td>
+                    <td>{{ $item->kode_barang }}</td>
+                    <td>{{ $item->qty }}</td>
+                    <td>Rp{{ $item->total_harga }}</td>
+                    <td>
+                        <form action="" method="post">
+                            <input type="submit" value="Beli" id="btnBeli" name="btnBeli" class="w-full">
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
 
 </body>
 
