@@ -30,18 +30,21 @@
                         <td id="subtotal">Rp{{ $b->harga_barang }}</td>
                     </tr>
                 </table>
+            </form>
+            <form action="{{ route('add-to-cart', ['kode_barang' => $b->kode_barang]) }}" class="mt-5" method="post">
+                @csrf
                 <input type="submit" value="+ Keranjang" id="btnAddKeranjang"
                     class="btn btn-success text-yellow-300 bg-black w-full rounded p-1 mt-3"><br>
                 <input type="submit" value="Beli" id="btnBeli"
                     class="btn btn-light text-black bg-white w-full rounded p-1 mt-1">
-                <table class="w-full mt-2">
-                    <tr>
-                        <td><a href="{{ route('chat') }}">Chat</a></td>
-                        <td>Wishlist</td>
-                        <td>Share</td>
-                    </tr>
-                </table>
             </form>
+            <table class="w-full mt-2">
+                <tr>
+                    <td><a href="{{ route('chat') }}">Chat</a></td>
+                    <td>Wishlist</td>
+                    <td>Share</td>
+                </tr>
+            </table>
         </div>
     </div>
 

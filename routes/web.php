@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\userController;
@@ -56,9 +57,6 @@ Route::post('/register', [LoginController::class, "doRegist"]);
 
 Route::get('/logout', [LoginController::class, "logout"]);
 
-Route::get('/terbeli', [userController::class, "terbeli"])->name('terbeli');
-Route::post('/terbeli', [userController::class, "terbeli"])->name('membeli');
-
 Route::middleware("master")->group(function () {
     Route::prefix("master")->group(function () {
         Route::get('/', [MasterController::class, "master"]);
@@ -74,10 +72,12 @@ Route::middleware("master")->group(function () {
     });
 });
 
-Route::middleware("pembeli")->group(function(){
+Route::middleware("pembeli")->group(function () {
     Route::prefix("user")->group(function () {
         Route::get('/home', [userController::class, "home"]);
         Route::get("/detail", [SearchController::class, "detail"]);
     });
 });
 
+Route::get('/cart', [CartController::class, 'showCart'])->name('show-cart');
+Route::post('/add-to-cart/{kode_barang}', [CartController::class, 'addToCart'])->name('add-to-cart');
