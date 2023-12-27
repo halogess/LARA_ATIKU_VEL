@@ -20,7 +20,7 @@
         </div>
         <div class="formBeli text-center border border-black p-20 justify-items-center">
             <p class="text-4xl"><b>Atur Jumlah</b></p>
-            <form action="{{ route('terbeli') }}" class="mt-5" method="POST">
+            <form action="{{ route('add-to-cart', ['kode_barang' => $b->kode_barang]) }}" class="mt-5" method="post">
                 @csrf
                 <input type="number" name="jumlah" id="jumlah" class="w-full" oninput="updateSubtotal()"
                     min="0"><br>
@@ -30,13 +30,21 @@
                         <td id="subtotal">Rp{{ $b->harga_barang }}</td>
                     </tr>
                 </table>
-            </form>
-            <form action="{{ route('add-to-cart', ['kode_barang' => $b->kode_barang]) }}" class="mt-5" method="post">
-                @csrf
                 <input type="submit" value="+ Keranjang" id="btnAddKeranjang"
                     class="btn btn-success text-yellow-300 bg-black w-full rounded p-1 mt-3"><br>
+            </form><br>
+            <form action="{{ route('membeli', ['kode_barang' => $b->kode_barang]) }}" method="post">
+                @csrf
+                <input type="number" name="jumlahBeli" id="jumlahBeli" class="w-full" oninput="updateSubtotalBeli()"
+                    min="0"><br>
+                <table class="mt-2">
+                    <tr>
+                        <td>Subtotal</td>
+                        <td id="subtotalBeli">Rp{{ $b->harga_barang }}</td>
+                    </tr>
+                </table>
                 <input type="submit" value="Beli" id="btnBeli"
-                    class="btn btn-light text-black bg-white w-full rounded p-1 mt-1">
+                    class="btn btn-success text-yellow-300 bg-black w-full rounded p-1 mt-3">
             </form>
             <table class="w-full mt-2">
                 <tr>
@@ -59,6 +67,18 @@
 
             // Update the subtotal in the HTML
             document.getElementById('subtotal').innerHTML = 'Rp' + subtotal;
+        }
+
+        function updateSubtotalBeli() {
+            // Get the value of the input
+            var jumlahBeli = document.getElementById('jumlahBeli').value;
+
+            // Assuming $b->harga_barang is the base price, update the subtotal
+            var hargaBarang = {{ $b->harga_barang }};
+            var subtotalBeli = jumlahBeli * hargaBarang;
+
+            // Update the subtotal in the HTML
+            document.getElementById('subtotalBeli').innerHTML = 'Rp' + subtotalBeli;
         }
     </script>
 @endsection

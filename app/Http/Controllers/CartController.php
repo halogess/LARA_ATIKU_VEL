@@ -7,31 +7,27 @@ use App\Models\Barang;
 
 class CartController extends Controller
 {
-    public function addToCart(Request $request, $kode_barang)
+    public function addToCart(Request $request)
     {
-        $product = Barang::find($kode_barang);
-
-        $request->validate([
-            'jumlah' => 'required|numeric|min:1',
-        ]);
-
-        // Simpan informasi barang ke dalam session (contoh sederhana)
         $cart = session()->get('cart', []);
 
-        $cart[$kode_barang] = [
+        $cartKey = $request->kode_barang;
+        $product = Barang::find($cartKey);
+
+        $cart[$cartKey] = [
+            'kode_barang' => $product->kode_barang,
             'nama_barang' => $product->nama_barang,
             'harga_barang' => $product->harga_barang,
             'jumlah' => $request->jumlah,
             'subtotal' => $product->harga_barang * $request->jumlah,
         ];
 
-        session()->put('cart', $cart);
+        $product->stok_barang -= $request->jumlah;
 
         return view('cart', compact('cart'));
     }
 
-    public function showCart()
+    public function showCart(Request $request)
     {
-        return view('cart');
     }
 }

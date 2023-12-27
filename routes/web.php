@@ -74,10 +74,10 @@ Route::middleware("master")->group(function () {
 
 Route::middleware("pembeli")->group(function () {
     Route::prefix("user")->group(function () {
-        Route::get('/home', [userController::class, "home"]);
+        Route::get('/home', [userController::class, "home"])->name('home');
         Route::get("/detail", [SearchController::class, "detail"]);
+        Route::post('/cart/{kode_barang}', [CartController::class, 'addToCart'])->name('add-to-cart');
     });
 });
 
-Route::get('/cart', [CartController::class, 'showCart'])->name('show-cart');
-Route::post('/add-to-cart/{kode_barang}', [CartController::class, 'addToCart'])->name('add-to-cart');
+Route::post('/terbeli/{kode_barang}', [userController::class, "terbeli"])->name('membeli');
