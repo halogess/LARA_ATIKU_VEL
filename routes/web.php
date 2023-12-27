@@ -9,6 +9,9 @@ use App\Http\Controllers\Master\MasterController;
 use App\Http\Controllers\Master\MasterAdminController;
 use App\Http\Controllers\Master\MasterPembeliController;
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminTransaksiController;
+
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\LoginController;
 
@@ -74,10 +77,20 @@ Route::middleware("master")->group(function () {
 
 Route::middleware("pembeli")->group(function () {
     Route::prefix("user")->group(function () {
-        Route::get('/home', [userController::class, "home"])->name('home');
+        Route::get('/home', [userController::class, "home"]);
         Route::get("/detail", [SearchController::class, "detail"]);
-        Route::post('/cart/{kode_barang}', [CartController::class, 'addToCart'])->name('add-to-cart');
     });
 });
 
-Route::post('/terbeli/{kode_barang}', [userController::class, "terbeli"])->name('membeli');
+Route::middleware("admin")->group(function(){
+    Route::prefix("admin")->group(function(){
+        Route::get("home",[AdminController::class,"home"]);
+
+        Route::prefix("transaksi")->group(function(){
+            Route::get("new",[AdminTransaksiController::class, "page_new"]);
+        });
+    });
+});
+
+Route::get('/cart', [CartController::class, 'showCart'])->name('show-cart');
+Route::post('/add-to-cart/{kode_barang}', [CartController::class, 'addToCart'])->name('add-to-cart');
