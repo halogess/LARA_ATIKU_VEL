@@ -15,7 +15,7 @@
             </select><br><br>
 
             Deskripsi Barang : <br>
-            <textarea type="text" name="deskripsi" rows="10" cols="50" class="border-2 border-black bg-gray-200 text-black resize-none ml-[108px] mt-4"></textarea><br> <br>
+            <textarea type="text" name="deskripsi" rows="10" cols="50" class="border-2 border-black bg-gray-200 text-black resize-none ml-[108px] mt-4 "></textarea><br> <br>
 
             Harga : <input type="number" name="harga" step="1000" class="border-2 border-black bg-gray-200 text-black ml-14"><br><br>
             Stok : <input type="number" name="stok" class="border-2 border-black bg-gray-200 text-black ml-[68px]"><br><br>
