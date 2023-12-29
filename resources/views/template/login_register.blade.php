@@ -61,8 +61,6 @@
 
             </form>
         </div>
-
-
     </div>
     <footer class="bg-black text-[#e7dfdc] pb-9">
         <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">

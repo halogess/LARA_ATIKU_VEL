@@ -16,19 +16,6 @@ use App\Http\Controllers\Admin\AdminTransaksiController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\LoginController;
 
-
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', function () {
     return view('home');
 });
@@ -100,12 +87,16 @@ Route::middleware("admin")->group(function () {
 
         Route::prefix("transaksi")->group(function () {
             Route::get("new", [AdminTransaksiController::class, "page_new"]);
-            Route::post("new", [AdminTransaksiController::class, "getNewTrans"])->name("loadNewTrans");
 
-            Route::get("detail/{no}", [AdminTransaksiController::class, "detail"]);
+            Route::post("new", [AdminTransaksiController::class, "getNewTrans"])->name("loadNewTrans");
+            Route::post("detail", [AdminTransaksiController::class, "detail"])->name("loadDetailTrans");
+
+            Route::get("new/approve/{no}", [AdminTransaksiController::class, "approve_new"]);
+            Route::get("decline/{no}", [AdminTransaksiController::class, "decline"]);
         });
     });
 });
+
 
 Route::get('/cart', [CartController::class, 'showCart'])->name('show-cart');
 Route::post('/add-to-cart/{kode_barang}', [CartController::class, 'addToCart'])->name('add-to-cart');

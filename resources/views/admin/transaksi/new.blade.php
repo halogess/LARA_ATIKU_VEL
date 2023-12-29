@@ -1,10 +1,13 @@
 @extends('template.admin')
 @section('content')
-    <div class="border-2 border-black rounded-lg p-5 mx-5">
-        <div id="newTrans"></div>
-    </div>
+    @if (Session::has('message'))
+        {{ Session::get('message') }}
+    @endif
+
+    <div id="newTrans"></div>
 
     <script>
+        var int;
         $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
@@ -24,11 +27,31 @@
 
             load();
 
-            // Refresh every 10 seconds (adjust the interval as needed)
-            setInterval(function() {
+            int = setInterval(function() {
                 load();
-            }, 10000);
+            }, 5000);
 
         });
+
+        function showDetail(nomor_nota) {
+            clearInterval(int);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            alert("oke");
+            $.ajax({
+                url: "{{ route('loadDetailTrans') }}",
+                method: "post",
+                data:{
+                    no : nomor_nota
+                },
+                success: function(response) {
+                    $("#newTrans").html(response);
+                }
+            });
+        }
     </script>
 @endsection
