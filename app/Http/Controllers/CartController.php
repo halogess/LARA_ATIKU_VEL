@@ -14,11 +14,11 @@ class CartController extends Controller
     public function addToCart(Request $request, $kode_barang)
     {
         $product = Barang::find($kode_barang);
-        $user = Session::get("user_id");
+        $userID = Auth::id();
 
         // Insert into cart table
         Cart::create([
-            'id_pembeli ' => $user, // Assuming you are using authentication
+            'id_pembeli' => $userID, // Assuming you are using authentication
             'kode_barang' => $product->kode_barang,
             'qty' => $request->jumlah,
             'total_harga' => $product->harga_barang * $request->jumlah,
@@ -28,9 +28,9 @@ class CartController extends Controller
         $product->stok_barang -= $request->jumlah;
         $product->save();
 
-        $cartItems = Cart::where('id_pembeli', $user)->get();
+        $cartItems = Cart::where('id_pembeli', $userID)->get();
         // Calculate the cart count (example: count of unique items)
-        $cartCount = Cart::where('id_pembeli', $user)->count();
+        $cartCount = Cart::where('id_pembeli', $userID)->count();
 
         $barang = $product;
 
@@ -44,11 +44,16 @@ class CartController extends Controller
 
     public function showCart(Request $request)
     {
-        $user = Session::get("user_id");
+        $userID = Auth::id();
 
-        $cartItems = Cart::where('id_pembeli', $user)->get();
-        $cartCount = Cart::where('id_pembeli', $user)->count();
+        $cartItems = Cart::where('id_pembeli', $userID)->get();
+        $cartCount = Cart::where('id_pembeli', $userID)->count();
 
         return view('cart', compact('cartItems', 'cartCount'));
+    }
+
+    public function status()
+    {
+        return view('status');
     }
 }

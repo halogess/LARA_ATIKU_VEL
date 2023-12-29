@@ -25,6 +25,12 @@
             <a href={{ url('/') }}
                 class="mr-5 w-16 h-auto p-2 text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl">
                 Home </a>
+            <a href={{ url('user/cart') }}
+                class="mr-5 w-16 h-auto p-2 text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl">
+                Cart </a>
+            <a href={{ url('/status') }}
+                class="mr-5 w-16 h-auto p-2 text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl">
+                Status </a>
             <a href={{ url('login') }}
                 class="mr-5 w-16 h-auto text-yellow-400 p-2 rounded-xl hover:cursor-pointer font-bold text-xl">
                 Log In </a>

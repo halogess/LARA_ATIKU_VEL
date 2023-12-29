@@ -20,7 +20,9 @@ class SearchController extends Controller
 
             // $url = route('detail', ['id' => $result['kode_barang'], 'nama' => $result['nama_barang'], 'gambar' => $result['gambar_barang']]);
 
-            $hasil .= '<a href="' . $url . '">' . $result['nama_barang'] . '</a><img src="' . $result['gambar_barang'] . '" style="width: 200px; height: 100px;"></img>';
+            $imagePath = asset($result['gambar_barang']);
+
+            $hasil .= '<a href="' . $url . '">' . $result['nama_barang'] . '</a><img src="' . $imagePath . '" style="width: 200px; height: 100px;"></img>';
         }
 
         return $hasil;

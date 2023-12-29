@@ -9,10 +9,19 @@ class Dtrans extends Model
 {
     use HasFactory;
 
-    use HasFactory;
-    protected $connection ="mysql";
-    protected $table ="dtrans";
+    protected $connection = "mysql";
+    protected $table = "dtrans";
     protected $primaryKey = "id_dtrans";
     public $incrementing = false;
     public $timestamps = false;
+
+    protected $fillable = [
+        'id_dtrans',
+        'nomor_nota',
+        'kode_barang',
+        'harga_barang',
+        'deskripsi_barang',
+        'qty',
+        'sub_total'
+    ];
 }

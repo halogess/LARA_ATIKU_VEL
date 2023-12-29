@@ -1,32 +1,26 @@
 @extends('template.mainUser')
 
 @section('navbarUser')
-    <nav class="bg-black">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <p class="text-yellow-400">JJHC Automotive</p>
-            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-                <ul
-                    class="font-medium flex flex-col p-4 md:p-0 mt-4 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
-                    <li>
-                        <a href="#" class="block py-2 px-3 text-yellow-400 rounded md:bg-transparent md:p-0"
-                            aria-current="page">Home</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/cart') }}"
-                            class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-yellow-400 md:p-0">Cart</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/') }}"
-                            class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-yellow-400 md:p-0">Log
-                            Out</a>
-                    </li>
-                    <li>
-                        <p
-                            class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-yellow-400 md:p-0">
-                            Welcome, {{ Auth::user()->nama_user }}</p>
-                    </li>
-                </ul>
-            </div>
+    <nav class="w-full h-[69px] bg-black text-[#e7dfdc]">
+        <div class="judul h-auto w-auto ml-24 float-left">
+            <p class="font-bold text-4xl pt-4 text-yellow-400">JJHC Automotive</p>
+        </div>
+        <div class="buttons h-auto w-auto mr-24 mt-5 pb-4 float-right">
+            <a href={{ url('/') }}
+                class="mr-5 w-16 h-auto p-2 text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl">
+                Home </a>
+            <a href={{ url('/cart') }}
+                class="mr-5 w-16 h-auto p-2 text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl">
+                Cart </a>
+            <a href={{ url('/beli-barang/{kode_barang}/{id_pembeli}') }}
+                class="mr-5 w-16 h-auto p-2 text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl">
+                Status </a>
+            <a href={{ url('logout') }}
+                class="mr-5 w-16 h-auto text-yellow-400 p-2 rounded-xl hover:cursor-pointer font-bold text-xl">
+                Log Out </a>
+            <a href={{ url('register') }}
+                class="w-auto h-auto text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl drop-shadow-lg">
+                Sign Up</a>
         </div>
     </nav>
 @endsection
@@ -110,8 +104,8 @@
                 onclick="showContent('harga4')">
             <input type="button" value="Rp 800 - 1200 Juta" class="mr-10 bg-black text-white p-2 rounded" id="harga5"
                 onclick="showContent('harga5')">
-            <input type="button" value="Diatas Rp 1200 Juta" class="mr-10 bg-black text-white p-2 rounded"
-                id="harga6" onclick="showContent('harga6')">
+            <input type="button" value="Diatas Rp 1200 Juta" class="mr-10 bg-black text-white p-2 rounded" id="harga6"
+                onclick="showContent('harga6')">
         </form>
 
         <div id="contohMobil" class="w-full h-auto pt-3 "></div>
