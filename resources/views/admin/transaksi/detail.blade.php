@@ -1,4 +1,4 @@
-<a href="{{ url('admin/transaksi/new') }}"><button
+<a href='{{ url(Session::get("url")) }}'><button
         class="w-1/12 bg-yellow-400 border border-black p-2 rounded-lg mb-5">Back</button></a>
 <div class="border-4 border-black rounded-3xl pb-10">
     <div class="flex items-stretch justify-between">

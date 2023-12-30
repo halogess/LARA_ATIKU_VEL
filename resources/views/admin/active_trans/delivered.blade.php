@@ -1,11 +1,7 @@
-@extends('template.admin.admin')
-@section('content')
-    @if (Session::has('message'))
-        {{ Session::get('message') }}
-    @endif
+@extends('template.admin.active')
 
-    <div id="konten"></div>
-
+@section('subcontent')
+    <div id="data"></div>
     <script>
         $(document).ready(function() {
             $.ajaxSetup({
@@ -16,20 +12,14 @@
 
             function load() {
                 $.ajax({
-                    url: "{{ route('loadNewTrans') }}",
+                    url: "{{ route('loadDelivered') }}",
                     method: "post",
                     success: function(response) {
-                        $("#konten").html(response);
+                        $("#data").html(response);
                     }
                 });
             }
-
             load();
-
-            let int = setInterval(function() {
-                load();
-            }, 5000);
-
         });
     </script>
 @endsection

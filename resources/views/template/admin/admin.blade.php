@@ -3,11 +3,17 @@
     $currentPage = 'text-black bg-yellow-400';
 
     $newPage = $notCurrentPage;
+    $activePage = $notCurrentPage;
+    $chatPage = $notCurrentPage;
+    $historyPage = $notCurrentPage;
 
-    if ($page == 'new') {
+    if (Session::get('page') == 'new') {
         $newPage = $currentPage;
-    } elseif ($page == active) {
-    } elseif ($page == chat) {
+    } elseif (Session::get('page') == 'active') {
+        $activePage = $currentPage;
+    } elseif (Session::get('page') == 'chat') {
+    } elseif (Session::get('page') == 'history') {
+        $historyPage = $currentPage;
     }
 @endphp
 
@@ -23,13 +29,30 @@
     <script src="/style/tailwind.js"></script>
     <script src="/style/jquery.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+        body::-webkit-scrollbar {
+            width: 0px;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: #ffffff00;
+            border-radius: 0px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background-color: #ffffff00;
+        }
+    </style>
 </head>
 
-<body class="bg-slate-100 overflow-x-hidden">
+<body class="bg-slate-100">
     <nav class="fixed w-full h-20 bg-black text-yellow-400 flex justify-between px-5 shadow-2xl">
-        <div class="h-auto w-auto float-left flex justify-center align-middle items-center">
-            <button data-collapse-toggle="navbar-hamburger" data-drawer-toggle="navbar-hamburger" type="button"
-                onclick="ganti()" id="button_ham"
+        <div class="h-auto w-auto float-left flex justify-center align-middle items-center ">
+            <button data-collapse-toggle="navbar-hamburger" type="button" onclick="ganti()" id="button_ham"
                 class="mr-5 inline-flex items-center justify-center w-10 h-10 text-yellow-400 rounded-lg hover:border-yellow-400 hover:border-2"
                 aria-controls="navbar-hamburger" aria-expanded="true">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
@@ -40,7 +63,6 @@
             </button>
             <p class="font-bold hidden sm:inline text-sm sm:text-2xl md:text-4xl text-yellow-400">JJHC Automotive</p>
             <p class="font-bold text-2xl sm:hidden text-yellow-400">JJHC</p>
-
 
         </div>
         <div href="admin/profile" class="h-full w-auto flex items-center align-middle p-2">
@@ -60,9 +82,8 @@
     </nav>
 
     <div class="flex w-screen min-h-screen">
-        <div class=" bg-black top-20 pt-24 w-auto px-5 " id="navbar-hamburger">
-
-            <ul class="font-medium">
+        <div class="top-20 pt-24" id="navbar-hamburger">
+            <ul class="top-20 font-medium fixed flex-row bg-black w-auto min-h-screen px-5">
                 <li class="py-1">
                     <a href="{{ url('admin/transaksi/new') }}"
                         class=" {{ $newPage }} flex items-center p-2 rounded-lg hover:bg-yellow-400 hover:text-black">
@@ -75,8 +96,8 @@
                     </a>
                 </li>
                 <li class="py-1">
-                    <a href="{{ url('admin/transaksi/') }}"
-                        class="flex items-center p-2 text-yellow-400 rounded-lg hover:bg-yellow-400 hover:text-black">
+                    <a href="{{ url('admin/transaksi/active') }}"
+                        class="{{ $activePage }} flex items-center p-2 rounded-lg hover:bg-yellow-400 hover:text-black">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             class="bi bi-pencil-square flex-shrink-0 w-5 h-5" viewBox="0 0 16 16">
                             <path
@@ -89,7 +110,7 @@
                 </li>
                 <li class="py-1">
                     <a href="#"
-                        class="flex items-center p-2 text-yellow-400 rounded-lg hover:bg-yellow-400 hover:text-black">
+                        class="{{ $chatPage }} flex items-center p-2 rounded-lg hover:bg-yellow-400 hover:text-black">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             class="bi bi-chat-dots flex-shrink-0 w-5 h-5" viewBox="0 0 16 16">
                             <path
@@ -102,8 +123,8 @@
                 </li>
 
                 <li class="py-1">
-                    <a href="#"
-                        class="flex items-center p-2 text-yellow-400 rounded-lg hover:bg-yellow-400 hover:text-black">
+                    <a href="{{ url('admin/history') }}"
+                        class="{{ $historyPage }} flex items-center p-2 rounded-lg hover:bg-yellow-400 hover:text-black">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             class="bi bi-clock-history flex-shrink-0 w-5 h-5" viewBox="0 0 16 16">
                             <path
@@ -152,14 +173,11 @@
                 </li>
             </ul>
         </div>
-        <div class="p-20 pt-28 min-h-80 w-full">
+
+        <div class="px-20 pt-28 ps-36 md:ps-72 min-h-80 w-full items-stretch">
             @yield('content')
         </div>
-
-
     </div>
-
-
 </body>
 
 </html>
@@ -167,6 +185,7 @@
 
 <script>
     isOpen = false;
+
     function ganti() {
         if (isOpen) {
             $("#button_ham").html(
@@ -180,5 +199,23 @@
             isOpen = true;
         }
 
+    }
+
+    function showDetail(nomor_nota) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "{{ route('loadDetailTrans') }}",
+            method: "post",
+            data: {
+                no: nomor_nota
+            },
+            success: function(response) {
+                $("#konten").html(response);
+            }
+        });
     }
 </script>

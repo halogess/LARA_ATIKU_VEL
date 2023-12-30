@@ -14,5 +14,10 @@ class Status extends Model
     public $incrementing = false;
     public $timestamps = false;
 
+    public function Keterangan()
+    {
+        return $this->belongsTo(Keterangan::class, 'kode_status', 'kode_status');
+    }
+
 
 }

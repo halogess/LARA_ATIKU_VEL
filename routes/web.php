@@ -10,7 +10,7 @@ use App\Http\Controllers\Master\MasterAdminController;
 use App\Http\Controllers\Master\MasterPembeliController;
 use App\Http\Controllers\Master\MasterBarangController;
 
-use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminHistoryController;
 use App\Http\Controllers\Admin\AdminTransaksiController;
 
 use App\Http\Controllers\SearchController;
@@ -95,15 +95,42 @@ Route::middleware("pembeli")->group(function () {
 
 Route::middleware("admin")->group(function () {
     Route::prefix("admin")->group(function () {
-        Route::get("home", [AdminController::class, "home"]);
         Route::get('/chat', [ChatController::class, "doChatAdmin"])->name('chatAdmin');
         Route::post('/chat', [ChatController::class, "kirimChatAdmin"])->name('adminChat');
 
+        Route::post("detail", [AdminTransaksiController::class, "detail"])->name("loadDetailTrans");
         Route::prefix("transaksi")->group(function () {
+
             Route::get("new", [AdminTransaksiController::class, "page_new"]);
             Route::post("new", [AdminTransaksiController::class, "getNewTrans"])->name("loadNewTrans");
 
-            Route::get("detail/{no}", [AdminTransaksiController::class, "detail"]);
+            Route::get("approve/{no}", [AdminTransaksiController::class, "approve"]);
+            Route::get("cancel/{no}", [AdminTransaksiController::class, "cancel"]);
+
+            Route::prefix("active")->group(function () {
+                Route::get("", [AdminTransaksiController::class, "page_active"]);
+                Route::post("", [AdminTransaksiController::class, "loadActive"])->name('loadActive');
+
+                Route::get("packing", [AdminTransaksiController::class, "page_packing"]);
+                Route::post("packing", [AdminTransaksiController::class, "loadPacking"])->name('loadPacking');
+
+                Route::get("shipping", [AdminTransaksiController::class, "page_shipping"]);
+                Route::post("shipping", [AdminTransaksiController::class, "loadShipping"])->name('loadShipping');
+
+                Route::get("delivered", [AdminTransaksiController::class, "page_delivered"]);
+                Route::post("delivered", [AdminTransaksiController::class, "loadDelivered"])->name('loadDelivered');
+            });
+        });
+
+        Route::prefix("history")->group(function () {
+            Route::get("", [AdminHistoryController::class, "page_history"]);
+            Route::post("", [AdminHistoryController::class, "loadHistory"])->name("loadHistory");
+
+            Route::get("completed", [AdminHistoryController::class, "page_completed"]);
+            Route::post("completed", [AdminHistoryController::class, "loadCompleted"])->name("loadCompleted");
+
+            Route::get("canceled", [AdminHistoryController::class, "page_canceled"]);
+            Route::post("canceled", [AdminHistoryController::class, "loadCanceled"])->name("loadCanceled");
         });
     });
 });
