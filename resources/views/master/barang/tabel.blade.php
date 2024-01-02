@@ -1,4 +1,4 @@
-<tr class="border-2 border-yellow-400 bg-black text-yellow-400">
+<tr class="border-2 border-black bg-black text-yellow-400">
     <td onclick="sortKode()">ID
         <button id="kode_asc">🡹</button>
         <button id="kode_dsc">🡻</button>
@@ -12,7 +12,7 @@
     <td>Gambar</td>
     <td>Deskripsi</td>
 
-    <td onclick="sortHarga()">Harga
+    <td onclick="sortHarga()" class="text-center">Harga
         <button id="hrg_asc">🡹</button>
         <button id="hrg_dsc">🡻</button>
     </td>
@@ -35,17 +35,17 @@
         }
     @endphp
 
-    <tr class="{{ $bg }} border-2 border-yellow-400 bg-black text-yellow-400">
+    <tr class="{{ $bg }} border-2 border-black bg-gray-200 text-black">
         <td>{{ $p->kode_barang }}</td>
         <td>{{ $p->nama_barang }}</td>
-        <td><img src="{{asset("$p->gambar_barang")}}" alt="Picture" width="200px"></td>
-        <td>{{ $p->deskripsi_barang }}</td>
-        <td class="">Rp {{ number_format($p->harga_barang,2,',','.') }}</td>
-        <td class="">{{ number_format($p->stok_barang, 0, ',', '.') }}</td>
+        <td><img src="{{asset("$p->gambar_barang")}}" alt="Picture" width="170px"></td>
+        <td class="break-words">{{ $p->deskripsi_barang }}</td>
+        <td class="text-center">Rp {{ number_format($p->harga_barang,2,',','.') }}</td>
+        <td class="text-center">{{ number_format($p->stok_barang, 0, ',', '.') }}</td>
         <td>
-            <button onclick="ban('{{ $p->kode_barang }}')" class="w-50 h-full border rounded p-2 border-yellow-400">{{ $btn }}
+            <button onclick="ban('{{ $p->kode_barang }}')" class="w-[61px] h-full border rounded p-2 border-yellow-400 mb-2 bg-gray-300 hover:ring-white hover:bg-black hover:text-white">{{ $btn }}
             </button>
-            <a href="{{url('master/barang/edit/'. $p->kode_barang)}}" class="w-50 h-full border rounded p-2 border-yellow-400 ml-4">Edit
+            <a href="{{url('master/barang/edit/'. $p->kode_barang)}}" class="w-[30px] h-full border rounded p-2 border-yellow-400 bg-gray-300 hover:ring-white hover:bg-black hover:text-white mr-2">Edit
             </a>
         </td>
     </tr>

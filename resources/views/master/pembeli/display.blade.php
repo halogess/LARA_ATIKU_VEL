@@ -28,8 +28,8 @@
         <label for="banned">All</label>
 
         <br><br>
-        <div class="w-full overflow-x-auto">
-            <table id="table" class="min w-full"></table>
+        <div class="container mx-auto">
+            <table id="table" class="min-w-full table-auto"></table>
         </div>
     </div>
 
