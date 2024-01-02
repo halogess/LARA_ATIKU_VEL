@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Master;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 
 use App\Models\Kategori;
 use App\Models\Barang;
@@ -15,6 +16,7 @@ class MasterBarangController extends Controller
 {
     public function pageBarang()
     {
+        Session::put("page", "barang");
         $kategori = Kategori::all();
         return view("master.barang.display", compact("kategori"));
     }

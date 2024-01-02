@@ -2,22 +2,22 @@
     $notCurrentPage = 'text-yellow-400';
     $currentPage = 'text-black bg-yellow-400';
 
-    $newPage = $notCurrentPage;
-    $activePage = $notCurrentPage;
-    $chatPage = $notCurrentPage;
-    $historyPage = $notCurrentPage;
-    $profilePage = $notCurrentPage;
+    $dashboardPage = $notCurrentPage;
+    $barangPage = $notCurrentPage;
+    $usersPage = $notCurrentPage;
+    $transPage = $notCurrentPage;
+    $reportPage = $notCurrentPage;
 
-    if (Session::get('page') == 'new') {
-        $newPage = $currentPage;
-    } elseif (Session::get('page') == 'active') {
-        $activePage = $currentPage;
-    } elseif (Session::get('page') == 'chat') {
-        $activePage = $currentPage;
-    } elseif (Session::get('page') == 'history') {
-        $historyPage = $currentPage;
-    } else if(Session::get('page') == 'profile'){
-        $profilePage = $currentPage;
+    if (Session::get('page') == 'dashboard') {
+        $dashboardPage = $currentPage;
+    } elseif (Session::get('page') == 'barang') {
+        $barangPage = $currentPage;
+    } elseif (Session::get('page') == 'users') {
+        $usersPage = $currentPage;
+    } elseif (Session::get('page') == 'trans') {
+        $transPage = $currentPage;
+    } elseif (Session::get('page') == 'report') {
+        $transPage = $currentPage;
     }
 @endphp
 
@@ -33,6 +33,8 @@
     <script src="/style/tailwind.js"></script>
     <script src="/style/jquery.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+
     <style>
         body {
             overflow-x: hidden;
@@ -89,19 +91,19 @@
         <div class="top-20 pt-24" id="navbar-hamburger">
             <ul class="top-20 font-medium fixed flex-row bg-black w-auto min-h-screen px-5">
                 <li class="py-1">
-                    <a href="{{ url('admin/transaksi/new') }}"
-                        class=" {{ $newPage }} flex items-center p-2 rounded-lg hover:bg-yellow-400 hover:text-black">
+                    <a href="{{ url('master') }}"
+                        class=" {{ $dashboardPage }} flex items-center p-2 rounded-lg hover:bg-yellow-400 hover:text-black">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             class="bi bi-plus-lg flex-shrink-0 w-5 h-5" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
                                 d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
                         </svg>
-                        <div class="ms-3 whitespace-nowrap hidden md:flex">New Orders</div>
+                        <div class="ms-3 whitespace-nowrap hidden md:flex">Dashboard</div>
                     </a>
                 </li>
                 <li class="py-1">
-                    <a href="{{ url('admin/transaksi/active') }}"
-                        class="{{ $activePage }} flex items-center p-2 rounded-lg hover:bg-yellow-400 hover:text-black">
+                    <a href="{{ url('master/barang') }}"
+                        class="{{ $barangPage }} flex items-center p-2 rounded-lg hover:bg-yellow-400 hover:text-black">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             class="bi bi-pencil-square flex-shrink-0 w-5 h-5" viewBox="0 0 16 16">
                             <path
@@ -109,46 +111,58 @@
                             <path fill-rule="evenodd"
                                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
                         </svg>
-                        <div class="ms-3 whitespace-nowrap hidden md:flex">Processing Orders</div>
+                        <div class="ms-3 whitespace-nowrap hidden md:flex">Products</div>
                     </a>
                 </li>
                 <li class="py-1">
-                    <a href="{{url('admin/chat')}}"
-                        class="{{ $chatPage }} flex items-center p-2 rounded-lg hover:bg-yellow-400 hover:text-black">
+                    <a href="{{ url('master/users') }}"
+                        class="{{ $usersPage }} flex items-center p-2 rounded-lg hover:bg-yellow-400 hover:text-black">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                            class="bi bi-chat-dots flex-shrink-0 w-5 h-5" viewBox="0 0 16 16">
+                            class="bi bi-person-vcard flex-shrink-0 w-5 h-5" viewBox="0 0 16 16">
                             <path
-                                d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
+                                d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5" />
                             <path
-                                d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125zm.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 0 .398-2" />
+                                d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96c.026-.163.04-.33.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1.006 1.006 0 0 1 1 12z" />
                         </svg>
-                        <div class="ms-3 whitespace-nowrap hidden md:flex">Chat</div>
+                        <div class="ms-3 whitespace-nowrap hidden md:flex">Users</div>
+                    </a>
+                </li>
+                <li class="py-1">
+                    <a href="{{ url('master/transaksi') }}"
+                        class="{{ $transPage }} flex items-center p-2 rounded-lg hover:bg-yellow-400 hover:text-black">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-receipt-cutoff flex-shrink-0 w-5 h-5" viewBox="0 0 16 16">
+                            <path
+                                d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5M11.5 4a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1z" />
+                            <path
+                                d="M2.354.646a.5.5 0 0 0-.801.13l-.5 1A.5.5 0 0 0 1 2v13H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1H15V2a.5.5 0 0 0-.053-.224l-.5-1a.5.5 0 0 0-.8-.13L13 1.293l-.646-.647a.5.5 0 0 0-.708 0L11 1.293l-.646-.647a.5.5 0 0 0-.708 0L9 1.293 8.354.646a.5.5 0 0 0-.708 0L7 1.293 6.354.646a.5.5 0 0 0-.708 0L5 1.293 4.354.646a.5.5 0 0 0-.708 0L3 1.293zm-.217 1.198.51.51a.5.5 0 0 0 .707 0L4 1.707l.646.647a.5.5 0 0 0 .708 0L6 1.707l.646.647a.5.5 0 0 0 .708 0L8 1.707l.646.647a.5.5 0 0 0 .708 0L10 1.707l.646.647a.5.5 0 0 0 .708 0L12 1.707l.646.647a.5.5 0 0 0 .708 0l.509-.51.137.274V15H2V2.118l.137-.274z" />
+                        </svg>
+                        <div class="ms-3 whitespace-nowrap hidden md:flex">Transactions</div>
                     </a>
                 </li>
 
                 <li class="py-1">
-                    <a href="{{ url('admin/history') }}"
-                        class="{{ $historyPage }} flex items-center p-2 rounded-lg hover:bg-yellow-400 hover:text-black">
+                    <a href="{{ url('master/report') }}"
+                        class="{{ $reportPage }} flex items-center p-2 rounded-lg hover:bg-yellow-400 hover:text-black">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                            class="bi bi-clock-history flex-shrink-0 w-5 h-5" viewBox="0 0 16 16">
+                            class="bi bi-flag flex-shrink-0 w-5 h-5" viewBox="0 0 16 16">
                             <path
-                                d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.023 7.023 0 0 0-.179-.483m.53 2.507a6.991 6.991 0 0 0-.1-1.025l.985-.17c.067.386.106.778.116 1.17l-1 .025zm-.131 1.538c.033-.17.06-.339.081-.51l.993.123a7.957 7.957 0 0 1-.23 1.155l-.964-.267c.046-.165.086-.332.12-.501zm-.952 2.379c.184-.29.346-.594.486-.908l.914.405c-.16.36-.345.706-.555 1.038l-.845-.535m-.964 1.205c.122-.122.239-.248.35-.378l.758.653a8.073 8.073 0 0 1-.401.432l-.707-.707z" />
-                            <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0z" />
-                            <path
-                                d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5" />
+                                d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001M14 1.221c-.22.078-.48.167-.766.255-.81.252-1.872.523-2.734.523-.886 0-1.592-.286-2.203-.534l-.008-.003C7.662 1.21 7.139 1 6.5 1c-.669 0-1.606.229-2.415.478A21.294 21.294 0 0 0 3 1.845v6.433c.22-.078.48-.167.766-.255C4.576 7.77 5.638 7.5 6.5 7.5c.847 0 1.548.28 2.158.525l.028.01C9.32 8.29 9.86 8.5 10.5 8.5c.668 0 1.606-.229 2.415-.478A21.317 21.317 0 0 0 14 7.655V1.222z" />
                         </svg>
-                        <div class="ms-3 whitespace-nowrap hidden md:flex">History</div>
+                        <div class="ms-3 whitespace-nowrap hidden md:flex">Customer Reports</div>
                     </a>
                 </li>
                 <li class="py-1">
-                    <a href="{{ url('admin/profile') }}"
+                    <a href="{{ url('master/profile') }}"
                         class="flex items-center p-2 text-yellow-400 rounded-lg hover:bg-yellow-400 hover:text-black">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                            class="bi bi-person flex-shrink-0 w-5 h-5" viewBox="0 0 16 16">
+                            class="bi bi-shield-lock flex-shrink-0 w-5 h-5" viewBox="0 0 16 16">
                             <path
-                                d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664z" />
+                                d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56" />
+                            <path
+                                d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415z" />
                         </svg>
-                        <div class="ms-3 whitespace-nowrap hidden md:flex">Profile</div>
+                        <div class="ms-3 whitespace-nowrap hidden md:flex">My Account</div>
                     </a>
                 </li>
                 <li class="py-1">
@@ -175,6 +189,7 @@
 
 </html>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script>
 
 <script>
     isOpen = false;
@@ -197,19 +212,20 @@
     }
 
     function showDetail(nomor_nota) {
+        clearInterval(int);
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
         $.ajax({
-            url: "{{ route('loadDetailTrans') }}",
+            url: "{{ route('loadDetailTransMaster') }}",
             method: "post",
             data: {
                 no: nomor_nota
             },
             success: function(response) {
-                $("#konten").html(response);
+                $("#content").html(response);
             }
         });
     }

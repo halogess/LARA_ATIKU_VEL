@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Master;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
+use App\Models\User;
 
 class MasterPembeliController extends Controller
 {
     public function pagePembeli()
     {
+        Session::put("page", "users");
         return view("master.pembeli.display");
     }
     public function getPembeli(Request $request)
@@ -31,7 +34,7 @@ class MasterPembeliController extends Controller
                 $active = "-1";
             }
 
-            $pembeli = DB::table('user')->where("role",0)
+            $pembeli = User::where("role",0)
                 ->where("$field", "LIKE", "%$key%")
                 ->where("active", "$tanda", "$active")
                 ->orderBy("$sortField", "$sortUrutan")
@@ -44,18 +47,12 @@ class MasterPembeliController extends Controller
 
             $id = $request->input("id_pembeli");
 
-            $p = DB::table('user')
-                ->where("id_user", "$id")
-                ->value("active");
+            $p = User::find($id)->value("active");
 
             if($p=="1"){
-                DB::table('user')
-                ->where("id_user", "$id")
-                ->update(["active"=>0]);
+                User::find($id)->update(["active"=>0]);
             } else {
-                DB::table('user')
-                ->where("id_user", "$id")
-                ->update(["active"=>1]);
+                User::find($id)->update(["active"=>1]);
             }
             return;
         }

@@ -36,9 +36,7 @@
         <td>{{ $p->nama_user }}</td>
         <td>{{ $p->username }}</td>
         <td>{{ $p->telp }}</td>
-        <td>{{ $p->Saldo->saldo }}</td>
-
-        {{-- Ini masih salah --}}
+        <td>Rp {{ $p->Saldo->saldo }}</td>
 
         <td>
             <button onclick="ban('{{ $p->id_user }}')" class="w-full h-full border rounded p-2">{{ $btn }}

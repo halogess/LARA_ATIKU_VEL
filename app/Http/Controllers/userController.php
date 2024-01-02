@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Session;
 
 class userController extends Controller
 {
-
-
     public function home()
     {
 
@@ -34,7 +32,6 @@ class userController extends Controller
             'jumlahBeli' => $req->jumlahBeli,
             'subtotalBeli' => $product->harga_barang * $req->jumlahBeli,
         ];
-
 
 
         return view('terbeli', compact('cart'));

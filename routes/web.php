@@ -9,6 +9,8 @@ use App\Http\Controllers\Master\MasterController;
 use App\Http\Controllers\Master\MasterAdminController;
 use App\Http\Controllers\Master\MasterPembeliController;
 use App\Http\Controllers\Master\MasterBarangController;
+use App\Http\Controllers\Master\MasterActiveController;
+use App\Http\Controllers\Master\MasterHistoryController;
 
 use App\Http\Controllers\Admin\AdminHistoryController;
 use App\Http\Controllers\Admin\AdminTransaksiController;
@@ -64,6 +66,8 @@ Route::middleware("master")->group(function () {
     Route::prefix("master")->group(function () {
         Route::get('/', [MasterController::class, "master"]);
 
+        Route::get('/users', [MasterController::class, "users"]);
+
         Route::get('/pembeli', [MasterPembeliController::class, "pagePembeli"]);
         Route::post('/pembeli', [MasterPembeliController::class, "getPembeli"])->name("loadPembeli");
 
@@ -78,9 +82,40 @@ Route::middleware("master")->group(function () {
 
         Route::get('/barang/add', [MasterBarangController::class, "pageAddBarang"]);
         Route::post('/barang/add', [MasterBarangController::class, "addBarang"]);
+        Route::post('/barang/add', [MasterBarangController::class, "addBarang"]);
 
         Route::get('/barang/edit/{kode}', [MasterBarangController::class, "pageEditBarang"]);
         Route::post('/barang/edit/{kode}', [MasterBarangController::class, "editBarang"]);
+
+        Route::prefix("transaksi")->group(function () {
+            Route::get('', [MasterController::class, "trans"]);
+            Route::post("detail", [MasterController::class, "detail"])->name("loadDetailTransMaster");
+
+            Route::get('active', [MasterActiveController::class, "page_active"]);
+            Route::post('active', [MasterActiveController::class, "loadActive"])->name("loadActiveMaster");
+
+            Route::get('new', [MasterActiveController::class, "page_new"]);
+            Route::post('new', [MasterActiveController::class, "loadNew"])->name("loadNewMaster");
+
+            Route::get('packing', [MasterActiveController::class, "page_packing"]);
+            Route::post('packing', [MasterActiveController::class, "loadPacking"])->name("loadPackingMaster");
+
+            Route::get('shipping', [MasterActiveController::class, "page_shipping"]);
+            Route::post('shipping', [MasterActiveController::class, "loadShipping"])->name("loadShippingMaster");
+
+            Route::get('delivered', [MasterActiveController::class, "page_delivered"]);
+            Route::post('delivered', [MasterActiveController::class, "loadDelivered"])->name("loadDeliveredMaster");
+
+            Route::get('history', [MasterHistoryController::class, "page_history"]);
+            Route::post('history', [MasterHistoryController::class, "loadHistory"])->name("loadHistoryMaster");
+
+            Route::get('completed', [MasterHistoryController::class, "page_completed"]);
+            Route::post('completed', [MasterHistoryController::class, "loadCompleted"])->name("loadCompletedMaster");
+
+            Route::get('canceled', [MasterHistoryController::class, "page_canceled"]);
+            Route::post('canceled', [MasterHistoryController::class, "loadCanceled"])->name("loadCanceledMaster");
+        });
+
     });
 });
 

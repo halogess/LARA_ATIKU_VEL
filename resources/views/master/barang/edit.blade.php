@@ -1,4 +1,4 @@
-@extends('template.master')
+@extends('template.master.master')
 
 @section('content')
     <form method="POST" enctype="multipart/form-data">

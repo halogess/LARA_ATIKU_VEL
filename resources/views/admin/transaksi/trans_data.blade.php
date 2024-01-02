@@ -21,10 +21,10 @@
             <div class="flex p-1">
                 <div class="flex w-11/12" onclick = "showDetail('{{ $t->nomor_nota }}')">
                     <div class="p-2 w-2/12">#{{ $t->nomor_nota }} </div>
-                    <div class="p-2 w-6/12 md:w-2/12 hidden md:inline-block">{{ \Carbon\Carbon::parse($t->tanggal_beli)->format('d M Y') }} </div>
-                    <div class="p-2 w-3/12">{{ $t->Pembeli->nama_user }}</div>
-                    <div class="p-2 w-3/12 "> Rp {{ number_format($t->total_harga, 2, ',', '.') }}</div>
-                    <div class="p-2 w-2/12 hidden md:inline-block">Item : {{ $t->total_item }}</div>
+                    <div class="p-2 w-5/12 md:w-2/12 hidden lg:inline-block">{{ \Carbon\Carbon::parse($t->tanggal_beli)->format('d M Y') }} </div>
+                    <div class="p-2 w-5/12 lg:w-3/12">{{ $t->Pembeli->nama_user }}</div>
+                    <div class="p-2 w-5/12 lg:w-3/12"> Rp {{ number_format($t->total_harga, 2, ',', '.') }}</div>
+                    <div class="p-2 w-2/12 hidden lg:inline-block">Item : {{ $t->total_item }}</div>
                 </div>
 
                 @if (Session::get('page') == 'new' || Session::get('page') == 'active')

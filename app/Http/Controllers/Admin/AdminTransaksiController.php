@@ -95,11 +95,12 @@ class AdminTransaksiController extends Controller
         return $view;
     }
 
-    private function getTransByStatus($param){
+    private function getTransByStatus($param)
+    {
         $all = Htrans::where("id_admin", Auth::user()->id_user)->where("active", 1)->get();
         $trans = [];
         foreach ($all as $p) {
-            if($p->Status->last()->kode_status == $param){
+            if ($p->Status->last()->kode_status == $param) {
                 array_push($trans, $p);
             }
         }
@@ -117,7 +118,7 @@ class AdminTransaksiController extends Controller
         $newStatus->id_status = Status::all()->count() + 1;
         $newStatus->nomor_nota = $htrans->nomor_nota;
         $newStatus->kode_status = $htrans->Status->last()->kode_status + 1;
-        if($newStatus->kode_status == 4){
+        if ($newStatus->kode_status == 4) {
             $htrans->active = 0;
         }
         $newStatus->save();

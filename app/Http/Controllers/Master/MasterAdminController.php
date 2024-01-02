@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 use App\Models\User;
 
@@ -13,6 +14,7 @@ class MasterAdminController extends Controller
 {
     public function pageAdmin()
     {
+        Session::put("page", "users");
         return view("master.admin.display");
     }
 
@@ -65,6 +67,7 @@ class MasterAdminController extends Controller
 
     public function pageAddAdmin()
     {
+        Session::put("page", "users");
         return view("master.admin.add");
     }
 

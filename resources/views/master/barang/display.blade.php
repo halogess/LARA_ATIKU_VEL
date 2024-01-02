@@ -1,4 +1,4 @@
-@extends('template.master')
+@extends('template.master.master')
 
 @section('content')
     <div class="mt-4 ml-4 mr-4">

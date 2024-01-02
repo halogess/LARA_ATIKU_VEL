@@ -1,13 +1,17 @@
-@extends('template.master')
+@extends('template.master.master')
 
 @section('content')
     <div class="mt-4 ml-4 mr-4">
+
+        <div class="flex gap-5 items-center py-2 justify-between">
+            <div class="text-xl font-bold">Admin List</div>
+            <a href="{{url('master/users')}}" class="border border-black rounded px-2 py-1 text-xs bg-black text-yellow-400">Back</a>
+        </div>
+
         @if (Session::has('message'))
             {{ Session::get('message') }}
         @endif
 
-        <a href="{{ url('master/admin/add') }}"
-            class="bg-black border-yellow-400 text-yellow-400 border-2 p-2 rounded-lg ml-2">Add Admin</a> <br> <br>
         Search By
         <select id="combo_box" class="border-2 border-yellow-400 bg-black text-yellow-400 p-2 rounded-lg inline-flex">
             <option value="id_user">ID</option>
@@ -17,7 +21,7 @@
         </select>
 
         <input type="search" id="search" placeholder="Search"
-        class="border-2 border-yellow-400 bg-black text-yellow-400 p-2 rounded-lg inline-flex">
+            class="border-2 border-yellow-400 bg-black text-yellow-400 p-2 rounded-lg inline-flex">
 
         <input type="radio" name="rb" id="active" value="active" checked>
         <label for="active">Active</label>
@@ -27,6 +31,9 @@
 
         <input type="radio" name="rb" id="all" value="all">
         <label for="banned">All</label>
+
+        <a href="{{ url('master/admin/add') }}"
+            class="bg-black border-yellow-400 text-yellow-400 border-2 p-2 rounded-lg ml-2">Add Admin</a>
         <br>
         <br>
 
