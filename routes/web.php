@@ -123,10 +123,11 @@ Route::middleware("pembeli")->group(function () {
     Route::prefix("user")->group(function () {
         Route::get('/home', [userController::class, "home"]);
         Route::get("/detail", [SearchController::class, "detail"])->name('membeli');
-        Route::get("/status", [CartController::class, "status"]);
         Route::get('/cart', [CartController::class, 'showCart'])->name('show-cart');
     });
 });
+
+Route::get("/status", [CartController::class, "status"]);
 
 Route::middleware("admin")->group(function () {
     Route::prefix("admin")->group(function () {
@@ -172,4 +173,4 @@ Route::middleware("admin")->group(function () {
 
 Route::post('/add-to-cart/{kode_barang}', [CartController::class, 'addToCart'])->name('add-to-cart');
 
-Route::post('/beli-barang/{kode_barang}/{id_pembeli}', [TransactionController::class, 'doTrans'])->name('beli-barang');
+Route::get('/beli-barang/{kode_barang}/{id_pembeli}', [TransactionController::class, 'doTrans'])->name('beli-barang');

@@ -34,8 +34,10 @@ class CartController extends Controller
 
         $barang = $product;
 
+        $namaKategori = $barang->kategorinya->nama_kategori;
+
         // Return the updated cart count
-        return view('/detail', compact('barang'));
+        return view('/detail', compact('barang', 'namaKategori'));
     }
 
     public function addItemToCart(Request $request)

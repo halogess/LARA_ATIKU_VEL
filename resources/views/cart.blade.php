@@ -32,7 +32,7 @@
                         <td>
                             <form
                                 action="{{ route('beli-barang', ['kode_barang' => $item->kode_barang, 'id_pembeli' => $item->id_pembeli]) }}"
-                                method="post">
+                                method="get">
                                 @csrf
                                 <input type="submit" value="Beli" id="btnBeli" name="btnBeli" class="w-full">
                             </form>

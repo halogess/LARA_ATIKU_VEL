@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Models\Barang;
+use App\Models\Kategori;
 
 class SearchController extends Controller
 {
@@ -32,8 +34,9 @@ class SearchController extends Controller
     {
         $id = $request->input('id');
         $barang = Barang::where("kode_barang", "$id")->first();
+        $namaKategori = $barang->kategorinya->nama_kategori;
 
-        return view('detail', compact('barang'));
+        return view('detail', compact('barang', 'namaKategori'));
     }
 
     public function performSearch($keyword)

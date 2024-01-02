@@ -8,7 +8,7 @@
             <table>
                 <tr>
                     <td class="text-sm">Jenis: </td>
-                    <td class="text-sm">{{ $barang->kategori_barang }}</td>
+                    <td class="text-sm">{{ $namaKategori }}</td>
                 </tr>
                 <tr>
                     <td class="text-sm">Stok: </td>
@@ -32,20 +32,6 @@
                 <input type="submit" id="btnAddKeranjang"
                     class="btn btn-success text-yellow-300 bg-black w-full rounded p-1 mt-3" value="+ Keranjang"
                     onclick="submitForm()"><br>
-            </form><br>
-
-            <form action="{{ route('membeli', ['kode_barang' => $barang->kode_barang]) }}" method="post">
-                @csrf
-                <input type="number" name="jumlahBeli" id="jumlahBeli" class="w-full" oninput="updateSubtotalBeli()"
-                    min="0"><br>
-                <table class="mt-2">
-                    <tr>
-                        <td>Subtotal</td>
-                        <td id="subtotalBeli">Rp{{ $barang->harga_barang }}</td>
-                    </tr>
-                </table>
-                <input type="submit" value="Beli" id="btnBeli"
-                    class="btn btn-success text-yellow-300 bg-black w-full rounded p-1 mt-3">
             </form>
 
             <table class="w-full mt-2">
