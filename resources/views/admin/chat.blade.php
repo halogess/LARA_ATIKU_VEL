@@ -9,14 +9,14 @@
     <script src="/style/jquery.js"></script>
 </head>
 <body>
-    <div class="w-1/5 bg-slate-600 h-screen float-left">
+    <div class="w-1/5 bg-slate-600 h-screen float-left overflow-auto">
         <div class="text-center text-slate-50 font-semibold pb-4 pt-4">
             CHAT
         </div>
         <form action="{{ route('adminChat') }}" method="post">
             @csrf
             @foreach ($namaUsers as $item)
-                <button type="submit" name="btnUser" value={{$item->id_user}} class="text-slate-50 bg-slate-500 w-full h-fit py-3 text-left px-4">
+                <button type="submit" name="btnUser" value={{$item->id_user}} class="text-slate-50 bg-slate-500 w-full h-fit py-3 text-left px-4 hover:bg-slate-800">
                     {{$item->nama_user}}
                 </button>
                 <hr>
