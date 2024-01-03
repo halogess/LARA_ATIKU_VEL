@@ -43,7 +43,7 @@ class ChatController extends Controller
 
     public function doChatAdmin()
     {
-        $userID = session('user_id');
+        $adminID = session('user_id');
         $chat = Chat::all();
         $namaUsers = User::where('id_user', 'LIKE', '%P%')->get();
 
@@ -66,15 +66,34 @@ class ChatController extends Controller
 
     //     $chat = DB::table('serverchat')->where('id', $newChat)->first();
     //     return Response::json(['chat_content' => $chat->chat_content]);
-    // }
+    //}
 
-    public function kirimChatAdmin(Request $request)
+    public function showChat(Request $request)
     {
-        $userID = session('user_id');
-        $adminID = $request->input('btnUser');
+        $adminID = session('user_id');
+        $userID = $request->input('btnUser');
+        session(['id_pembeli' => $userID]);
+        $namaUsers = User::where('id_user', 'LIKE', '%P%')->get();
 
-        $chats = Chat::where('id_pembeli', $userID)->get();
+        $chat = Chat::where('id_pembeli', $userID)->get();
 
-        return view('admin.chat', compact('chats'));
+        return view('admin.chat', compact('chat', 'namaUsers'));
+    }
+    public function sendChat(Request $request)
+    {
+        $adminID = session('user_id');
+        $id_pembeli = session('id_pembeli');
+
+        $input = [
+            'chat_content' => $request->input('textChat'),
+            'id_admin' => $adminID,
+            'id_pembeli' => $id_pembeli,
+            'pengirim' =>'admin'
+        ];
+
+        $newChat = DB::table('serverchat')->insertGetId($input);
+
+        $chat = DB::table('serverchat')->where('id', $newChat)->first();
+        return Response::json(['chat_content' => $chat->chat_content]);
     }
 }

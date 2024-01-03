@@ -79,7 +79,7 @@
                 <input type="text" name="inputChat" id="inputChat" class="w-5/6 p-1 bg-slate-200 rounded float-left mt-2 ml-2"
                     style="border: 2px solid black;">
                     <button type="button" class="py-1 px-4 rounded mt-2 w-fit text-lg float-left mx-4" id="btnKirim">
-                        <img src="img/send_icon.png" alt="Send Icon" class="w-6 h-7">
+                        <img src="/img/send_icon.png" alt="Send Icon" class="w-6 h-7">
                     </button>
             </form>
         </div>

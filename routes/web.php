@@ -115,7 +115,6 @@ Route::middleware("master")->group(function () {
             Route::get('canceled', [MasterHistoryController::class, "page_canceled"]);
             Route::post('canceled', [MasterHistoryController::class, "loadCanceled"])->name("loadCanceledMaster");
         });
-
     });
 });
 
@@ -132,7 +131,8 @@ Route::get("/status", [CartController::class, "status"]);
 Route::middleware("admin")->group(function () {
     Route::prefix("admin")->group(function () {
         Route::get('/chat', [ChatController::class, "doChatAdmin"])->name('chatAdmin');
-        Route::post('/chat', [ChatController::class, "kirimChatAdmin"])->name('adminChat');
+        Route::post('/show-chat', [ChatController::class, "showChat"])->name('adminChat');
+        Route::post('/send-chat', [ChatController::class, "sendChat"])->name('adminSend');
 
         Route::post("detail", [AdminTransaksiController::class, "detail"])->name("loadDetailTrans");
         Route::prefix("transaksi")->group(function () {
