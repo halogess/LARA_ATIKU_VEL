@@ -28,15 +28,18 @@
             <a href={{ url('user/cart') }}
                 class="mr-5 w-16 h-auto p-2 text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl">
                 Cart </a>
-            <a href={{ url('/status') }}
+            <a href={{ url('user/status') }}
                 class="mr-5 w-16 h-auto p-2 text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl">
                 Status </a>
             <a href={{ url('login') }}
                 class="mr-5 w-16 h-auto text-yellow-400 p-2 rounded-xl hover:cursor-pointer font-bold text-xl">
                 Log In </a>
             <a href={{ url('register') }}
-                class="w-auto h-auto text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl drop-shadow-lg">
+                class="mr-5 w-16 h-auto text-yellow-400 p-2 rounded-xl hover:cursor-pointer font-bold text-xl">
                 Sign Up</a>
+            <a href={{ url('logout') }}
+                class="w-auto h-auto text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl drop-shadow-lg">
+                Log Out</a>
         </div>
     </nav>
     @yield('content')

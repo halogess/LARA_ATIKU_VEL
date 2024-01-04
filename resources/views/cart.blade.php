@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('template.main')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Shopping Cart</title>
-</head>
-
-<body>
-    <h1>Shopping Cart</h1>
+@section('content')
+    <p class="text-6xl">Shopping Cart</p>
 
     <div class="data w-full">
         @if ($cartCount > 0)
@@ -41,10 +33,7 @@
                 @endforeach
             </table>
         @else
-            <p>Keranjang kosong!</p>
+            <p class="text-xl mt-5">Keranjang kosong!</p>
         @endif
     </div>
-
-</body>
-
-</html>
+@endsection

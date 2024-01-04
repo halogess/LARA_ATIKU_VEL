@@ -12,7 +12,7 @@
             <a href={{ route('show-cart') }}
                 class="mr-5 w-16 h-auto p-2 text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl">
                 Cart </a>
-            <a href={{ url('/beli-barang/{kode_barang}/{id_pembeli}') }}
+            <a href={{ url('user/status') }}
                 class="mr-5 w-16 h-auto p-2 text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl">
                 Status </a>
             <a href={{ url('logout') }}

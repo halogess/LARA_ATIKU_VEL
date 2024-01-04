@@ -123,10 +123,10 @@ Route::middleware("pembeli")->group(function () {
         Route::get('/home', [userController::class, "home"]);
         Route::get("/detail", [SearchController::class, "detail"])->name('membeli');
         Route::get('/cart', [CartController::class, 'showCart'])->name('show-cart');
+        Route::get("/status", [CartController::class, "status"]);
     });
 });
 
-Route::get("/status", [CartController::class, "status"]);
 
 Route::middleware("admin")->group(function () {
     Route::prefix("admin")->group(function () {
