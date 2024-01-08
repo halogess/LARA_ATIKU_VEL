@@ -96,9 +96,86 @@ class TransactionController extends Controller
                     'keterangan' => $item->keterangan
                 ];
             }
+
             Session::put('barangnya', $barangnya);
             Cart::where('kode_barang', $kode_barang)->delete();
             return view('status', compact('barangnya'));
         }
+    }
+
+    public function doTransAll(Request $request, $id_pembeli)
+    {
+        // Get an array of kode_barang values
+        $kode_barang_array = $request->input('kode_barang');
+
+        // Get all cart items for the user
+        $cartItems = Cart::where('id_pembeli', $id_pembeli)->get();
+
+        // Calculate total_item and total_harga for all items
+        $totalItemAll = $cartItems->sum('qty');
+        $totalHargaAll = $cartItems->sum('total_harga');
+
+        // Create a new Htrans record
+        $htrans = Htrans::create([
+            'nomor_nota' => Htrans::max('nomor_nota') + 1,
+            'tanggal_beli' => now(),
+            'id_pembeli' => $id_pembeli,
+            'total_item' => $totalItemAll,
+            'total_harga' => $totalHargaAll,
+            'active' => 1,
+        ]);
+
+        // Loop through each kode_barang and create a Dtrans record for each
+        foreach ($kode_barang_array as $kode_barang) {
+            // Find the product
+            $product = Barang::find($kode_barang);
+
+            // Check if the product is found
+            if ($product) {
+                // Create a new Dtrans record
+                Dtrans::create([
+                    'id_dtrans' => Dtrans::max('id_dtrans') + 1,
+                    'nomor_nota' => $htrans->nomor_nota,
+                    'kode_barang' => $kode_barang,
+                    'harga_barang' => $product->harga_barang,
+                    'deskripsi_barang' => $product->deskripsi_barang,
+                    'qty' => 1, // You might need to adjust this based on your requirements
+                    'sub_total' => $product->harga_barang,
+                ]);
+            }
+        }
+
+        // Clear the user's cart
+        Cart::where('id_pembeli', $id_pembeli)->delete();
+
+        // Retrieve the purchased items for the current transaction
+        $data = DB::table('htrans')
+            ->join('dtrans', 'htrans.nomor_nota', '=', 'dtrans.nomor_nota')
+            ->join('status_transaksi', 'htrans.nomor_nota', '=', 'status_transaksi.nomor_nota')
+            ->select(
+                'htrans.nomor_nota',
+                'dtrans.kode_barang',
+                'dtrans.deskripsi_barang',
+                'dtrans.sub_total',
+                'htrans.tanggal_beli',
+                'status_transaksi.keterangan'
+            )
+            ->where('htrans.id_pembeli', $id_pembeli)
+            ->get();
+
+        $barangnya = [];
+        foreach ($data as $item) {
+            $barangnya[] = [
+                'nomor_nota' => $item->nomor_nota,
+                'tanggal' => $item->tanggal_beli,
+                'kode_barang' => $item->kode_barang,
+                'deskripsi_barang' => $item->deskripsi_barang,
+                'sub_total' => $item->sub_total,
+                'keterangan' => $item->keterangan
+            ];
+        }
+
+        Session::put('barangnya', $barangnya);
+        return view('status', compact('barangnya'));
     }
 }

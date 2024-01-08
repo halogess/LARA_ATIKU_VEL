@@ -5,6 +5,19 @@
 
     <div class="data w-full">
         @if ($cartCount > 0)
+            <form action="{{ route('beli-semua-barang', ['id_pembeli' => $cartItems[0]->id_pembeli]) }}" method="get"
+                onsubmit="return confirm('Anda yakin ingin membeli semua barang di keranjang?');">
+                @csrf
+
+                {{-- Hidden input for each kode_barang --}}
+                @foreach ($cartItems as $item)
+                    <input type="hidden" name="kode_barang[]" value="{{ $item->kode_barang }}">
+                @endforeach
+
+                <input type="submit" value="Beli Semua" id="btnBeliSemua" name="btnBeliSemua"
+                    class="mb-3 bg-green-500 text-white py-2 px-4 rounded">
+            </form>
+
             <table border="1" class="mx-auto">
                 <tr>
                     <th>ID Cart</th>

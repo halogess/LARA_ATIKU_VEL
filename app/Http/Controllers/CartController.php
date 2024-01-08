@@ -82,7 +82,6 @@ class CartController extends Controller
             ];
         }
 
-        $barangnya = Session::get('barangnya', []);
         return view('status', compact('barangnya'));
     }
 }
