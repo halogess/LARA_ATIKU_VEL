@@ -13,7 +13,7 @@
     } elseif (Session::get('page') == 'active') {
         $activePage = $currentPage;
     } elseif (Session::get('page') == 'chat') {
-        $activePage = $currentPage;
+        $chatPage = $currentPage;
     } elseif (Session::get('page') == 'history') {
         $historyPage = $currentPage;
     } else if(Session::get('page') == 'profile'){

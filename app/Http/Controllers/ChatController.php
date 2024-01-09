@@ -40,6 +40,11 @@ class ChatController extends Controller
         return Response::json(['chat_content' => $chat->chat_content]);
     }
 
+    public function loadChatAdmin(Request $request){
+        $chat = Chat::where("id_pembeli", $request->id_pembeli)->get();
+        $view = view("admin.isiChat", compact("chat"));
+        return $view;
+    }
 
     public function doChatAdmin()
     {

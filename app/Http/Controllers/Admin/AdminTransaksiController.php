@@ -10,7 +10,6 @@ use App\Models\Status;
 use App\Models\Htrans;
 use App\Models\Dtrans;
 use Illuminate\Http\Request;
-
 class AdminTransaksiController extends Controller
 {
     public function page_new()
@@ -19,13 +18,11 @@ class AdminTransaksiController extends Controller
         Session::put("url", "admin/transaksi/new");
         return view("admin.transaksi.new");
     }
-
     public function page_active()
     {
         Session::put("page", "active");
         Session::put("nav", "");
         Session::put("url", "admin/transaksi/active");
-
         return view("admin.active_trans.all");
     }
 

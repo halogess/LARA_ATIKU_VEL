@@ -73,7 +73,6 @@ class MasterAdminController extends Controller
 
     public function addAdmin(Request $request)
     {
-
         $admin = new User();
         $id = User::where("role",1)->count() + 1;
         $admin->id_user = "A" . sprintf("%04d", $id);
