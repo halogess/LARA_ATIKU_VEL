@@ -127,10 +127,6 @@ Route::middleware("pembeli")->group(function () {
         Route::get("/status", [CartController::class, "status"]);
     });
 
-    // Route::get('/chat', [ChatController::class, "doChat"])->name('chat');
-    // Route::post('/chat', [ChatController::class, "kirimChat"])->name('masukChat');
-
-
     Route::get('/chat', [ChatController::class, 'doChat'])->name('getChatMessages');
     Route::post('/chat', [ChatController::class, 'kirimChat'])->name('masukChat');
     Route::get('/show-chat', [ChatController::class, 'loadChat'])->name('userChat');
