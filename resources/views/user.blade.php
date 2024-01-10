@@ -6,7 +6,7 @@
             <p class="font-bold text-4xl pt-4 text-yellow-400">JJHC Automotive</p>
         </div>
         <div class="buttons h-auto w-auto mr-24 mt-5 pb-4 float-right">
-            <a href={{ url('/') }}
+            <a href={{ url('user/home') }}
                 class="mr-5 w-16 h-auto p-2 text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl">
                 Home </a>
             <a href={{ route('show-cart') }}

@@ -21,6 +21,7 @@ class CartController extends Controller
 
         // Insert into cart table
         Cart::create([
+            'id_cart' => Cart::max('id_cart') + 1,
             'id_pembeli' => $userID, // Assuming you are using authentication
             'kode_barang' => $product->kode_barang,
             'qty' => $request->jumlah,
@@ -56,13 +57,20 @@ class CartController extends Controller
     {
         $userID = Auth::id();
 
-        $data = DB::table('htrans')
-            ->join('dtrans', 'htrans.nomor_nota', '=', 'dtrans.nomor_nota')
+        $data = DB::table('dtrans')
+            ->join(
+                'htrans',
+                'dtrans.nomor_nota',
+                '=',
+                'htrans.nomor_nota'
+            )
             ->join('status_transaksi', 'htrans.nomor_nota', '=', 'status_transaksi.nomor_nota')
             ->select(
                 'htrans.nomor_nota',
                 'dtrans.kode_barang',
                 'dtrans.deskripsi_barang',
+                'dtrans.harga_barang',
+                'dtrans.qty',
                 'dtrans.sub_total',
                 'htrans.tanggal_beli',
                 'status_transaksi.keterangan'
@@ -72,13 +80,24 @@ class CartController extends Controller
 
         $barangnya = [];
         foreach ($data as $item) {
-            $barangnya[] = [
-                'nomor_nota' => $item->nomor_nota,
-                'tanggal' => $item->tanggal_beli,
+            $nomorNota = $item->nomor_nota;
+
+            // Check if the nomorNota already exists in $barangnya
+            if (!isset($barangnya[$nomorNota])) {
+                $barangnya[$nomorNota] = [
+                    'tanggal' => $item->tanggal_beli,
+                    'items' => [],
+                ];
+            }
+
+            // Add the current item to the 'items' array
+            $barangnya[$nomorNota]['items'][] = [
                 'kode_barang' => $item->kode_barang,
                 'deskripsi_barang' => $item->deskripsi_barang,
+                'harga' => $item->harga_barang,
+                'jumlah' => $item->qty,
                 'sub_total' => $item->sub_total,
-                'keterangan' => $item->keterangan
+                'keterangan' => $item->keterangan,
             ];
         }
 

@@ -191,3 +191,5 @@ Route::middleware("admin")->group(function () {
 Route::post('/add-to-cart/{kode_barang}', [CartController::class, 'addToCart'])->name('add-to-cart');
 
 Route::get('/beli-barang/{kode_barang}/{id_pembeli}', [TransactionController::class, 'doTrans'])->name('beli-barang');
+
+Route::get('/beli-semua-barang/{id_pembeli}/{cartCount}', [TransactionController::class, 'doTransAll'])->name('beli-semua-barang');

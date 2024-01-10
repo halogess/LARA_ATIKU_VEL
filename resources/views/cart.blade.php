@@ -5,7 +5,7 @@
 
     <div class="data w-full">
         @if ($cartCount > 0)
-            <form action="{{ route('beli-semua-barang', ['id_pembeli' => $cartItems[0]->id_pembeli]) }}" method="get"
+            <form action="{{ route('beli-semua-barang', ['id_pembeli' => $cartItems[0]->id_pembeli, 'cartCount' => $cartCount]) }}" method="post"
                 onsubmit="return confirm('Anda yakin ingin membeli semua barang di keranjang?');">
                 @csrf
 
