@@ -14,17 +14,16 @@ class AdminChatController extends Controller
 {
     public function page_chat()
     {
-        Session::put("chat_user", "");
-        $pembeli = User::where("role", 0)->get();
-        return view("admin.chat.chat", compact("pembeli"));
-    }
-
-    public function load_chat(Request $request)
-    {
-        Session::put("chat_user", $request->id);
+        Session::put("page", "chat");
+        if(!Session::has('chat_user')){
+            Session::put("chat_user", "");
+        }
         $param["pembeli"] = User::where("role", 0)->get();
-        $param["chat"] =  Chat::where("id_pembeli", $request->id)->get();
         return view("admin.chat.chat", $param);
+    }
+    public function transChat(Request $request){
+        Session::put("chat_user", $request->id);
+        return redirect("admin/chat");
     }
 
     public function loadCustomers()
@@ -61,9 +60,13 @@ class AdminChatController extends Controller
         return ;
     }
 
-    public function loadChat(Request $request)
+    public function loadChat()
     {
-
+        $blmdibaca = Chat::where("id_pembeli", Session::get("chat_user"))->where("dibaca", 0)->get();
+        foreach($blmdibaca as $b){
+            $b->dibaca = 1;
+            $b->save();
+        }
         $chat = Chat::where("id_pembeli", Session::get("chat_user"))->get();
         $view = view("admin.chat.isiChat", compact("chat"));
         return $view;

@@ -29,7 +29,7 @@
 
                 @if (Session::get('page') == 'new' || Session::get('page') == 'active')
                     <div class="w-auto flex items-center justify-start ">
-                        <a href='{{ url('admin/transaksi/new/approve/' . "$t->nomor_nota") }}'><button
+                        <a href='{{ url("admin/chat/$t->id_pembeli") }}'><button
                                 class="mr-1 text-black rounded-md border-black border-2 w-8 h-8 flex items-center justify-center">
                                 <svg xmlns="{{ asset('icons/chat-dots-fill.svg') }}" width="20" height="20"
                                     fill="currentColor" class="bi bi-chat-dots-fill text-center" viewBox="0 0 16 16">

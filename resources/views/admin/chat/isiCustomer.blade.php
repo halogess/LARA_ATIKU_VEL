@@ -1,8 +1,8 @@
 @foreach ($pembeli as $item)
     <button type="submit" name="btnUser" value={{ $item->id_user }} id="{{ $item->id_user }}"
         onclick='show("{{ $item->id_user }}")'
-        class="text-slate-50 @if (Session::get('chat_user') == $item->id_user) {{ 'bg-yellow-400' }}
-        @else {{ 'bg-slate-800' }} @endif w-full h-auto py-3 text-left px-4 hover:bg-slate-800">
+        class="text-slate-50 @if (Session::get('chat_user') == $item->id_user) {{ 'bg-' }}
+        @else {{ 'bg-slate-800' }} @endif w-full h-auto py-3 text-left px-4 hover:bg-slate-500">
         {{ $item->nama_user }}
         @if ($newMessage[$item->id_user] > 0)
             <div

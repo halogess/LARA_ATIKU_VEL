@@ -14,6 +14,8 @@ use App\Http\Controllers\Master\MasterHistoryController;
 
 use App\Http\Controllers\Admin\AdminHistoryController;
 use App\Http\Controllers\Admin\AdminTransaksiController;
+use App\Http\Controllers\Admin\AdminChatController;
+use App\Http\Controllers\Admin\AdminProfileController;
 
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\LoginController;
@@ -130,11 +132,19 @@ Route::middleware("pembeli")->group(function () {
 
 Route::middleware("admin")->group(function () {
     Route::prefix("admin")->group(function () {
-        Route::get('/chat', [ChatController::class, "doChatAdmin"])->name('chatAdmin');
-        Route::post('/show-chat', [ChatController::class, "showChat"])->name('adminChat');
-        Route::post('/send-chat', [ChatController::class, "sendChat"])->name('adminSend');
+        Route::get('/chat', [AdminChatController::class, "page_chat"]);
+
+        Route::get('/chat/{id}',[AdminChatController::class,"transChat"])->name('trans-chat');
+        Route::post('/load-cust', [AdminChatController::class, "loadCustomers"])->name('loadCustomers');
+        Route::post('/show-chat', [AdminChatController::class, "showChat"])->name('showChat');
+        Route::post('/load-chat', [AdminChatController::class, "loadChat"])->name('adminChat');
+        Route::post('/chat', [AdminChatController::class, "sendChat"])->name('adminSend');
 
         Route::post("detail", [AdminTransaksiController::class, "detail"])->name("loadDetailTrans");
+
+        Route::get("profile", [AdminProfileController::class, "page_profile"]);
+        Route::post("profile", [AdminProfileController::class, "do_profile"]);
+
         Route::prefix("transaksi")->group(function () {
 
             Route::get("new", [AdminTransaksiController::class, "page_new"]);
@@ -174,4 +184,3 @@ Route::middleware("admin")->group(function () {
 Route::post('/add-to-cart/{kode_barang}', [CartController::class, 'addToCart'])->name('add-to-cart');
 
 Route::get('/beli-barang/{kode_barang}/{id_pembeli}', [TransactionController::class, 'doTrans'])->name('beli-barang');
-Route::get('/beli-semua-barang/{id_pembeli}', [TransactionController::class, 'doTransAll'])->name('beli-semua-barang');

@@ -74,7 +74,7 @@
         <div href="admin/profile" class="h-full w-auto flex items-center align-middle p-2">
             <div class="flex gap-4 px-2 py-1" type="button">
                 <a href="{{ url('admin/profile') }}"><img class="w-10 h-10 rounded-full border-2 border-yellow-400"
-                        src="{{ asset('img/brio.jpg') }}" alt="">
+                        src="{{ Auth::user()->foto_user }}" alt="">
                 </a>
 
                 <div class="font-medium text-start">
