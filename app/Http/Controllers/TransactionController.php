@@ -30,30 +30,34 @@ class TransactionController extends Controller
             $barangnya = [];
             return view('status', compact('barangnya'));
         } else {
-            $sub_total = Cart::sum('total_harga'); // ambil total harga dan total qty
-            $totalItem = Cart::sum('qty');
+            $total = Cart::where('kode_barang', $kode_barang)->first();
             $nomorNotaTerakhir = Htrans::max('nomor_nota'); // ambil nomor_nota terakhir
 
             $htrans = Htrans::create([ // create htrans
                 'nomor_nota' => $nomorNotaTerakhir + 1,
                 'tanggal_beli' => $tanggalHtrans,
                 'id_pembeli' => $userID,
-                'total_item' => $totalItem,
-                'total_harga' => $sub_total,
+                'total_item' => $total->qty,
+                'total_harga' => $total->total_harga,
                 'active' => 1
             ]);
 
-            for ($i = 0; $i < $totalItem; $i++) {
-                $id_dtransTerakhir = Dtrans::max('id_dtrans'); // ambil id_dtrans terakhir
-                Dtrans::create([ // create dtrans
-                    'id_dtrans' => $id_dtransTerakhir + 1,
-                    'nomor_nota' => $nomorNotaTerakhir + 1,
-                    'kode_barang' => $kode_barang,
-                    'harga_barang' => $product->harga_barang,
-                    'deskripsi_barang' => $product->deskripsi_barang,
-                    'qty' => 1,
-                    'sub_total' => $product->harga_barang
-                ]);
+            $cart = Cart::where('id_pembeli', $userID)->get();
+            $jumlah = Cart::where('kode_barang', $kode_barang)->sum('qty');
+
+            foreach ($cart as $cartItem) {
+                if ($cartItem->kode_barang == $kode_barang) {
+                    $id_dtransTerakhir = Dtrans::max('id_dtrans');
+                    Dtrans::create([
+                        'id_dtrans' => $id_dtransTerakhir + 1,
+                        'nomor_nota' => $nomorNotaTerakhir + 1,
+                        'kode_barang' => $kode_barang,
+                        'harga_barang' => $product->harga_barang,
+                        'deskripsi_barang' => $product->deskripsi_barang,
+                        'qty' => $jumlah,
+                        'sub_total' => $jumlah * $product->harga_barang
+                    ]);
+                }
             }
 
             $tanggalStatus = $currentDate->format('Y-m-d H:i:s'); // format tanggal buat status
@@ -69,7 +73,7 @@ class TransactionController extends Controller
                 'keterangan' => $keterangan
             ]);
 
-            $jumlah = Dtrans::where('kode_barang', $kode_barang)->sum('qty'); // jumlahkan qty dari suatu barang
+            $jumlah = Dtrans::where('kode_barang', $kode_barang)->sum('qty');
 
             $data = DB::table('htrans')
                 ->join('dtrans', 'htrans.nomor_nota', '=', 'dtrans.nomor_nota')
@@ -77,7 +81,10 @@ class TransactionController extends Controller
                 ->select(
                     'htrans.nomor_nota',
                     'dtrans.kode_barang',
+                    'dtrans.harga_barang',
+                    'dtrans.qty',
                     'dtrans.deskripsi_barang',
+                    'htrans.total_item',
                     'dtrans.sub_total',
                     'htrans.tanggal_beli',
                     'status_transaksi.keterangan'
@@ -87,13 +94,24 @@ class TransactionController extends Controller
 
             $barangnya = [];
             foreach ($data as $item) {
-                $barangnya[] = [
-                    'nomor_nota' => $item->nomor_nota,
-                    'tanggal' => $item->tanggal_beli,
+                $nomorNota = $item->nomor_nota;
+
+                // Check if the nomorNota already exists in $barangnya
+                if (!isset($barangnya[$nomorNota])) {
+                    $barangnya[$nomorNota] = [
+                        'tanggal' => $item->tanggal_beli,
+                        'items' => [],
+                    ];
+                }
+
+                // Add the current item to the 'items' array
+                $barangnya[$nomorNota]['items'][] = [
                     'kode_barang' => $item->kode_barang,
                     'deskripsi_barang' => $item->deskripsi_barang,
+                    'harga' => $item->harga_barang,
+                    'jumlah' => $item->qty,
                     'sub_total' => $item->sub_total,
-                    'keterangan' => $item->keterangan
+                    'keterangan' => $item->keterangan,
                 ];
             }
 
@@ -107,6 +125,7 @@ class TransactionController extends Controller
     {
         // Get an array of kode_barang values
         $kode_barang_array = $request->input('kode_barang');
+        $jumlahDtrans = $request->cartCount;
 
         // Get all cart items for the user
         $cartItems = Cart::where('id_pembeli', $id_pembeli)->get();
@@ -116,8 +135,9 @@ class TransactionController extends Controller
         $totalHargaAll = $cartItems->sum('total_harga');
 
         // Create a new Htrans record
+        $nomorNotaTerakhir = Htrans::max('nomor_nota');
         $htrans = Htrans::create([
-            'nomor_nota' => Htrans::max('nomor_nota') + 1,
+            'nomor_nota' => $nomorNotaTerakhir + 1,
             'tanggal_beli' => now(),
             'id_pembeli' => $id_pembeli,
             'total_item' => $totalItemAll,
@@ -129,9 +149,10 @@ class TransactionController extends Controller
         foreach ($kode_barang_array as $kode_barang) {
             // Find the product
             $product = Barang::find($kode_barang);
+            $cartItem = $cartItems->where('kode_barang', $kode_barang)->first();
 
             // Check if the product is found
-            if ($product) {
+            if ($product && $cartItem) {
                 // Create a new Dtrans record
                 Dtrans::create([
                     'id_dtrans' => Dtrans::max('id_dtrans') + 1,
@@ -139,23 +160,31 @@ class TransactionController extends Controller
                     'kode_barang' => $kode_barang,
                     'harga_barang' => $product->harga_barang,
                     'deskripsi_barang' => $product->deskripsi_barang,
-                    'qty' => 1, // You might need to adjust this based on your requirements
-                    'sub_total' => $product->harga_barang,
+                    'qty' => $cartItem->qty,
+                    'sub_total' => $product->harga_barang * $cartItem->qty,
                 ]);
             }
         }
 
         // Clear the user's cart
         Cart::where('id_pembeli', $id_pembeli)->delete();
+        Session::forget('barangnya');
 
         // Retrieve the purchased items for the current transaction
-        $data = DB::table('htrans')
-            ->join('dtrans', 'htrans.nomor_nota', '=', 'dtrans.nomor_nota')
+        $data = DB::table('dtrans')
+            ->join(
+                'htrans',
+                'dtrans.nomor_nota',
+                '=',
+                'htrans.nomor_nota'
+            )
             ->join('status_transaksi', 'htrans.nomor_nota', '=', 'status_transaksi.nomor_nota')
             ->select(
                 'htrans.nomor_nota',
                 'dtrans.kode_barang',
                 'dtrans.deskripsi_barang',
+                'dtrans.harga_barang',
+                'dtrans.qty',
                 'dtrans.sub_total',
                 'htrans.tanggal_beli',
                 'status_transaksi.keterangan'
@@ -165,17 +194,28 @@ class TransactionController extends Controller
 
         $barangnya = [];
         foreach ($data as $item) {
-            $barangnya[] = [
-                'nomor_nota' => $item->nomor_nota,
-                'tanggal' => $item->tanggal_beli,
+            $nomorNota = $item->nomor_nota;
+
+            // Check if the nomorNota already exists in $barangnya
+            if (!isset($barangnya[$nomorNota])) {
+                $barangnya[$nomorNota] = [
+                    'tanggal' => $item->tanggal_beli,
+                    'items' => [],
+                ];
+            }
+
+            // Add the current item to the 'items' array
+            $barangnya[$nomorNota]['items'][] = [
                 'kode_barang' => $item->kode_barang,
                 'deskripsi_barang' => $item->deskripsi_barang,
+                'harga' => $item->harga_barang,
+                'jumlah' => $item->qty,
                 'sub_total' => $item->sub_total,
-                'keterangan' => $item->keterangan
+                'keterangan' => $item->keterangan,
             ];
         }
 
-        Session::put('barangnya', $barangnya);
+        Session::push('barangnya', $barangnya);
         return view('status', compact('barangnya'));
     }
 }
