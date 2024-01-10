@@ -21,23 +21,36 @@ class ChatController extends Controller
         $chat = Chat::where('id_pembeli', $userID)->get();
 
         return view('chat', compact('chat'));
+
     }
+    public function loadChat()
+    {
+        $userID = session('user_id');
+        $chat = Chat::where('id_pembeli', $userID)->get();
+
+        return view('isiChat', compact('chat'));
+    }
+
+
 
     public function kirimChat(Request $request)
     {
         $userID = session('user_id');
+        $request->validate([
+            'inputChat' => 'required',
+        ]);
 
-        $input = [
-            'chat_content' => $request->input('inputChat'),
-            'id_admin' => 'A0001',
-            'id_pembeli' =>  $userID,
-            'pengirim' =>'user'
-        ];
+        $chat = [];
+        $newChat = new Chat();
+        $newChat->id = Chat::all()->count() + 1;
+        $newChat->chat_content = $request->input('inputChat');
+        $newChat->id_pembeli = $userID;
+        $newChat->id_admin = "mstr";
+        $newChat->pengirim = "user";
+        $newChat->save();
+        array_push($chat, $newChat);
+        return ;
 
-        $newChat = DB::table('serverchat')->insertGetId($input);
-
-        $chat = DB::table('serverchat')->where('id', $newChat)->first();
-        return Response::json(['chat_content' => $chat->chat_content]);
     }
 
     public function loadChatAdmin(Request $request){
@@ -54,24 +67,6 @@ class ChatController extends Controller
 
         return view("admin.chat", compact('chat', 'namaUsers'));
     }
-
-    // public function kirimChatAdmin(Request $request)
-    // {
-    //     $userID = session('user_id');
-    //     $adminID = $request->input('btnUser');
-
-    //     $input = [
-    //         'chat_content' => $request->input('inputChat'),
-    //         'id_admin' => $adminID,
-    //         'id_pembeli' =>  $userID,
-    //         'pengirim' =>'user'
-    //     ];
-
-    //     $newChat = DB::table('serverchat')->insertGetId($input);
-
-    //     $chat = DB::table('serverchat')->where('id', $newChat)->first();
-    //     return Response::json(['chat_content' => $chat->chat_content]);
-    //}
 
     public function showChat(Request $request)
     {

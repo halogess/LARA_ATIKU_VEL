@@ -55,69 +55,103 @@
             <div class="text-center text-black font-semibold text-lg pb-4 pt-2 ">
                 CHAT
             </div>
-            <div id="chatContainer" class="w-full overflow-auto h-96">
-                @foreach ($chat as $c)
-                    @if ($c->pengirim === 'admin')
-                        <div class="admin-chat w-fit m-2 p-2 rounded" style="background-color: #FFFF00;">
-                            <p class="text-black">
-                                {{$c->chat_content}}
-                            </p>
-                        </div>
-                    @else
-                        <div class="user-chat w-fit m-2 p-2 rounded ml-auto mr-7"
-                            style="background-color: #000000;">
-                            <p class="text-white">
-                                {{$c->chat_content}}
-                            </p>
-                        </div>
-                    @endif
-                @endforeach
+
+            <div id="isiChat" class="w-full overflow-auto h-96">
             </div>
 
             <form id="chatForm" class="w-full mt-4">
                 @csrf
-                <input type="text" name="inputChat" id="inputChat" class="w-5/6 p-1 bg-slate-200 rounded float-left mt-2 ml-2"
-                    style="border: 2px solid black;">
-                    <button type="button" class="py-1 px-4 rounded mt-2 w-fit text-lg float-left mx-4" id="btnKirim">
-                        <img src="/img/send_icon.png" alt="Send Icon" class="w-6 h-7">
-                    </button>
+                <input type="text" name="inputChat" id="inputChat"
+                    class="w-5/6 p-1 bg-slate-200 rounded float-left mt-2 ml-2" style="border: 2px solid black;">
+                <button type="button" class="py-1 px-4 rounded mt-2 w-fit text-lg float-left mx-4" id="btnKirim">
+                    <img src="/img/send_icon.png" alt="Send Icon" class="w-6 h-7">
+                </button>
             </form>
         </div>
     </div>
 
     <script>
+        let chatInt;
+        let userScrolled = false;
+
         $(document).ready(function() {
-        $('#btnKirim').on('click', function(e) {
-        e.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
-        $.ajax({
-            type: 'POST',
-            url: '{{ route('masukChat') }}',
-            data: $('#chatForm').serialize(),
-            dataType: 'json',
-            success: function(response) {
-                var chatContainer = $('#chatContainer');
-                var newChatDiv = $('<div></div>');
-                newChatDiv.addClass(response.pengirim === 'admin' ? 'admin-chat w-fit m-2 p-2 rounded' : 'user-chat w-fit m-2 p-2 rounded ml-auto mr-7');
-                newChatDiv.css('background-color', response.pengirim === 'admin' ? '#FFFF00' : '#000000');
+            load();
+            set();
+        });
 
-                var newChatP = $('<p></p>');
-                newChatP.addClass(response.pengirim === 'admin' ? 'text-black' : 'text-white');
-                newChatP.text(response.chat_content);
-
-                newChatDiv.append(newChatP);
-                chatContainer.append(newChatDiv);
-
-                $('#inputChat').val('');
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-                console.error(status);
-                console.error(error);
+        $('#isiChat').on('scroll', function() {
+            if ($('#isiChat').scrollTop() < ($('#isiChat')[0].scrollHeight - $('#isiChat').height()) + 20) {
+                userScrolled = true;
+            } else {
+                userScrolled = false;
             }
         });
-    });
-});
+
+        function load() {
+            $.ajax({
+                url: "{{ route('userChat') }}",
+                method: "GET",
+                success: function(response) {
+                    $("#isiChat").html(response);
+                    if (!userScrolled) {
+                        scrollChatToBottom();
+                    }
+                }
+            });
+        }
+
+        function set() {
+            chatInt = setInterval(function() {
+                load();
+            }, 2000);
+        }
+
+        $("#btnKirim").click(function() {
+            var chat = $("#textChat").val();
+            if (chat != "") {
+                clearInterval(chatInt);
+                $('#btnKirim').click(function() {
+                    var message = $('#inputChat').val();
+
+                    $.ajax({
+                        url: '{{ route('masukChat') }}',
+                        method: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            inputChat: message
+                        },
+                        success: function(data) {
+                            console.log(data);
+                            $('#inputChat').val('');
+                            load();
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                });
+
+            }
+
+        })
+
+        function scrollChatToBottom() {
+            var chatContainer = document.getElementById('isiChat');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        $("#textChat").keypress(function(event) {
+            if (event.which === 13) {
+                event.preventDefault();
+                $("#btnKirim").click();
+            }
+        });
     </script>
 
     {{-- footer --}}
@@ -125,7 +159,7 @@
         <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
             <div class="md:flex md:justify-between">
                 <div class="mb-6 md:mb-0">
-                    <a href="https://flowbite.com/" class="flex items-center">
+                    <a href="" class="flex items-center">
                         <img src="/img/image.png" class="h-36 me-3" alt="FlowBite Logo" />
                         <span class="self-center text-2xl font-semibold whitespace-nowrap">JJHC Automotive</span>
                     </a>

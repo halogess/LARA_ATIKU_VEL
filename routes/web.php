@@ -49,8 +49,7 @@ Route::get('/mainUser', function () {
     return view('user');
 });
 
-Route::get('/chat', [ChatController::class, "doChat"])->name('chat');
-Route::post('/chat', [ChatController::class, "kirimChat"])->name('masukChat');
+
 
 // Route::get('/detail?id={id}', [SearchController::class, 'detail'])->name('detail');
 
@@ -127,6 +126,14 @@ Route::middleware("pembeli")->group(function () {
         Route::get('/cart', [CartController::class, 'showCart'])->name('show-cart');
         Route::get("/status", [CartController::class, "status"]);
     });
+
+    // Route::get('/chat', [ChatController::class, "doChat"])->name('chat');
+    // Route::post('/chat', [ChatController::class, "kirimChat"])->name('masukChat');
+
+
+    Route::get('/chat', [ChatController::class, 'doChat'])->name('getChatMessages');
+    Route::post('/chat', [ChatController::class, 'kirimChat'])->name('masukChat');
+    Route::get('/show-chat', [ChatController::class, 'loadChat'])->name('userChat');
 });
 
 
@@ -134,7 +141,7 @@ Route::middleware("admin")->group(function () {
     Route::prefix("admin")->group(function () {
         Route::get('/chat', [AdminChatController::class, "page_chat"]);
 
-        Route::get('/chat/{id}',[AdminChatController::class,"transChat"])->name('trans-chat');
+        Route::get('/chat/{id}', [AdminChatController::class, "transChat"])->name('trans-chat');
         Route::post('/load-cust', [AdminChatController::class, "loadCustomers"])->name('loadCustomers');
         Route::post('/show-chat', [AdminChatController::class, "showChat"])->name('showChat');
         Route::post('/load-chat', [AdminChatController::class, "loadChat"])->name('adminChat');

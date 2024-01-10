@@ -119,7 +119,7 @@
             chatInt = setInterval(function() {
                 load();
                 loadCustomers();
-            }, 5000);
+            }, 1000);
         }
 
         function show(param) {
