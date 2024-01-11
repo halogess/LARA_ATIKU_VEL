@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\CatalogController;
 
 use App\Http\Controllers\Master\MasterController;
 use App\Http\Controllers\Master\MasterAdminController;
@@ -121,7 +122,8 @@ Route::middleware("master")->group(function () {
 
 Route::middleware("pembeli")->group(function () {
     Route::prefix("user")->group(function () {
-        Route::get('/home', [userController::class, "home"]);
+        // Route::get('/home', [userController::class, "home"]);
+        Route::get('/home', [CatalogController::class, "pageHome"]);
         Route::get("/detail", [SearchController::class, "detail"])->name('membeli');
         Route::get('/cart', [CartController::class, 'showCart'])->name('show-cart');
         Route::post('/cart', [CartController::class, 'hapus'])->name('hapus');

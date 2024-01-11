@@ -130,8 +130,9 @@
                             console.log(data);
                             $('#inputChat').val('');
                             load();
+                            set();
                         },
-                        error: function(xhr, status, error) {
+                        error: function(xhr, status, error) {s
                             console.error(xhr.responseText);
                         }
                     });

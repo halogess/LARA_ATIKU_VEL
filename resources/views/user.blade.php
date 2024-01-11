@@ -90,22 +90,100 @@
         </div>
     </div>
 
+    {{-- Katalog --}}
+    <div class="w-full h-auto px-16 py-8 mt-36">
+        <p class="text-5xl font-semibold font-serif">Katalog</p>
+        <p class="text-3xl font-semibold font-serif mt-8">Unit</p>
+
+        <div class="flex w-fit flex-wrap">
+            @foreach ($unit as $item)
+                <div class="w-1/4 bg-none border border-gray-200 rounded-lg shadow dark:border-gray-700">
+                    <a href='{{ url('user/detail?id=' . "$item->kode_barang") }}' class="w-full h-full">
+                        <div class="p-5">
+                            <img src="{{ asset($item->gambar_barang) }}" alt="">
+                            {{ $item->nama_barang }}
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+                                {{ $item->deskripsi_barang }}</h5>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $item->harga_barang }}</p>
+                            {{ $item->stok_barang }}
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+
+        <p class="text-3xl font-semibold font-serif mt-12">Spare Part</p>
+        <div class="flex w-fit flex-wrap">
+            @foreach ($sparepart as $item)
+                <div class="w-1/4 bg-none border border-gray-200 rounded-lg shadow dark:border-gray-700">
+                    <a href='{{ url('user/detail?id=' . "$item->kode_barang") }}' class="w-full h-full">
+                        <div class="p-5">
+                            <img src="{{ asset($item->gambar_barang) }}" alt="">
+                            {{ $item->nama_barang }}
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+                                {{ $item->deskripsi_barang }}</h5>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $item->harga_barang }}</p>
+                            {{ $item->stok_barang }}
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+
+        <p class="text-3xl font-semibold font-serif mt-12">After Market</p>
+        <div class="flex w-fit flex-wrap">
+            @foreach ($aftermarket as $item)
+                <div class="w-1/4 bg-none border border-gray-200 rounded-lg shadow dark:border-gray-700">
+                    <a href='{{ url('user/detail?id=' . "$item->kode_barang") }}' class="w-full h-full">
+                        <div class="p-5">
+                            <img src="{{ asset($item->gambar_barang) }}" alt="">
+                            {{ $item->nama_barang }}
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+                                {{ $item->deskripsi_barang }}</h5>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $item->harga_barang }}</p>
+                            {{ $item->stok_barang }}
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+
+        <p class="text-3xl font-semibold font-serif mt-12">Interior</p>
+        <div class="flex w-fit flex-wrap">
+            @foreach ($interior as $item)
+                <div class="w-1/4 bg-none border border-gray-200 rounded-lg shadow dark:border-gray-700">
+                    <a href='{{ url('user/detail?id=' . "$item->kode_barang") }}' class="w-full h-full">
+                        <div class="p-5">
+                            <img src="{{ asset($item->gambar_barang) }}" alt="">
+                            {{ $item->nama_barang }}
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+                                {{ $item->deskripsi_barang }}</h5>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $item->harga_barang }}</p>
+                            {{ $item->stok_barang }}
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+
+    </div>
+
     {{-- mobil sesuai anggaran --}}
     <div class="anggaran w-full h-auto px-16 py-8 mt-48">
         <p class="text-5xl text-black font-semibold font-serif">Mobil Sesuai Anggaran</p>
         <form action="" class="mt-5" id="myForm">
-            <input type="button" value="Dibawah Rp 150 Juta" class="mr-10 bg-black text-white p-2 rounded" id="harga1"
-                onclick="showContent('harga1')">
-            <input type="button" value="Dibawah Rp 200 Juta" class="mr-10 bg-black text-white p-2 rounded" id="harga2"
-                onclick="showContent('harga2')">
+            <input type="button" value="Dibawah Rp 150 Juta" class="mr-10 bg-black text-white p-2 rounded"
+                id="harga1" onclick="showContent('harga1')">
+            <input type="button" value="Dibawah Rp 200 Juta" class="mr-10 bg-black text-white p-2 rounded"
+                id="harga2" onclick="showContent('harga2')">
             <input type="button" value="Rp 200 - 400 Juta" class="mr-10 bg-black text-white p-2 rounded" id="harga3"
                 onclick="showContent('harga3')">
             <input type="button" value="Rp 400 - 800 Juta" class="mr-10 bg-black text-white p-2 rounded" id="harga4"
                 onclick="showContent('harga4')">
-            <input type="button" value="Rp 800 - 1200 Juta" class="mr-10 bg-black text-white p-2 rounded" id="harga5"
-                onclick="showContent('harga5')">
-            <input type="button" value="Diatas Rp 1200 Juta" class="mr-10 bg-black text-white p-2 rounded" id="harga6"
-                onclick="showContent('harga6')">
+            <input type="button" value="Rp 800 - 1200 Juta" class="mr-10 bg-black text-white p-2 rounded"
+                id="harga5" onclick="showContent('harga5')">
+            <input type="button" value="Diatas Rp 1200 Juta" class="mr-10 bg-black text-white p-2 rounded"
+                id="harga6" onclick="showContent('harga6')">
         </form>
 
         <div id="contohMobil" class="w-full h-auto pt-3 "></div>
