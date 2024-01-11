@@ -18,9 +18,9 @@
             <a href={{ url('logout') }}
                 class="mr-5 w-16 h-auto text-yellow-400 p-2 rounded-xl hover:cursor-pointer font-bold text-xl">
                 Log Out </a>
-            <a href={{ url('register') }}
+            {{-- <a href={{ url('register') }}
                 class="w-auto h-auto text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl drop-shadow-lg">
-                Sign Up</a>
+                Sign Up</a> --}}
         </div>
     </nav>
 @endsection

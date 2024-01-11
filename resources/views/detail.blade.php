@@ -36,7 +36,7 @@
 
             <table class="w-full mt-2">
                 <tr>
-                    <td><a href="{{ route('chat') }}">Chat</a></td>
+                    <td><a href="{{ route('getChatMessages') }}">Chat</a></td>
                     <td>Wishlist</td>
                     <td>Share</td>
                 </tr>
