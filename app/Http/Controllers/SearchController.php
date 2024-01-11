@@ -12,18 +12,14 @@ class SearchController extends Controller
     public function search(Request $request)
     {
         $keyword = $request->input('keyword');
-
-        $results = Barang::where('nama_barang', 'like', '%' . $keyword . '%')->get();
-
+        $results = Barang::where('nama_barang', 'like', '%' . $keyword . '%')
+            ->where('stok_barang', '>', 0)
+            ->get();
         $hasil = "";
+
         foreach ($results as $result) {
-
             $url = "detail?id=" . $result["kode_barang"];
-
-            // $url = route('detail', ['id' => $result['kode_barang'], 'nama' => $result['nama_barang'], 'gambar' => $result['gambar_barang']]);
-
             $imagePath = asset($result['gambar_barang']);
-
             $hasil .= '<a href="' . $url . '">' . $result['nama_barang'] . '</a><img src="' . $imagePath . '" style="width: 200px; height: 100px;"></img>';
         }
 

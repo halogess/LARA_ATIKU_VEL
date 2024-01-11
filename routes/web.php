@@ -35,7 +35,7 @@ use App\Http\Controllers\TransactionController;
 Route::get('/', function () {
     return view('home');
 });
-Route::get('/profile', function () {    
+Route::get('/profile', function () {
     return view('detailProfile');
 });
 Route::get('/pageEdit', function () {
@@ -124,6 +124,7 @@ Route::middleware("pembeli")->group(function () {
         Route::get('/home', [userController::class, "home"]);
         Route::get("/detail", [SearchController::class, "detail"])->name('membeli');
         Route::get('/cart', [CartController::class, 'showCart'])->name('show-cart');
+        Route::post('/cart', [CartController::class, 'hapus'])->name('hapus');
         Route::get("/status", [CartController::class, "status"]);
     });
 
@@ -188,4 +189,6 @@ Route::post('/add-to-cart/{kode_barang}', [CartController::class, 'addToCart'])-
 
 Route::get('/beli-barang/{kode_barang}/{id_pembeli}', [TransactionController::class, 'doTrans'])->name('beli-barang');
 
-Route::get('/beli-semua-barang/{id_pembeli}/{cartCount}', [TransactionController::class, 'doTransAll'])->name('beli-semua-barang');
+Route::post('/beli-semua-barang/{id_pembeli}/{cartCount}', [TransactionController::class, 'doTransAll'])->name('beli-semua-barang');
+
+Route::get('/hapus-barang/{id_cart}', [CartController::class, 'hapusItem'])->name('hapusItem');

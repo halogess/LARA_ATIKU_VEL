@@ -57,6 +57,7 @@ class CartController extends Controller
     {
         $userID = Auth::id();
 
+        // Retrieve the purchased items for the current transaction
         $data = DB::table('dtrans')
             ->join(
                 'htrans',
@@ -79,6 +80,7 @@ class CartController extends Controller
             ->get();
 
         $barangnya = [];
+
         foreach ($data as $item) {
             $nomorNota = $item->nomor_nota;
 
@@ -102,5 +104,25 @@ class CartController extends Controller
         }
 
         return view('status', compact('barangnya'));
+    }
+
+    public function hapus()
+    {
+        $userID = Auth::id();
+        Cart::where('id_pembeli', $userID)->delete();
+        $cartItems = Cart::where('id_pembeli', $userID)->get();
+        $cartCount = Cart::where('id_pembeli', $userID)->count();
+
+        return view('cart', compact('cartItems', 'cartCount'));
+    }
+
+    public function hapusItem(Request $request, $id_cart)
+    {
+        $id_pembeli = Auth::id();
+        Cart::where('id_cart', $id_cart)->delete();
+        $cartItems = Cart::where('id_pembeli', $id_pembeli)->get();
+        $cartCount = Cart::where('id_pembeli', $id_pembeli)->count();
+
+        return view('cart', compact('cartItems', 'cartCount'));
     }
 }

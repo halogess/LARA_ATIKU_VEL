@@ -5,7 +5,7 @@
 
     @if ($barangnya)
         <div class="mx-auto mt-12 mb-10">
-            @foreach ($barangnya as $transaction)
+            @foreach ($barangnya as $nomorNota => $transaction)
                 <h3 class="text-lg font-bold mb-2">Tanggal Transaksi: {{ $transaction['tanggal'] }}</h3>
                 <table border="1" class="table text-center"
                     style="margin-left: auto; margin-right: auto; border: 1px solid black;">
@@ -36,3 +36,4 @@
         <p>Belum ada barang yang dibeli!</p>
     @endif
 @endsection
+

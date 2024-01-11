@@ -10,7 +10,12 @@
     <script src="/style/jquery.js"></script>
     <style>
         #btnBeli:hover {
-            background-color: black;
+            background-color: green;
+            color: white;
+        }
+
+        #btnHapus:hover {
+            background-color: red;
             color: white;
         }
     </style>

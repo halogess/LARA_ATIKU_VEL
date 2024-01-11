@@ -57,8 +57,11 @@ class TransactionController extends Controller
                         'qty' => $jumlah,
                         'sub_total' => $jumlah * $product->harga_barang
                     ]);
+
                 }
             }
+
+            $product->stok_barang -= $cartItem->qty;
 
             $tanggalStatus = $currentDate->format('Y-m-d H:i:s'); // format tanggal buat status
             $nomorStatusTerakhir = Status::max('id_status'); // ambil id_status terakhir
@@ -75,24 +78,30 @@ class TransactionController extends Controller
 
             $jumlah = Dtrans::where('kode_barang', $kode_barang)->sum('qty');
 
-            $data = DB::table('htrans')
-                ->join('dtrans', 'htrans.nomor_nota', '=', 'dtrans.nomor_nota')
+            // Retrieve the purchased items for the current transaction
+            $data = DB::table('dtrans')
+                ->join(
+                    'htrans',
+                    'dtrans.nomor_nota',
+                    '=',
+                    'htrans.nomor_nota'
+                )
                 ->join('status_transaksi', 'htrans.nomor_nota', '=', 'status_transaksi.nomor_nota')
                 ->select(
                     'htrans.nomor_nota',
                     'dtrans.kode_barang',
+                    'dtrans.deskripsi_barang',
                     'dtrans.harga_barang',
                     'dtrans.qty',
-                    'dtrans.deskripsi_barang',
-                    'htrans.total_item',
                     'dtrans.sub_total',
                     'htrans.tanggal_beli',
                     'status_transaksi.keterangan'
                 )
-                ->where('htrans.id_pembeli', $userID)
+                ->where('htrans.id_pembeli', $id_pembeli)
                 ->get();
 
             $barangnya = [];
+
             foreach ($data as $item) {
                 $nomorNota = $item->nomor_nota;
 
@@ -145,10 +154,11 @@ class TransactionController extends Controller
             'active' => 1,
         ]);
 
+
         // Loop through each kode_barang and create a Dtrans record for each
         foreach ($kode_barang_array as $kode_barang) {
-            // Find the product
             $product = Barang::find($kode_barang);
+            // Find the product
             $cartItem = $cartItems->where('kode_barang', $kode_barang)->first();
 
             // Check if the product is found
@@ -163,8 +173,24 @@ class TransactionController extends Controller
                     'qty' => $cartItem->qty,
                     'sub_total' => $product->harga_barang * $cartItem->qty,
                 ]);
+
+                $product->stok_barang -= $cartItem->qty;
             }
         }
+
+        $currentDate = now();
+        $tanggalStatus = $currentDate->format('Y-m-d H:i:s'); // format tanggal buat status
+        $nomorStatusTerakhir = Status::max('id_status'); // ambil id_status terakhir
+        $statusKode = 0; // set kode_status dan ambil nama_status nya
+        $keterangan = Keterangan::where('kode_status', $statusKode)->value('nama_status');
+
+        $status = Status::create([ // create status
+            'id_status' => $nomorStatusTerakhir + 1,
+            'nomor_nota' => $nomorNotaTerakhir + 1,
+            'tanggal' => $tanggalStatus,
+            'kode_status' => 0,
+            'keterangan' => $keterangan
+        ]);
 
         // Clear the user's cart
         Cart::where('id_pembeli', $id_pembeli)->delete();
@@ -193,6 +219,7 @@ class TransactionController extends Controller
             ->get();
 
         $barangnya = [];
+
         foreach ($data as $item) {
             $nomorNota = $item->nomor_nota;
 
@@ -215,7 +242,7 @@ class TransactionController extends Controller
             ];
         }
 
-        Session::push('barangnya', $barangnya);
+        Session::put('barangnya', $barangnya);
         return view('status', compact('barangnya'));
     }
 }
