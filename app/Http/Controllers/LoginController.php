@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
-Use App\Models\User;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -36,28 +36,26 @@ class LoginController extends Controller
             "password" => $req->password,
         ];
 
-        //punya jewe
-        // if(Auth::attempt($cek)){
-        //     if(Auth::user()->role == 0){
-        //         return redirect("user/home");
-        //     } else if(Auth::user()->role==1){
-        //         return redirect("admin");
-        //     } else{
-        //         return redirect("master");
-        //     }
-        // }
-
         if (Auth::attempt($cek)) {
-            $userID = Auth::id(); // Mendapatkan ID pengguna
-            session(['user_id' => $userID]); // Menyimpan ID pengguna dalam sesi
+            $user = Auth::user(); // Mendapatkan informasi pengguna
 
-            if (Auth::user()->role == 0) {
-                return redirect("user/home");
-            } else if (Auth::user()->role == 1) {
-                return redirect("admin/transaksi/new");
+            // Pengecekan password
+            if (Hash::check($req->password, $user->password)) {
+                $userID = $user->id; // Mendapatkan ID pengguna
+                session(['user_id' => $userID]); // Menyimpan ID pengguna dalam sesi
+
+                if ($user->role == 0) {
+                    return redirect("user/home");
+                } else if ($user->role == 1) {
+                    return redirect("admin/transaksi/new");
+                } else {
+                    return redirect("master");
+                }
             } else {
-                return redirect("master");
+                return redirect("login")->withErrors(['password' => 'Password tidak sesuai']);
             }
+        } else {
+            return redirect("login")->withErrors(['username' => 'Kombinasi username dan password tidak valid']);
         }
     }
 
@@ -89,10 +87,10 @@ class LoginController extends Controller
         );
 
         $user = User::where("id_user", $req->username);
-        if($user != null){
+        if ($user != null) {
             $user = new User();
 
-            $id = User::where("role",0)->count()+1;
+            $id = User::where("role", 0)->count() + 1;
             $user->id_user = "P" . sprintf("%04d", $id);
             $user->nama_user = $req->name;
             $user->username = $req->username;
@@ -106,7 +104,8 @@ class LoginController extends Controller
         }
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         session()->flush();
         return redirect("login");

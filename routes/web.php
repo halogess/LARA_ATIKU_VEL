@@ -35,7 +35,7 @@ use App\Http\Controllers\TransactionController;
 Route::get('/', function () {
     return view('home');
 });
-Route::get('/profile', function () {
+Route::get('/profile', function () {    
     return view('detailProfile');
 });
 Route::get('/pageEdit', function () {
