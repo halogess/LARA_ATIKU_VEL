@@ -22,39 +22,11 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TransactionController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', function () {
     return view('home');
 });
-Route::get('/profile', function () {
-    return view('detailProfile');
-});
-Route::get('/pageEdit', function () {
-    return view('pageEdit');
-});
-// Route::get('/user/home', function () {
-//     return view('user');
-// });
-
-Route::get('/mainUser', function () {
-    return view('user');
-});
-
-
 
 // Route::get('/detail?id={id}', [SearchController::class, 'detail'])->name('detail');
-
-Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 Route::get('/login', [LoginController::class, "login"]);
 Route::post('/login', [LoginController::class, "doLogin"]);
@@ -138,6 +110,15 @@ Route::middleware("pembeli")->group(function () {
     Route::get('/show-chat', [ChatController::class, 'loadChat'])->name('userChat');
     Route::get("profile", [UserProfileController::class, "page_profile"]);
     Route::post("profile", [UserProfileController::class, "do_profile"])->name("do_profile");
+
+    Route::post('/add-to-cart/{kode_barang}', [CartController::class, 'addToCart'])->name('add-to-cart');
+
+    Route::get('/beli-barang/{kode_barang}/{id_pembeli}', [TransactionController::class, 'doTrans'])->name('beli-barang');
+
+    Route::post('/beli-semua-barang/{id_pembeli}/{cartCount}', [TransactionController::class, 'doTransAll'])->name('beli-semua-barang');
+
+    Route::get('/hapus-barang/{id_cart}', [CartController::class, 'hapusItem'])->name('hapusItem');
+    Route::get('/search', [SearchController::class, 'search'])->name('search');
 });
 
 Route::middleware("admin")->group(function () {
@@ -190,12 +171,3 @@ Route::middleware("admin")->group(function () {
         });
     });
 });
-
-
-Route::post('/add-to-cart/{kode_barang}', [CartController::class, 'addToCart'])->name('add-to-cart');
-
-Route::get('/beli-barang/{kode_barang}/{id_pembeli}', [TransactionController::class, 'doTrans'])->name('beli-barang');
-
-Route::post('/beli-semua-barang/{id_pembeli}/{cartCount}', [TransactionController::class, 'doTransAll'])->name('beli-semua-barang');
-
-Route::get('/hapus-barang/{id_cart}', [CartController::class, 'hapusItem'])->name('hapusItem');
