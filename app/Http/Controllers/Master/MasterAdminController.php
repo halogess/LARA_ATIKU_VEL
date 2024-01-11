@@ -81,7 +81,7 @@ class MasterAdminController extends Controller
         $admin->password = Hash::make($request->password);
         $admin->telp = $request->telp;
         $admin->role = 1;
-        $admin->foto_user = "halo";
+        $admin->foto_user = "img/profile/admin.jpg";
         $admin->save();
 
         return redirect("master/admin")->with("message", "Sukses tambahkan Admin");

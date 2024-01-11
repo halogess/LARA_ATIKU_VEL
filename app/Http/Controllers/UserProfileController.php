@@ -29,35 +29,50 @@ class UserProfileController extends Controller
     {
 
         if ($request->action == "ganti_profile") {
-            $user = User::find(Auth::user()->id_user);
+
+            if ($request->username == Auth::user()->username && $request->telp == Auth::user()->telp) {
+                return "";
+            }
+
+            if ($request->username == "" || $request->telp == "") {
+                return "Input tidak boleh kosong";
+            }
+
+            if (!is_numeric($request->telp) || strlen($request->telp) > 13 || strlen($request->telp) < 12) {
+                return ("Format No Telepon Salah");
+            }
 
             $all = User::all();
-            foreach($all as $a){
-                if($request->username == $a->username){
-                    return "gagal";
+            foreach ($all as $a) {
+                if ($request->username == $a->username && $request->username != Auth::user()->username) {
+                    return "Username sudah digunakan";
                 }
             }
 
-            if ($request->username != Auth::user()->username || $request->telp != Auth::user()->telp) {
-                $user->username = $request->username;
-                $user->telp = $request->telp;
-                $user->save();
-                return response()->json(['message' => 'Berhasil mengubah profil']);
+            $user = User::find(Auth::user()->id_user);
+            $user->username = $request->username;
+            $user->telp = $request->telp;
+            $user->save();
+            return "oke";
+        } else if ($request->action == "ganti_password") {
+
+            if ($request->old_password == "" || $request->password == "" || $request->confirm == "") {
+                return "Input tidak boleh kosong!";
             }
 
-        } else if ($request->action == "ganti_password") {
-            $request->validate([
-                "old_password" => 'required',
-                "password" => "required|confirmed",
-                "password_confirmation" => 'required'
-            ]);
-            $user = User::find(Auth::user()->id_user);
+            if ($request->password != $request->confirm) {
+                return "Konfirmasi password tidak cocok";
+            }
 
+            $user = User::find(Auth::user()->id_user);
             if (Hash::check($request->password, $user->password)) {
                 $user->password = Hash::make($request->password);
                 $user->save();
-                return redirect("profile")->with('messagePassword', "Berhasil mengubah password");
+                return "Berhasil mengubah password!";
             }
+
+            return "Password salah!";
+
         } else {
             $user = User::find(Auth::user()->id_user);
             $user->foto_user = "img/profile/user/" . $request->foto . ".png";

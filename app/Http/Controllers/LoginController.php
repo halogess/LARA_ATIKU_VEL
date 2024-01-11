@@ -71,7 +71,7 @@ class LoginController extends Controller
                 //ini pengecekannya
                 "username" => "required|regex:/^\S*$/",
                 "name" => "required",
-                "telp" => "required|numeric|min:12|max:13",
+                "telp" => "required|numeric|digits_between:12,13",
                 'password' => "required|confirmed"
             ],
             [
@@ -97,7 +97,7 @@ class LoginController extends Controller
             $user->password = Hash::make($req->password);
             $user->telp = $req->telp;
             $user->role = 0;
-            $user->foto_user = "";
+            $user->foto_user = "img/profile/admin.jpg";
 
             $user->save();
             return redirect("login")->with("message", "Anda telah berhasil register");

@@ -17,23 +17,6 @@
 </head>
 
 <body>
-    {{-- <table>
-        <tr>
-            <th>ID</th>
-            <th>Username</th>
-            <th>Pass</th>
-            <th>Saldo</th>
-        </tr>
-
-        @foreach ($users as $user)
-            <tr>
-                <td>{{ $user['id_pembeli'] }}</td>
-                <td>{{ $user['username_pembeli'] }}</td>
-            </tr>
-        @endforeach
-
-    </table> --}}
-
 
     <nav class="w-full h-20 bg-black text-[#e7dfdc]">
         <div class="judul h-auto w-auto ml-24 float-left">

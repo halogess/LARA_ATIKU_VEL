@@ -12,12 +12,12 @@
     <div class="h-screen pb-52 flex">
 
         {{-- customer --}}
-        <div class="w-1/5">
+        <div class="w-1/4">
             <div class="bg-slate-600 overflow-y-auto h-full w-full" id="isiCustomers"></div>
         </div>
 
         {{-- chat --}}
-        <div class="w-4/5 bg-slate-600 h-full" id="chatContainer">
+        <div class="w-3/4 bg-slate-600 h-full" id="chatContainer">
             <div class="h-full w-1/3 mx-auto flex justify-items-center text-white" id="gada-user">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chat-dots-fill"
                     viewBox="0 0 16 16">

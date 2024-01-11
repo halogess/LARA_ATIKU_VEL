@@ -54,31 +54,6 @@
                 <button type="button" id="ganti_profile"
                     class="rounded-lg bg-yellow-400 p-2 w-full border border-slate-200 hover:bg-black hover:text-yellow-400 mb-5">Save</button>
 
-                {{-- @error('username')
-                    <div class="p-2 text-sm text-red-800 rounded-lg bg-red-300 border mb-2" role="alert">
-                        <span class="font-medium">
-                            {{ $message }}
-                        </span>
-                    </div>
-                @enderror
-
-                @error('telp')
-                    <div class="p-2 text-sm text-red-800 rounded-lg bg-red-300 border mb-2" role="alert">
-                        <span class="font-medium">
-                            {{ $message }}
-                        </span>
-                    </div>
-                @enderror
-
-                @if (Session::has('message'))
-                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 border"
-                        role="alert">
-                        <span class="font-medium">
-                            {{ Session::get('message') }}
-                        </span>
-                    </div>
-                @endif --}}
-
             </div>
             <div class="w-1/2 justify-items-center mx-20 border-t border-black">
                 <div class=" text-3xl font-bold p-5">Change Password</div>
@@ -87,7 +62,7 @@
                         class="w-36 inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                         Old Password
                     </span>
-                    <input type="password" name="old_password"
+                    <input type="password" name="old_password" id="old_password"
                         class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
 
@@ -96,7 +71,7 @@
                         class="w-36 inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                         New Password
                     </span>
-                    <input type="password" name="password"
+                    <input type="password" name="password" id="password"
                         class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="flex pb-5">
@@ -104,35 +79,11 @@
                         class="w-36 inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                         Confirm Password
                     </span>
-                    <input type="password" name="password_confirmation"
+                    <input type="password" name="password_confirmation" id="confirm"
                         class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
-                <input type="submit" name="button" value="Change"
+                <input type="submit" name="button" value="Change" id="ganti_password"
                     class="rounded-lg bg-yellow-400 p-2 w-full border border-slate-200 hover:bg-black hover:text-yellow-400">
-
-                {{-- @error('old_password')
-                    <div class="p-2 text-sm text-red-800 rounded-lg bg-red-300 border mb-2" role="alert">
-                        <span class="font-medium">
-                            {{ $message }}
-                        </span>
-                    </div>
-                @enderror
-                @error('password')
-                    <div class="p-2 text-sm text-red-800 rounded-lg bg-red-300 border mb-2" role="alert">
-                        <span class="font-medium">
-                            {{ $message }}
-                        </span>
-                    </div>
-                @enderror --}}
-
-                @if (Session::has('messagePassword'))
-                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 border"
-                        role="alert">
-                        <span class="font-medium">
-                            {{ Session::get('messagePassword') }}
-                        </span>
-                    </div>
-                @endif
             </div>
         </div>
 
@@ -142,12 +93,19 @@
 
     <script>
         var photo;
+        var inp_username;
+        var inp_telp;
+
         $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+            inp_username = $("#username").val();
+            inp_telp = $("#telp").val();
+
         });
 
         $("#setProfile").click(
@@ -168,7 +126,6 @@
 
         $("#ganti_profile").click(
             function() {
-                alert($("#telp").val());
                 $.ajax({
                     url: "{{ route('do_profile') }}",
                     method: "post",
@@ -179,25 +136,40 @@
                     },
 
                     success: function(response) {
-                        if(response == "gagal"){
-                            alert("input invalid");
+
+                        if (response != "oke" && response != "") {
+                            $("#username").val(inp_username);
+                            $("#telp").val(inp_telp);
+                            alert(response);
+
+                        } else if (response == "oke") {
+                            inp_username = $("#username").val();
+                            inp_telp = $("#telp").val();
+                            alert("Berhasil mengubah profile");
                         }
                     },
-                    error: function(response) {
+                });
+            }
+        );
+
+        $("#ganti_password").click(
+            function() {
+                $.ajax({
+                    url: "{{ route('do_profile') }}",
+                    method: "post",
+                    data: {
+                        action: "ganti_password",
+                        old_password: $("#old_password").val(),
+                        password: $("#password").val(),
+                        confirm: $("#confirm").val(),
+                    },
+
+                    success: function(response) {
+
                         alert(response);
-                        // if (response.status == 422) {
-                        //     // Validation error
-                        //     var errors = response.responseJSON.errors;
-                        //     var errorMessage = '';
-
-                        //     $.each(errors, function(key, value) {
-                        //         errorMessage += value[0] + '\n';
-                        //     });
-
-                        //     alert(errorMessage);
-                        // } else {
-                        //     alert("Error: " + response.statusText);
-                        // }
+                        $("#old_password").val("");
+                        $("#password").val("");
+                        $("#confirm").val("");
                     },
                 });
             }
