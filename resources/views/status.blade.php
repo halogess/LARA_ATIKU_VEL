@@ -4,36 +4,34 @@
     <p class="text-5xl text-center">--- Status Pembelian Anda ---</p>
 
     @if ($barangnya)
-        <div class="mx-auto mt-12 mb-10">
-            @foreach ($barangnya as $nomorNota => $transaction)
-                <h3 class="text-lg font-bold mb-2">Tanggal Transaksi: {{ $transaction['tanggal'] }}</h3>
-                <table border="1" class="table text-center"
-                    style="margin-left: auto; margin-right: auto; border: 1px solid black;">
-                    <tr>
-                        <th>No.</th>
-                        <th>Kode Barang</th>
-                        <th>Deskripsi Barang</th>
-                        <th>Harga</th>
-                        <th>Jumlah</th>
-                        <th>Sub Total</th>
-                        <th>Keterangan</th>
-                    </tr>
+        <div class="mt-12 mb-10">
+            <table border="1" class="table text-center w-full"
+                style="margin-left: auto; margin-right: auto; border: 1px solid black;">
+                <tr class="bg-black">
+                    <th class="border-black border-2 text-yellow-400">Kode Barang</th>
+                    <th class="border-black border-2 text-yellow-400">Deskripsi Barang</th>
+                    <th class="border-black border-2 text-yellow-400">Harga</th>
+                    <th class="border-black border-2 text-yellow-400">Jumlah</th>
+                    <th class="border-black border-2 text-yellow-400">Sub Total</th>
+                    <th class="border-black border-2 text-yellow-400">Tanggal</th>
+                    <th class="border-black border-2 text-yellow-400">Keterangan</th>
+                </tr>
+                @foreach ($barangnya as $nomorNota => $transaction)
                     @foreach ($transaction['items'] as $index => $item)
-                        <tr>
-                            <td>{{ $index + 1 }}</td>
-                            <td>{{ $item['kode_barang'] }}</td>
-                            <td>{{ $item['deskripsi_barang'] }}</td>
-                            <td>Rp{{ $item['harga'] }}</td>
-                            <td>{{ $item['jumlah'] }}</td>
-                            <td class="text-green-500">Rp{{ $item['sub_total'] }}</td>
-                            <td>{{ $item['keterangan'] }}</td>
+                        <tr class="bg-gray-200">
+                            <td class="border-black border-2">{{ $item['kode_barang'] }}</td>
+                            <td class="border-black border-2">{{ $item['deskripsi_barang'] }}</td>
+                            <td class="border-black border-2">Rp{{ $item['harga'] }}</td>
+                            <td class="border-black border-2">{{ $item['jumlah'] }}</td>
+                            <td class="text-green-500 border-black border-2">Rp{{ $item['sub_total'] }}</td>
+                            <td class="border-black border-2">{{ $transaction['tanggal'] }}</td>
+                            <td class="border-black border-2">{{ $item['keterangan'] }}</td>
                         </tr>
                     @endforeach
-                </table>
-            @endforeach
+                @endforeach
+            </table>
         </div>
     @else
         <p>Belum ada barang yang dibeli!</p>
     @endif
 @endsection
-

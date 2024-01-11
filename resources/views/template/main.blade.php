@@ -12,11 +12,13 @@
         #btnBeli:hover {
             background-color: green;
             color: white;
+            /* border: 1px solid black; */
         }
 
         #btnHapus:hover {
             background-color: red;
             color: white;
+            /* border: 1px solid black; */
         }
     </style>
 </head>
