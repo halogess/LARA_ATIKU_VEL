@@ -17,7 +17,7 @@ class ChatController extends Controller
 {
     public function doChat()
     {
-        $userID = session('user_id');
+        $userID = Auth::id();
         $chat = Chat::where('id_pembeli', $userID)->get();
 
         return view('chat', compact('chat'));
@@ -25,7 +25,7 @@ class ChatController extends Controller
     }
     public function loadChat()
     {
-        $userID = session('user_id');
+        $userID = Auth::id();
         $chat = Chat::where('id_pembeli', $userID)->get();
 
         return view('isiChat', compact('chat'));
@@ -35,7 +35,7 @@ class ChatController extends Controller
 
     public function kirimChat(Request $request)
     {
-        $userID = session('user_id');
+        $userID = Auth::id();
         $request->validate([
             'inputChat' => 'required',
         ]);
