@@ -14,6 +14,11 @@ use App\Charts\pembeliChart;
 use DateTime;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
+use App\Models\User;
+
 class MasterController extends Controller
 {
 
@@ -46,8 +51,6 @@ class MasterController extends Controller
         $chartBulanan->dataset("Total Transactions", 'bar', $dataBulanan->pluck('total_transactions_amount')->toArray())
             ->backgroundColor('rgba(255, 234, 0, 0.5)');
         $chartBulanan->displayLegend(false);
-
-
 
 
         $param["chartTahunan"] = $chartTahunan;
@@ -130,5 +133,45 @@ class MasterController extends Controller
         return view("master.transaksi.detail", $param);
     }
 
-    //=========================================== DASHBOARD
+    //======================================================== PROFILE
+
+    public function page_profile()
+    {
+        Session::put('page', 'profile');
+        return view('master.profile');
+    }
+
+    public function do_profile(Request $request)
+    {
+        if ($request->button == "Save") {
+            $request->validate([
+                "username" => "required|regex:/^\S*$/",
+                "telp" => "required|numeric"
+            ]);
+
+            if ($request->username != Auth::user()->username || $request->telp != Auth::user()->telp) {
+                $user = User::find(Auth::user()->id_user);
+                $user->username = $request->username;
+                $user->telp = $request->telp;
+                $user->save();
+                return redirect("master/profile")->with('message', "Berhasil mengubah profile");
+            }
+        } else {
+            $request->validate([
+                "old_password" => 'required',
+                "password" => "required|confirmed",
+                "password_confirmation" => 'required'
+            ]);
+            $user = User::find(Auth::user()->id_user);
+
+            if (Hash::check($request->password, $user->password)) {
+                $user->password = Hash::make($request->password);
+                $user->save();
+                return redirect("master/profile")->with('messagePassword', "Berhasil mengubah password");
+            } else {
+                return back()->with('messagePassword', "Password Salah");
+            }
+        }
+        return back();
+    }
 }

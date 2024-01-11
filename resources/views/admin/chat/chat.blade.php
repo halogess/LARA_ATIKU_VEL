@@ -119,7 +119,7 @@
             chatInt = setInterval(function() {
                 load();
                 loadCustomers();
-            }, 1000);
+            }, 5000);
         }
 
         function show(param) {
@@ -141,14 +141,12 @@
             $("#gada-user").hide();
             userScrolled = false;
 
-
         }
 
         $("#btnKirim").click(function() {
             var chat = $("#textChat").val();
             if (chat != "") {
                 clearInterval(chatInt);
-
 
                 $.ajax({
                     url: "{{ route('adminSend') }}",

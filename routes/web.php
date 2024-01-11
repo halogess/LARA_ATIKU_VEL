@@ -3,7 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\userController;
+use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\CatalogController;
 
 use App\Http\Controllers\Master\MasterController;
@@ -89,6 +89,9 @@ Route::middleware("master")->group(function () {
         Route::get('/barang/edit/{kode}', [MasterBarangController::class, "pageEditBarang"]);
         Route::post('/barang/edit/{kode}', [MasterBarangController::class, "editBarang"]);
 
+        Route::get("profile", [MasterController::class, "page_profile"]);
+        Route::post("profile", [MasterController::class, "do_profile"]);
+
         Route::prefix("transaksi")->group(function () {
             Route::get('', [MasterController::class, "trans"]);
             Route::post("detail", [MasterController::class, "detail"])->name("loadDetailTransMaster");
@@ -133,8 +136,9 @@ Route::middleware("pembeli")->group(function () {
     Route::get('/chat', [ChatController::class, 'doChat'])->name('getChatMessages');
     Route::post('/chat', [ChatController::class, 'kirimChat'])->name('masukChat');
     Route::get('/show-chat', [ChatController::class, 'loadChat'])->name('userChat');
+    Route::get("profile", [UserProfileController::class, "page_profile"]);
+    Route::post("profile", [UserProfileController::class, "do_profile"])->name("do_profile");
 });
-
 
 Route::middleware("admin")->group(function () {
     Route::prefix("admin")->group(function () {
@@ -186,6 +190,7 @@ Route::middleware("admin")->group(function () {
         });
     });
 });
+
 
 Route::post('/add-to-cart/{kode_barang}', [CartController::class, 'addToCart'])->name('add-to-cart');
 

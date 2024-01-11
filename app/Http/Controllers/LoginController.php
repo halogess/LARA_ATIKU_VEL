@@ -71,7 +71,7 @@ class LoginController extends Controller
                 //ini pengecekannya
                 "username" => "required|regex:/^\S*$/",
                 "name" => "required",
-                "telp" => "required",
+                "telp" => "required|numeric|min:12|max:13",
                 'password' => "required|confirmed"
             ],
             [

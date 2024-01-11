@@ -70,7 +70,7 @@
 
         </div>
         <div href="admin/profile" class="h-full w-auto flex items-center align-middle p-2">
-            <div class="flex gap-4 px-2 py-1" type="button">
+            <div class="flex gap-4 px-2 py-1 items-center" type="button">
                 <a href="{{ url('admin/profile') }}"><img class="w-10 h-10 rounded-full border-2 border-yellow-400"
                         src='{{ asset(Auth::user()->foto_user) }}' alt="">
                 </a>
@@ -79,7 +79,6 @@
                     <a href="{{ url('admin/profile') }}">
                         <div>{{ Auth::user()->nama_user }}</div>
                     </a>
-                    <div class="text-sm text-yellow-400 font-extralight">Joined in August 2014</div>
                 </div>
             </div>
         </div>

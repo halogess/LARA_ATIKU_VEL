@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
-use App\Models\Pembeli;
 use App\Models\Barang;
 use Illuminate\Http\Request;
 
@@ -32,7 +30,6 @@ class userController extends Controller
             'jumlahBeli' => $req->jumlahBeli,
             'subtotalBeli' => $product->harga_barang * $req->jumlahBeli,
         ];
-
 
         return view('terbeli', compact('cart'));
     }

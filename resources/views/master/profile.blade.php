@@ -1,14 +1,12 @@
-@extends('template.admin.admin')
+@extends('template.master.master')
 @section('content')
     <form method="POST">
         @csrf
         <div class="w-full text-center">
-
             <div class="w-2/12 mx-auto rounded-full">
-                <img src="{{ asset('img/profile/admin.jpg') }}" class="rounded-full p-5">
+                <img src='{{ asset(Auth::user()->foto_user) }}' class="rounded-full p-5">
             </div>
             <div class="pb-10 text-xl font-medium">{{ '[' . Auth::user()->id_user . '] ' . Auth::user()->nama_user }}</div>
-
 
             <div class="flex w-full">
 
@@ -117,8 +115,6 @@
                         </div>
                     @endif
                 </div>
-
-
             </div>
 
         </div>

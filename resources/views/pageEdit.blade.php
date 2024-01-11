@@ -19,7 +19,8 @@
                 <form action="" method="POST" class="ml-10">
                     @csrf
                     <p class="font-medium text-lg">Nama</p>
-                    <input type="text" name="" id="" class="mb-2 w-96">
+                    <input type="text" name="" id="" class="mb-2 w-96"
+                        value="{{ Auth::user()->nama_user }}">
                     <p class="font-medium text-lg">No.Hp</p>
                     <input type="text" name="" id="" class="mb-2 w-96">
                     <p class="font-medium text-lg">New Password</p>
@@ -30,7 +31,8 @@
                     <input type="text" name="" id="" class="mb-2 w-96">
                     <p class="font-medium text-lg">Confirm Old Password</p>
                     <input type="text" name="" id="" class="mb-2 w-96">
-                    <button type="submit" class="mr-5 w-16 h-auto p-2 rounded-xl hover:cursor-pointer font-bold text-xl bg-[#e77438] ml-40 mt-2">Save</button>
+                    <button type="submit"
+                        class="mr-5 w-16 h-auto p-2 rounded-xl hover:cursor-pointer font-bold text-xl bg-[#e77438] ml-40 mt-2">Save</button>
                 </form>
             </div>
         </div>
