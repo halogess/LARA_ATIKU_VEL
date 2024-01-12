@@ -109,7 +109,7 @@
         function set() {
             chatInt = setInterval(function() {
                 load();
-            }, 2000);
+            }, 3000);
         }
 
         $("#btnKirim").click(function() {

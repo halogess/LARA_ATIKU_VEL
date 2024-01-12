@@ -9,6 +9,9 @@
             <a href={{ url('user/home') }}
                 class="mr-5 w-16 h-auto p-2 text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl">
                 Home </a>
+                <a href={{ route('getChatMessages') }}
+                    class="mr-5 w-16 h-auto p-2 text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl">
+                    Chat </a>
             <a href={{ route('show-cart') }}
                 class="mr-5 w-16 h-auto p-2 text-yellow-400 rounded-xl hover:cursor-pointer font-bold text-xl">
                 Cart </a>
